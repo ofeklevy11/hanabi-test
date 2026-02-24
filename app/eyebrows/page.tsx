@@ -70,28 +70,29 @@ export default function Eyebrows() {
 
   return (
     <main ref={containerRef} className="min-h-screen bg-white relative overflow-hidden">
-      <Navbar />
+      <Navbar transparent />
       
-      {/* Hero Section - Minimalist Luxury */}
-      <section className="relative min-h-[40vh] flex items-center justify-center overflow-hidden bg-white">
-        {/* Subtle animated background */}
-        <div className="absolute inset-0 overflow-hidden">
-          <motion.div
-            animate={{
-              x: [0, 100, 0],
-              y: [0, -50, 0],
-            }}
-            transition={{
-              duration: 25,
-              repeat: Infinity,
-              ease: "linear"
-            }}
-            className="absolute top-0 right-0 w-[600px] h-[600px] bg-gradient-to-br from-deep-red/3 to-transparent rounded-full blur-3xl"
+      {/* Hero Section - Full Width Image */}
+      <section className="relative min-h-[70vh] md:min-h-[85vh] lg:min-h-[90vh] flex items-center justify-center overflow-hidden">
+        {/* Background Image */}
+        <div className="absolute inset-0">
+          <Image
+            src="/files/hero/eyebrows.jpg"
+            alt="השתלת גבות טבעית - HANA BI"
+            fill
+            className="object-cover"
+            quality={95}
+            priority
+            sizes="100vw"
           />
+          {/* Subtle overlay for text readability */}
+          <div className="absolute inset-0 bg-black/30" />
+          {/* Bottom darkening to mark section end */}
+          <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-black/40 to-transparent" />
         </div>
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
-          {/* Hero Content - Spacious & Elegant */}
+        {/* Hero Content - Centered over image */}
+        <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20">
           <motion.div
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
@@ -102,23 +103,44 @@ export default function Eyebrows() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, delay: 0.3 }}
-              className="text-6xl md:text-7xl lg:text-9xl font-bold text-charcoal leading-[1.05] tracking-tight mt-24"
+              className="text-5xl md:text-7xl lg:text-9xl font-bold text-white leading-[1.05] tracking-tight"
             >
               השתלת גבות טבעית
             </motion.h1>
-            
-            <motion.p
+
+            <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, delay: 0.6 }}
-              className="text-3xl md:text-4xl lg:text-5xl text-deep-red font-bold leading-tight max-w-5xl mx-auto"
+              className="space-y-3"
             >
-              לא ציור, ולא קעקוע
-              <br />
-              <span className="text-2xl md:text-3xl lg:text-4xl text-charcoal font-normal">שיער אמיתי שנשאר לכל החיים</span>
-            </motion.p>
+              <p className="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight max-w-5xl mx-auto">
+                <span className="text-deep-red">לא ציור, ולא קעקוע</span>
+              </p>
+              <p className="text-xl md:text-2xl lg:text-3xl text-white/90 font-normal">
+                שיער אמיתי שנשאר לכל החיים
+              </p>
+            </motion.div>
+
+            {/* CTA Button */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1, delay: 0.9 }}
+              className="pt-4"
+            >
+              <a
+                href="#appointment"
+                className="inline-block bg-deep-red hover:bg-deep-red-dark text-white px-10 py-4 rounded-full text-lg font-semibold transition-all duration-300 hover:scale-105"
+              >
+                לתיאום פגישת ייעוץ
+              </a>
+            </motion.div>
           </motion.div>
         </div>
+
+        {/* Clean transition to next section */}
+        <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-white to-transparent z-10" />
       </section>
 
       {/* Video Carousel - iPhone View */}

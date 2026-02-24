@@ -1,7 +1,11 @@
 {
   "permissions": {
     "allow": [
-      "Bash(wc:*)"
+      "Bash(wc:*)",
+      "Bash(tail:*)",
+      "Bash(grep:*)",
+      "Bash(grep 1a1a1a:*)",
+      "Bash(ngrok:*)"
     ]
   }
 }

@@ -69,27 +69,74 @@ export default function IPRF() {
 
   return (
     <main className="min-h-screen bg-white">
-      <Navbar />
-      
-      {/* Hero Section */}
-      <section className="pt-24 pb-12 bg-white relative overflow-hidden">
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808008_1px,transparent_1px),linear-gradient(to_bottom,#80808008_1px,transparent_1px)] bg-[size:40px_40px] opacity-40" />
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          {/* Hero Content */}
+      <Navbar transparent />
+
+      {/* Hero Section - Full Width Image */}
+      <section className="relative min-h-[70vh] md:min-h-[85vh] lg:min-h-[90vh] flex items-center justify-center overflow-hidden">
+        {/* Background Image */}
+        <div className="absolute inset-0">
+          <Image
+            src="/files/hero/iprf.jpeg"
+            alt="iPRF התחדשות ביולוגית - HANA BI"
+            fill
+            className="object-cover"
+            quality={95}
+            priority
+            sizes="100vw"
+          />
+          {/* Subtle overlay for text readability */}
+          <div className="absolute inset-0 bg-black/30" />
+          {/* Bottom darkening to mark section end */}
+          <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-black/40 to-transparent" />
+        </div>
+
+        {/* Hero Content - Centered over image */}
+        <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20">
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="text-center mb-10"
+            transition={{ duration: 1.2, ease: [0.25, 0.1, 0.25, 1] }}
+            className="text-center space-y-6 max-w-6xl mx-auto"
           >
-            <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-charcoal mb-6 leading-tight">
-              iPRF <span className="text-deep-red">התחדשות ביולוגית</span> חכמה באמצעות המשאבים הטבעיים של הגוף
-            </h1>
-            <p className="text-xl md:text-2xl text-charcoal-light max-w-5xl mx-auto leading-relaxed font-normal">
-              פריצת דרך מהפכנית המעניקה מענה ביולוגי משולש לעצירת נשירת השיער חידוש מרקם עור הפנים ושחזור עמוק של עור צלקתי
-            </p>
+            <motion.h1
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1, delay: 0.3 }}
+              className="text-5xl md:text-7xl lg:text-9xl font-bold text-white leading-[1.05] tracking-tight"
+            >
+              iPRF <span className="text-deep-red">התחדשות ביולוגית</span>
+            </motion.h1>
+
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1, delay: 0.6 }}
+              className="space-y-3"
+            >
+              <p className="text-xl md:text-2xl lg:text-3xl text-white/90 font-normal max-w-5xl mx-auto leading-relaxed">
+                פריצת דרך מהפכנית המעניקה מענה ביולוגי משולש לעצירת נשירת השיער חידוש מרקם עור הפנים ושחזור עמוק של עור צלקתי
+              </p>
+            </motion.div>
+
+            {/* CTA Button */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1, delay: 0.9 }}
+              className="pt-4"
+            >
+              <a
+                href="#appointment"
+                className="inline-block bg-deep-red hover:bg-deep-red-dark text-white px-10 py-4 rounded-full text-lg font-semibold transition-all duration-300 hover:scale-105"
+              >
+                לתיאום פגישת ייעוץ
+              </a>
+            </motion.div>
           </motion.div>
         </div>
+
+        {/* Clean transition to next section */}
+        <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-white to-transparent z-10" />
       </section>
 
       {/* First Image Section */}

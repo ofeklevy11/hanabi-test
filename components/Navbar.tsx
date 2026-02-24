@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { Menu, X } from 'lucide-react'
 
-export default function Navbar() {
+export default function Navbar({ transparent = false }: { transparent?: boolean }) {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
 
@@ -33,9 +33,11 @@ export default function Navbar() {
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.6 }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled 
-          ? 'bg-white/95 backdrop-blur-md shadow-modern border-b border-gray-100' 
-          : 'bg-white/80 backdrop-blur-sm'
+        isScrolled
+          ? 'bg-white/95 backdrop-blur-md shadow-modern border-b border-gray-100'
+          : transparent
+            ? 'bg-transparent'
+            : 'bg-white/80 backdrop-blur-sm'
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -48,16 +50,26 @@ export default function Navbar() {
             className="flex items-center gap-2.5"
           >
             {/* Red square with Japanese characters - exact square */}
-            <div className="w-12 h-12 md:w-14 md:h-14 bg-deep-red flex flex-col items-center justify-center shrink-0">
-              <span className="text-white text-base md:text-lg font-normal leading-tight" style={{ lineHeight: '1.1' }}>花</span>
-              <span className="text-white text-base md:text-lg font-normal leading-tight" style={{ lineHeight: '1.1' }}>美</span>
+            <div className={`w-12 h-12 md:w-14 md:h-14 flex flex-col items-center justify-center shrink-0 transition-colors duration-300 ${
+              transparent && !isScrolled ? 'bg-white' : 'bg-deep-red'
+            }`}>
+              <span className={`text-base md:text-lg font-normal leading-tight transition-colors duration-300 ${
+                transparent && !isScrolled ? 'text-deep-red' : 'text-white'
+              }`} style={{ lineHeight: '1.1' }}>花</span>
+              <span className={`text-base md:text-lg font-normal leading-tight transition-colors duration-300 ${
+                transparent && !isScrolled ? 'text-deep-red' : 'text-white'
+              }`} style={{ lineHeight: '1.1' }}>美</span>
             </div>
             {/* Text - aligned to left of square */}
             <div className="flex flex-col justify-center">
-              <span className="text-lg md:text-xl font-bold text-deep-red tracking-tight leading-none uppercase">
+              <span className={`text-lg md:text-xl font-bold tracking-tight leading-none uppercase transition-colors duration-300 ${
+                transparent && !isScrolled ? 'text-white' : 'text-deep-red'
+              }`}>
                 HANA BI
               </span>
-              <span className="text-[10px] md:text-xs font-medium text-deep-red tracking-wide leading-none mt-0.5">
+              <span className={`text-[10px] md:text-xs font-medium tracking-wide leading-none mt-0.5 transition-colors duration-300 ${
+                transparent && !isScrolled ? 'text-white/80' : 'text-deep-red'
+              }`}>
                 Natural Looking
               </span>
             </div>
@@ -73,7 +85,9 @@ export default function Navbar() {
                 <motion.a
                   href={link.href}
                   whileHover={{ y: -2 }}
-                  className="relative text-charcoal hover:text-deep-red transition-colors duration-200 text-sm font-semibold tracking-wide"
+                  className={`relative hover:text-deep-red transition-colors duration-200 text-sm font-semibold tracking-wide ${
+                    transparent && !isScrolled ? 'text-white' : 'text-charcoal'
+                  }`}
                 >
                   {link.label}
                   <motion.span
@@ -110,7 +124,9 @@ export default function Navbar() {
           {/* Mobile Menu Button */}
           <motion.button
             whileTap={{ scale: 0.9 }}
-            className="md:hidden text-charcoal p-2 rounded-lg hover:bg-gray-100 transition-colors"
+            className={`md:hidden p-2 rounded-lg transition-colors ${
+              transparent && !isScrolled ? 'text-white hover:bg-white/10' : 'text-charcoal hover:bg-gray-100'
+            }`}
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             aria-label="Toggle menu"
           >
