@@ -390,7 +390,7 @@ export default function HairTransplant() {
               transition={{ duration: 1, delay: 0.2 }}
               className="relative pl-8 md:pl-0"
             >
-              <div className="absolute right-0 top-0 bottom-0 w-px bg-gradient-to-b from-deep-red/20 via-deep-red/40 to-deep-red/20 hidden md:block" />
+
               <div className="flex flex-col md:flex-row gap-8 items-start">
                 <div className="md:w-1/3 space-y-6">
                   <div className="flex items-center gap-4">

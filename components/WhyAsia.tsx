@@ -149,7 +149,7 @@ export default function WhyAsia() {
           {/* Image */}
           <div className="relative w-full h-64 md:h-80 bg-gray-100 rounded-2xl overflow-hidden">
             <Image
-              src="/assets/IMG_0461.PNG"
+              src="/assets/hana-bi.jpeg"
               alt="מערכת סריקה AI מתקדמת"
               fill
               className="object-cover"

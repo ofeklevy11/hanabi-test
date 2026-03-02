@@ -5,7 +5,10 @@
       "Bash(tail:*)",
       "Bash(grep:*)",
       "Bash(grep 1a1a1a:*)",
-      "Bash(ngrok:*)"
+      "Bash(ngrok:*)",
+      "WebSearch",
+      "WebFetch(domain:blog.google)",
+      "WebFetch(domain:www.geminiimagewatermarkremover.com)"
     ]
   }
 }

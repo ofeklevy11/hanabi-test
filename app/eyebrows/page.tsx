@@ -356,7 +356,7 @@ export default function Eyebrows() {
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true, margin: "-100px" }}
                     transition={{ duration: 1 }}
-                    className="relative overflow-hidden w-full h-full"
+                    className="relative overflow-hidden w-full min-h-[300px] sm:min-h-[400px] md:min-h-0 md:h-full"
                   >
                     <Image
                       src={principle.image}
@@ -432,7 +432,7 @@ export default function Eyebrows() {
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true, margin: "-100px" }}
                   transition={{ duration: 1, delay: 0.2 }}
-                  className="relative overflow-hidden order-1 md:order-2 w-full h-full"
+                  className="relative overflow-hidden order-1 md:order-2 w-full min-h-[300px] sm:min-h-[400px] md:min-h-0 md:h-full"
                 >
                   <Image
                     src={principle.image}
@@ -532,7 +532,7 @@ export default function Eyebrows() {
 
                   {/* Video content */}
                   <video
-                    src="/assets/sirton.MP4"
+                    src="/files/video-eye.mp4"
                     className="absolute inset-0 w-full h-full object-cover"
                     playsInline
                     autoPlay
@@ -619,7 +619,7 @@ export default function Eyebrows() {
               transition={{ duration: 1, delay: 0.2 }}
               className="relative pl-8 md:pl-0"
             >
-              <div className="absolute right-0 top-0 bottom-0 w-px bg-gradient-to-b from-deep-red/20 via-deep-red/40 to-deep-red/20 hidden md:block" />
+
               <div className="flex flex-col md:flex-row gap-8 items-start">
                 <div className="md:w-1/3 space-y-6">
                   <div className="flex items-center gap-4">
