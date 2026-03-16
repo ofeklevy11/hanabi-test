@@ -233,6 +233,16 @@ export default function HairTransplant() {
                 </h3>
                 <div className="text-lg md:text-xl text-charcoal/70 leading-relaxed font-normal text-right space-y-6">
                   <p>מראה מלאכותי (&quot;מראה בובה&quot;) נובע בדרך כלל מתכנון לקוי. ב-Hana bi, אנו בונים את קו השיער שלך בשכבות אנטומיות:</p>
+                  <div className="block md:hidden relative w-full h-[300px] rounded-2xl overflow-hidden my-4">
+                    <Image
+                      src="/files/hair/hairhana.jpeg"
+                      alt="ארכיטקטורה של קו השיער"
+                      fill
+                      className="object-contain"
+                      quality={95}
+                      sizes="100vw"
+                    />
+                  </div>
                   <ul className="space-y-4 list-disc pr-6">
                     <li><strong>הקו הראשון (The Frontal Design):</strong> מבוצע באמצעות &quot;סינגלים&quot; (זקיקים של שערה בודדת בלבד). כדי למנוע מראה נוקשה, אנו מעצבים קו מזוגזג וא-סימטרי בעדינות, המדמה את קו הצמיחה הטבעי איתו נולדנו.</li>
                     <li><strong>קווי העומק:</strong> בקו השני אנו משלבים זקיקי &quot;דאבל&quot; (זוגות), ומהקו השלישי והלאה עוברים לזקיקי &quot;טריפל&quot; המעניקים את עובי וחוזק השיער.</li>
@@ -247,7 +257,7 @@ export default function HairTransplant() {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true, margin: "-100px" }}
               transition={{ duration: 1, delay: 0.2 }}
-              className="relative overflow-hidden order-1 md:order-2 w-full h-full min-h-[400px]"
+              className="relative overflow-hidden order-1 md:order-2 w-full h-full min-h-[400px] hidden md:block"
             >
               <Image
                 src="/files/hair/hairhana.jpeg"
@@ -271,7 +281,7 @@ export default function HairTransplant() {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true, margin: "-100px" }}
               transition={{ duration: 1 }}
-              className="relative overflow-hidden w-full h-full min-h-[400px]"
+              className="relative overflow-hidden w-full h-full min-h-[400px] hidden md:block"
             >
               <Image
                 src="/files/hair/hanahiluz.jpeg"
@@ -296,6 +306,16 @@ export default function HairTransplant() {
                 </h3>
                 <div className="text-lg md:text-xl text-charcoal/70 leading-relaxed font-normal text-right space-y-6">
                   <p>הצלחה של השתלת שיער נמדדת לא רק באיך שהחלק הקדמי נראה, אלא גם בשמירה על החלק האחורי של הראש. ב-Hana bi, אנו מתייחסים לאזור התורם שלך ביראת קודש.</p>
+                  <div className="block md:hidden relative w-full h-[300px] rounded-2xl overflow-hidden my-4">
+                    <Image
+                      src="/files/hair/hanahiluz.jpeg"
+                      alt="הגנה על האזור התורם"
+                      fill
+                      className="object-contain"
+                      quality={95}
+                      sizes="100vw"
+                    />
+                  </div>
                   <h4 className="text-2xl font-bold text-charcoal mt-8">חילוץ זקיקים בטכנולוגיית &quot;Micro-Extraction&quot;:</h4>
                   <p>באמצעות מכשור קוריאני עדין ודק במיוחד, אנו מחלצים את הזקיקים אחד-אחד בדיוק כירורגי. הכלים המיוחדים שלנו מאפשרים לנו:</p>
                   <ul className="space-y-4 list-disc pr-6">
@@ -326,6 +346,16 @@ export default function HairTransplant() {
                 </h3>
                 <div className="text-lg md:text-xl text-charcoal/70 leading-relaxed font-normal text-right space-y-6">
                   <p>הזקיק הוא איבר חי, והזמן שלו מחוץ לגוף הוא קריטי. כדי להבטיח שכל שערה ושערה שאנחנו משתילים אכן תצמח, אנו משתמשים במערכת שימור וקירור זקיקים מתקדמת.</p>
+                  <div className="block md:hidden relative w-full h-[300px] rounded-2xl overflow-hidden my-4">
+                    <Image
+                      src="/files/hair/98.jpeg"
+                      alt="98% אחוזי קליטה"
+                      fill
+                      className="object-contain"
+                      quality={95}
+                      sizes="100vw"
+                    />
+                  </div>
                   <p>ברגע הוצאת הזקיק, הוא עובר לסביבה מבוקרת טמפרטורה המדמה את תנאי הגוף. פרוטוקול השימור הייחודי שלנו מאפשר לנו להגיע לתוצאה חסרת תקדים של 98% אחוזי קליטה. עבורך, זה אומר ביטחון מלא שמה שהשתלנו – יצמח בוודאות ויישאר איתך לתמיד.</p>
                 </div>
               </div>
@@ -336,7 +366,7 @@ export default function HairTransplant() {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true, margin: "-100px" }}
               transition={{ duration: 1, delay: 0.2 }}
-              className="relative overflow-hidden order-1 md:order-2 w-full h-full min-h-[400px]"
+              className="relative overflow-hidden order-1 md:order-2 w-full h-full min-h-[400px] hidden md:block"
             >
               <Image
                 src="/files/hair/98.jpeg"
@@ -650,6 +680,27 @@ export default function HairTransplant() {
                     בתום השנה הראשונה אנו נפגשים למעמד הסיכום. בשלב זה תהליך הצמיחה הושלם במלואו. אנו מבצעים בדיקת איכות סופית של העיצוב, צפיפות השיער וכיווני הצמיחה, כדי לוודא שהתוצאה היא מושלמת, טבעית ותישאר איתך לכל החיים.
                   </p>
                 </div>
+              </div>
+            </motion.div>
+
+            {/* Final Checkpoint Image */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 1 }}
+              className="flex justify-center"
+            >
+              <div className="relative w-full max-w-md rounded-2xl overflow-hidden shadow-lg">
+                <Image
+                  src="/files/hair/final-checkpoint.jpeg"
+                  alt="תחנת ביקורת סופית - תוצאה לאחר שנה"
+                  width={600}
+                  height={800}
+                  className="w-full h-auto object-cover"
+                  quality={95}
+                  sizes="(max-width: 768px) 100vw, 448px"
+                />
               </div>
             </motion.div>
           </div>
