@@ -13,22 +13,12 @@ export default function Eyebrows() {
     name: '',
     phone: '',
   })
-  const [currentVideoIndex, setCurrentVideoIndex] = useState(0)
   const [currentYoutubeIndex, setCurrentYoutubeIndex] = useState(0)
   const containerRef = useRef<HTMLDivElement>(null)
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start start", "end end"]
   })
-  
-  const videos = [
-    '/assets/galit.mp4',
-    'assets/linor.mp4',
-    'assets/michal.mp4',
-    'assets/noa.mp4',
-    'assets/orna.mp4',
-    'assets/sapir.mp4',
-  ]
   
   const youtubeVideos = [
     'E2LKatm83hE',
@@ -39,14 +29,6 @@ export default function Eyebrows() {
     '6mSbqnxEBw8',
     'wwSN_z_xcOY',
   ]
-
-  const nextVideo = () => {
-    setCurrentVideoIndex((prev) => (prev + 1) % videos.length)
-  }
-
-  const prevVideo = () => {
-    setCurrentVideoIndex((prev) => (prev - 1 + videos.length) % videos.length)
-  }
 
   const nextYoutube = () => {
     setCurrentYoutubeIndex((prev) => (prev + 1) % youtubeVideos.length)
@@ -162,7 +144,7 @@ export default function Eyebrows() {
         <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-white to-transparent z-10" />
       </section>
 
-      {/* Video Carousel - iPhone View */}
+      {/* YouTube Shorts Carousel - iPhone View */}
       <section className="py-8 md:py-12 relative bg-gradient-to-b from-white via-soft-grey/30 to-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
@@ -174,109 +156,6 @@ export default function Eyebrows() {
           >
             <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-charcoal">
               לפני ואחרי
-            </h2>
-          </motion.div>
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 1 }}
-            className="relative flex items-center justify-center gap-6 md:gap-12"
-          >
-            {/* Prev Button */}
-            {videos.length > 1 && (
-              <button
-                onClick={prevVideo}
-                className="w-12 h-12 md:w-14 md:h-14 bg-white hover:bg-gray-50 shadow-lg rounded-full flex items-center justify-center transition-all z-10 border border-gray-200 shrink-0"
-                aria-label="סרטון קודם"
-              >
-                <ChevronRight className="w-6 h-6 text-charcoal" />
-              </button>
-            )}
-
-            {/* iPhone Frame */}
-            <div className="relative mx-auto">
-              {/* Phone outer shell */}
-              <div className="relative bg-[#1a1a1a] rounded-[3rem] p-[10px] shadow-[0_0_0_2px_#333,0_0_0_4px_#1a1a1a,0_25px_60px_-12px_rgba(0,0,0,0.4)]">
-                {/* Side button - right (volume) */}
-                <div className="absolute -right-[3px] top-[120px] w-[3px] h-[30px] bg-[#333] rounded-l-sm" />
-                <div className="absolute -right-[3px] top-[165px] w-[3px] h-[30px] bg-[#333] rounded-l-sm" />
-                {/* Side button - left (power) */}
-                <div className="absolute -left-[3px] top-[140px] w-[3px] h-[45px] bg-[#333] rounded-r-sm" />
-
-                {/* Screen area */}
-                <div className="relative bg-black rounded-[2.4rem] overflow-hidden w-[280px] h-[580px] md:w-[320px] md:h-[660px]">
-                  {/* Dynamic Island / Notch */}
-                  <div className="absolute top-0 left-0 right-0 z-20 flex justify-center pt-3">
-                    <div className="w-[100px] h-[28px] md:w-[120px] md:h-[32px] bg-black rounded-full" />
-                  </div>
-
-                  {/* Video content */}
-                  <AnimatePresence mode="wait">
-                    <motion.video
-                      key={currentVideoIndex}
-                      initial={{ opacity: 0, scale: 1.05 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      exit={{ opacity: 0, scale: 0.95 }}
-                      transition={{ duration: 0.5 }}
-                      src={videos[currentVideoIndex]}
-                      className="absolute inset-0 w-full h-full object-cover"
-                      playsInline
-                      autoPlay
-                      muted
-                    />
-                  </AnimatePresence>
-
-                  {/* Bottom bar (home indicator) */}
-                  <div className="absolute bottom-2 left-1/2 -translate-x-1/2 w-[120px] h-[4px] bg-white/30 rounded-full z-20" />
-                </div>
-              </div>
-            </div>
-
-            {/* Next Button */}
-            {videos.length > 1 && (
-              <button
-                onClick={nextVideo}
-                className="w-12 h-12 md:w-14 md:h-14 bg-white hover:bg-gray-50 shadow-lg rounded-full flex items-center justify-center transition-all z-10 border border-gray-200 shrink-0"
-                aria-label="סרטון הבא"
-              >
-                <ChevronLeft className="w-6 h-6 text-charcoal" />
-              </button>
-            )}
-          </motion.div>
-
-          {/* Dots indicator */}
-          {videos.length > 1 && (
-            <div className="flex justify-center gap-2.5 mt-8">
-              {videos.map((_, index) => (
-                <button
-                  key={index}
-                  onClick={() => setCurrentVideoIndex(index)}
-                  className={`rounded-full transition-all duration-300 ${
-                    index === currentVideoIndex
-                      ? 'bg-deep-red w-8 h-2.5'
-                      : 'bg-gray-300 hover:bg-gray-400 w-2.5 h-2.5'
-                  }`}
-                  aria-label={`עבור לסרטון ${index + 1}`}
-                />
-              ))}
-            </div>
-          )}
-        </div>
-      </section>
-
-      {/* YouTube Shorts Carousel - Second iPhone */}
-      <section className="py-8 md:py-12 relative bg-gradient-to-b from-white via-soft-grey/30 to-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.8 }}
-            className="text-center mb-8"
-          >
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-charcoal">
-              עוד קצת מהתוצאות שלנו
             </h2>
           </motion.div>
 
