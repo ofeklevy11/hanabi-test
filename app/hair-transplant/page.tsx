@@ -102,62 +102,116 @@ export default function HairTransplant() {
         <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-white to-transparent z-10" />
       </section>
 
-      {/* Section Header: הסוד לתוצאה מושלמת */}
-      <section className="py-6 md:py-8 bg-white">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <motion.h2
-            initial={{ opacity: 0, y: 30 }}
+      {/* Introduction - Floating Text Over White */}
+      <section className="py-16 md:py-20 bg-white relative">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 60 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 1 }}
-            className="text-5xl md:text-6xl lg:text-7xl font-bold text-charcoal"
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 1.2 }}
+            className="space-y-6 text-center"
           >
-            הסוד לתוצאה מושלמת
-          </motion.h2>
+            <motion.p
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 1, delay: 0.2 }}
+              className="text-4xl md:text-5xl lg:text-6xl text-charcoal leading-[1.2] font-bold"
+            >
+              השיער הוא מבנה אנטומי מורכב וייחודי
+              <br />
+              <span className="text-3xl md:text-4xl lg:text-5xl font-normal">המורכב מאלפי זקיקים בעלי זווית צמיחה משתנה, כיוון טבעי וצפיפות דינמית.</span>
+            </motion.p>
+
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: 0.4 }}
+              className="pt-4"
+            >
+              <p className="text-2xl md:text-3xl lg:text-4xl text-charcoal leading-relaxed font-medium">
+                ב-<span className="text-deep-red font-bold">Hana Bi</span> אנו מתמחים בשחזור אנטומי של קו השיער ומילוי אזורי דלילות, תוך התאמה טבעית ומדויקת לתווי הפנים הייחודיים של כל מטופל.
+              </p>
+            </motion.div>
+
+          </motion.div>
         </div>
       </section>
 
       {/* Section 1: צפיפות אנטומית מקסימלית */}
       <section className="py-12 md:py-20 bg-white relative overflow-hidden">
-        <div className="max-w-[95vw] mx-auto">
-          <div className="grid md:grid-cols-[1.2fr_1fr] gap-0 items-stretch min-h-[50vh]">
-            <motion.div
-              initial={{ opacity: 0, x: -100 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 1 }}
-              className="relative overflow-hidden w-full h-full min-h-[400px]"
-            >
-              <Image
-                src="/files/hair/231.jpeg"
-                alt="צפיפות אנטומית מקסימלית"
-                fill
-                className="object-contain"
-                quality={95}
-                priority
-                sizes="(max-width: 768px) 100vw, 60vw"
-              />
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, x: 50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 1, delay: 0.2 }}
-              className="flex items-center p-8 md:p-10 lg:p-12 bg-white"
-            >
-              <div className="w-full">
-                <h3 className="text-3xl md:text-4xl font-bold text-charcoal leading-tight mb-8">
-                  צפיפות אנטומית מקסימלית
-                </h3>
-                <div className="text-lg md:text-xl text-charcoal/70 leading-relaxed font-normal text-right space-y-6">
-                  <p>כדי להשיג מראה שאינו מסגיר את הטיפול, כזה שנראה ומרגיש כמו שיער טבעי ושופע. עלינו להיצמד לחוקי האנטומיה של הקרקפת.</p>
-                  <p>הצפיפות הממוצעת בשיער טבעי עומדת על כ-80 זקיקים לס&quot;מ מרובע. כדי להעניק לך מראה מלא, ללא שטחים דלילים או מראה &quot;שקוף&quot;, אנו מחויבים להגיע לרמת צפיפות זהה לזו של הטבע.</p>
-                  <h4 className="text-2xl font-bold text-charcoal mt-8">איך אנחנו עושים זאת?</h4>
-                  <p>ב-Hana bi אנו משתמשים בטכנולוגיית קצה ובמכשור מיקרוסקופי ייחודי שפותח בסיאול, קוריאה – בירת החדשנות העולמית. המכשור שלנו דק ועדין במיוחד, מה שמאפשר לנו להשתיל את הזקיקים בקרבה מקסימלית זה לזה, מבלי לפגוע ברקמה, ולהבטיח תוצאה צפופה, עשירה וטבעית לחלוטין.</p>
-                </div>
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 1 }}
+          >
+            <div className="w-full">
+              <h3 className="text-3xl md:text-4xl font-bold text-charcoal leading-tight mb-8 text-center">
+                צפיפות אנטומית מקסימלית
+              </h3>
+              <div className="text-lg md:text-xl text-charcoal/70 leading-relaxed font-normal text-right space-y-6">
+                <p>כדי להשיג מראה שאינו מסגיר את הטיפול, כזה שנראה ומרגיש כמו שיער טבעי ושופע. עלינו להיצמד לחוקי האנטומיה של הקרקפת.</p>
+                <p>הצפיפות הממוצעת בשיער טבעי עומדת על כ-80 זקיקים לס&quot;מ מרובע. כדי להעניק לך מראה מלא, ללא שטחים דלילים או מראה &quot;שקוף&quot;, אנו מחויבים להגיע לרמת צפיפות זהה לזו של הטבע.</p>
+                <h4 className="text-2xl font-bold text-charcoal mt-8">איך אנחנו עושים זאת?</h4>
+                <p>ב-Hana bi אנו משתמשים בטכנולוגיית קצה ובמכשור מיקרוסקופי ייחודי שפותח בסיאול, קוריאה – בירת החדשנות העולמית. המכשור שלנו דק ועדין במיוחד, מה שמאפשר לנו להשתיל את הזקיקים בקרבה מקסימלית זה לזה, מבלי לפגוע ברקמה, ולהבטיח תוצאה צפופה, עשירה וטבעית לחלוטין.</p>
               </div>
-            </motion.div>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Before & After Results Gallery */}
+      <section className="py-16 md:py-24 bg-gradient-to-b from-white to-soft-grey relative overflow-hidden">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 1 }}
+            className="text-center mb-12"
+          >
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-charcoal mb-4">
+              תוצאות לפני ואחרי
+            </h2>
+            <p className="text-xl md:text-2xl text-charcoal/60 max-w-3xl mx-auto font-normal">
+              השתלות שיער שבוצעו במרפאת Hana Bi
+            </p>
+          </motion.div>
+        </div>
+
+        <div className="max-w-[95vw] mx-auto px-4">
+          <div className="grid grid-cols-2 md:grid-cols-5 gap-3 md:gap-4 items-center">
+            {[
+              '/files/hair/ba-5.png',
+              '/files/hair/ba-1.png',
+              '/files/hair/ba-2.png',
+              '/files/hair/ba-3.png',
+              '/files/hair/ba-4.png',
+            ].map((src, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8, delay: i * 0.1 }}
+              >
+                <div className="relative rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-shadow duration-300">
+                  <Image
+                    src={src}
+                    alt={`תוצאת השתלת שיער - לפני ואחרי ${i + 1}`}
+                    width={400}
+                    height={700}
+                    className="w-full h-auto object-cover"
+                    quality={90}
+                    sizes="(max-width: 768px) 50vw, 19vw"
+                  />
+                </div>
+              </motion.div>
+            ))}
           </div>
         </div>
       </section>
@@ -196,7 +250,7 @@ export default function HairTransplant() {
               className="relative overflow-hidden order-1 md:order-2 w-full h-full min-h-[400px]"
             >
               <Image
-                src="/files/hair/4.jpeg"
+                src="/files/hair/hairhana.jpeg"
                 alt="ארכיטקטורה של קו השיער"
                 fill
                 className="object-contain"
@@ -220,7 +274,7 @@ export default function HairTransplant() {
               className="relative overflow-hidden w-full h-full min-h-[400px]"
             >
               <Image
-                src="/files/hair/WhatsApp Image 2026-02-10 at 14.20.00.jpeg"
+                src="/files/hair/hanahiluz.jpeg"
                 alt="הגנה על האזור התורם"
                 fill
                 className="object-contain"
@@ -285,7 +339,7 @@ export default function HairTransplant() {
               className="relative overflow-hidden order-1 md:order-2 w-full h-full min-h-[400px]"
             >
               <Image
-                src="/files/hair/WhatsApp Image 2026-02-10 at 354.jpeg"
+                src="/files/hair/98.jpeg"
                 alt="98% אחוזי קליטה"
                 fill
                 className="object-contain"
@@ -382,6 +436,27 @@ export default function HairTransplant() {
               </div>
             </motion.div>
 
+            {/* Week image */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 1 }}
+              className="flex justify-center"
+            >
+              <div className="relative w-full max-w-md rounded-2xl overflow-hidden shadow-lg">
+                <Image
+                  src="/files/hair/week.jpeg"
+                  alt="שבוע ההתקבעות - תוצאה לאחר שבוע"
+                  width={600}
+                  height={800}
+                  className="w-full h-auto object-cover"
+                  quality={95}
+                  sizes="(max-width: 768px) 100vw, 448px"
+                />
+              </div>
+            </motion.div>
+
             {/* Checkpoint 1 */}
             <motion.div
               initial={{ opacity: 0, x: 50 }}
@@ -407,6 +482,40 @@ export default function HairTransplant() {
                   <p className="text-lg md:text-xl text-charcoal/70 leading-relaxed font-normal">
                     בדיוק שמונה ימים לאחר ההליך, אנו נפגשים בקליניקה לביקורת ראשונה. במפגש זה הצוות המקצועי מבצע ניקוי עדין ומבוקר להסרת הגלדים. בסיום הטיפול, האזור נקי לחלוטין, העור חוזר למרקמו החלק והמראה המתקבל נקי ואסתטי.
                   </p>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* Checkpoint 1 Images */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 1 }}
+              className="flex justify-center"
+            >
+              <div className="grid grid-cols-2 gap-4 w-full max-w-2xl">
+                <div className="relative rounded-2xl overflow-hidden shadow-lg">
+                  <Image
+                    src="/files/hair/checkpoint-one.jpeg"
+                    alt="תחנת ביקורת ראשונה - לפני ניקוי"
+                    width={600}
+                    height={800}
+                    className="w-full h-auto object-cover"
+                    quality={95}
+                    sizes="(max-width: 768px) 50vw, 300px"
+                  />
+                </div>
+                <div className="relative rounded-2xl overflow-hidden shadow-lg">
+                  <Image
+                    src="/files/hair/checkpoint-two.jpeg"
+                    alt="תחנת ביקורת ראשונה - תהליך ניקוי"
+                    width={600}
+                    height={800}
+                    className="w-full h-auto object-cover"
+                    quality={95}
+                    sizes="(max-width: 768px) 50vw, 300px"
+                  />
                 </div>
               </div>
             </motion.div>
@@ -492,6 +601,27 @@ export default function HairTransplant() {
                     החל מהחודש הרביעי מתחילה הצמיחה המשמעותית. מחודש לחודש השיער מתמלא, השיערות הופכות עבות וחיוניות יותר, והמבנה המעוצב מתחיל לקבל את נפחו הסופי תוך השתלבות הרמונית ומראה טבעי לחלוטין.
                   </p>
                 </div>
+              </div>
+            </motion.div>
+
+            {/* Growth image */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 1 }}
+              className="flex justify-center"
+            >
+              <div className="relative w-full max-w-md rounded-2xl overflow-hidden shadow-lg">
+                <Image
+                  src="/files/hair/man.jpeg"
+                  alt="צמיחה והתעבות - תוצאה"
+                  width={600}
+                  height={800}
+                  className="w-full h-auto object-cover"
+                  quality={95}
+                  sizes="(max-width: 768px) 100vw, 448px"
+                />
               </div>
             </motion.div>
 

@@ -14,6 +14,7 @@ export default function Eyebrows() {
     phone: '',
   })
   const [currentVideoIndex, setCurrentVideoIndex] = useState(0)
+  const [currentYoutubeIndex, setCurrentYoutubeIndex] = useState(0)
   const containerRef = useRef<HTMLDivElement>(null)
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -29,12 +30,30 @@ export default function Eyebrows() {
     'assets/sapir.mp4',
   ]
   
+  const youtubeVideos = [
+    'E2LKatm83hE',
+    'yVsjrG-PfLA',
+    '0wEELXTiRog',
+    'YROataWSxU0',
+    '_fIeAGCz9P0',
+    '6mSbqnxEBw8',
+    'wwSN_z_xcOY',
+  ]
+
   const nextVideo = () => {
     setCurrentVideoIndex((prev) => (prev + 1) % videos.length)
   }
-  
+
   const prevVideo = () => {
     setCurrentVideoIndex((prev) => (prev - 1 + videos.length) % videos.length)
+  }
+
+  const nextYoutube = () => {
+    setCurrentYoutubeIndex((prev) => (prev + 1) % youtubeVideos.length)
+  }
+
+  const prevYoutube = () => {
+    setCurrentYoutubeIndex((prev) => (prev - 1 + youtubeVideos.length) % youtubeVideos.length)
   }
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -147,6 +166,17 @@ export default function Eyebrows() {
       <section className="py-8 md:py-12 relative bg-gradient-to-b from-white via-soft-grey/30 to-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.8 }}
+            className="text-center mb-8"
+          >
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-charcoal">
+              לפני ואחרי
+            </h2>
+          </motion.div>
+          <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true, margin: "-100px" }}
@@ -232,6 +262,108 @@ export default function Eyebrows() {
               ))}
             </div>
           )}
+        </div>
+      </section>
+
+      {/* YouTube Shorts Carousel - Second iPhone */}
+      <section className="py-8 md:py-12 relative bg-gradient-to-b from-white via-soft-grey/30 to-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.8 }}
+            className="text-center mb-8"
+          >
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-charcoal">
+              עוד קצת מהתוצאות שלנו
+            </h2>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 1 }}
+            className="relative flex items-center justify-center gap-6 md:gap-12"
+          >
+            {/* Prev Button */}
+            <button
+              onClick={prevYoutube}
+              className="w-12 h-12 md:w-14 md:h-14 bg-white hover:bg-gray-50 shadow-lg rounded-full flex items-center justify-center transition-all z-10 border border-gray-200 shrink-0"
+              aria-label="סרטון קודם"
+            >
+              <ChevronRight className="w-6 h-6 text-charcoal" />
+            </button>
+
+            {/* iPhone Frame */}
+            <div className="relative mx-auto">
+              {/* Phone outer shell */}
+              <div className="relative bg-[#1a1a1a] rounded-[3rem] p-[10px] shadow-[0_0_0_2px_#333,0_0_0_4px_#1a1a1a,0_25px_60px_-12px_rgba(0,0,0,0.4)]">
+                {/* Side button - right (volume) */}
+                <div className="absolute -right-[3px] top-[120px] w-[3px] h-[30px] bg-[#333] rounded-l-sm" />
+                <div className="absolute -right-[3px] top-[165px] w-[3px] h-[30px] bg-[#333] rounded-l-sm" />
+                {/* Side button - left (power) */}
+                <div className="absolute -left-[3px] top-[140px] w-[3px] h-[45px] bg-[#333] rounded-r-sm" />
+
+                {/* Screen area */}
+                <div className="relative bg-black rounded-[2.4rem] overflow-hidden w-[280px] h-[580px] md:w-[320px] md:h-[660px]">
+                  {/* Dynamic Island / Notch */}
+                  <div className="absolute top-0 left-0 right-0 z-20 flex justify-center pt-3">
+                    <div className="w-[100px] h-[28px] md:w-[120px] md:h-[32px] bg-black rounded-full" />
+                  </div>
+
+                  {/* YouTube embed content */}
+                  <AnimatePresence mode="wait">
+                    <motion.div
+                      key={currentYoutubeIndex}
+                      initial={{ opacity: 0, scale: 1.05 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      exit={{ opacity: 0, scale: 0.95 }}
+                      transition={{ duration: 0.5 }}
+                      className="absolute inset-0 w-full h-full"
+                    >
+                      <iframe
+                        src={`https://www.youtube.com/embed/${youtubeVideos[currentYoutubeIndex]}?autoplay=1&mute=1&loop=1&playlist=${youtubeVideos[currentYoutubeIndex]}&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1`}
+                        className="absolute inset-0 w-full h-full border-0"
+                        allow="autoplay; encrypted-media"
+                        allowFullScreen
+                        title="YouTube video"
+                      />
+                    </motion.div>
+                  </AnimatePresence>
+
+                  {/* Bottom bar (home indicator) */}
+                  <div className="absolute bottom-2 left-1/2 -translate-x-1/2 w-[120px] h-[4px] bg-white/30 rounded-full z-20" />
+                </div>
+              </div>
+            </div>
+
+            {/* Next Button */}
+            <button
+              onClick={nextYoutube}
+              className="w-12 h-12 md:w-14 md:h-14 bg-white hover:bg-gray-50 shadow-lg rounded-full flex items-center justify-center transition-all z-10 border border-gray-200 shrink-0"
+              aria-label="סרטון הבא"
+            >
+              <ChevronLeft className="w-6 h-6 text-charcoal" />
+            </button>
+          </motion.div>
+
+          {/* Dots indicator */}
+          <div className="flex justify-center gap-2.5 mt-8">
+            {youtubeVideos.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => setCurrentYoutubeIndex(index)}
+                className={`rounded-full transition-all duration-300 ${
+                  index === currentYoutubeIndex
+                    ? 'bg-deep-red w-8 h-2.5'
+                    : 'bg-gray-300 hover:bg-gray-400 w-2.5 h-2.5'
+                }`}
+                aria-label={`עבור לסרטון ${index + 1}`}
+              />
+            ))}
+          </div>
         </div>
       </section>
 
@@ -752,6 +884,29 @@ export default function Eyebrows() {
               </div>
             </motion.div>
           </div>
+        </div>
+      </section>
+
+      {/* Result Image */}
+      <section className="py-12 md:py-20 relative overflow-hidden">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-center">
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 1 }}
+            className="relative w-full max-w-2xl rounded-2xl md:rounded-3xl overflow-hidden shadow-2xl"
+          >
+            <Image
+              src="/files/eyebrows-result.png"
+              alt="תוצאת השתלת גבות"
+              width={800}
+              height={600}
+              className="w-full h-auto object-cover"
+              quality={95}
+              sizes="(max-width: 768px) 100vw, 672px"
+            />
+          </motion.div>
         </div>
       </section>
 
