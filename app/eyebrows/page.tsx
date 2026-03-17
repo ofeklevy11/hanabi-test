@@ -23,7 +23,6 @@ export default function Eyebrows() {
   const youtubeVideos = [
     'E2LKatm83hE',
     'Q55GLiQvmmA',
-    '-rnDfzpfpjQ',
     '7B9dVNpBARc',
     'IC03yCTdwrs',
     'TOYRuu8LHhI',

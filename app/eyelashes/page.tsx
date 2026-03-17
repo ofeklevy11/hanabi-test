@@ -2,10 +2,9 @@
 
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
-import { Microscope, Move, Shield, ChevronRight, ChevronLeft, Sparkles, CheckCircle2, Eye } from 'lucide-react'
-import Link from 'next/link'
+import { Microscope, Move, Shield, Sparkles, CheckCircle2, Eye } from 'lucide-react'
 import Image from 'next/image'
-import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion'
+import { motion, useScroll } from 'framer-motion'
 import { useState, useRef } from 'react'
 
 export default function Eyelashes() {
@@ -13,26 +12,13 @@ export default function Eyelashes() {
     name: '',
     phone: '',
   })
-  const [currentVideoIndex, setCurrentVideoIndex] = useState(0)
   const containerRef = useRef<HTMLDivElement>(null)
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start start", "end end"]
   })
-  
-  const videos = [
-    '/videos/eyelash-video-1.mp4',
-    '/videos/eyelash-video-2.mp4',
-    '/videos/eyelash-video-3.mp4',
-  ]
-  
-  const nextVideo = () => {
-    setCurrentVideoIndex((prev) => (prev + 1) % videos.length)
-  }
-  
-  const prevVideo = () => {
-    setCurrentVideoIndex((prev) => (prev - 1 + videos.length) % videos.length)
-  }
+
+  const youtubeVideoId = '-rnDfzpfpjQ'
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
@@ -149,66 +135,58 @@ export default function Eyelashes() {
         <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-white to-transparent z-10" />
       </section>
 
-      {/* Video Carousel - Full Width Premium */}
-      <section className="py-0 relative">
-        <div className="max-w-[95vw] mx-auto">
+      {/* YouTube Shorts - iPhone View */}
+      <section className="py-8 md:py-12 relative bg-gradient-to-b from-white via-soft-grey/30 to-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.8 }}
+            className="text-center mb-8"
+          >
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-charcoal">
+              לפני ואחרי
+            </h2>
+          </motion.div>
+
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 1 }}
-            className="relative group"
+            className="relative flex items-center justify-center"
           >
-            <div className="relative aspect-[21/9] rounded-none md:rounded-3xl overflow-hidden shadow-2xl bg-black">
-              <AnimatePresence mode="wait">
-                <motion.video
-                  key={currentVideoIndex}
-                  initial={{ opacity: 0, scale: 1.05 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.95 }}
-                  transition={{ duration: 0.7 }}
-                  src={videos[currentVideoIndex]}
-                  className="w-full h-full object-cover"
-                  controls
-                  playsInline
-                  autoPlay
-                  muted
-                />
-              </AnimatePresence>
-              
-              {videos.length > 1 && (
-                <>
-                  <button
-                    onClick={prevVideo}
-                    className="absolute right-8 top-1/2 -translate-y-1/2 w-16 h-16 bg-white/10 hover:bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center transition-all z-10 group/btn border border-white/20"
-                    aria-label="סרטון קודם"
-                  >
-                    <ChevronRight className="w-7 h-7 text-white" />
-                  </button>
-                  <button
-                    onClick={nextVideo}
-                    className="absolute left-8 top-1/2 -translate-y-1/2 w-16 h-16 bg-white/10 hover:bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center transition-all z-10 group/btn border border-white/20"
-                    aria-label="סרטון הבא"
-                  >
-                    <ChevronLeft className="w-7 h-7 text-white" />
-                  </button>
-                  
-                  <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-3 z-10">
-                    {videos.map((_, index) => (
-                      <button
-                        key={index}
-                        onClick={() => setCurrentVideoIndex(index)}
-                        className={`h-1.5 rounded-full transition-all duration-300 ${
-                          index === currentVideoIndex
-                            ? 'bg-white w-12'
-                            : 'bg-white/30 hover:bg-white/50 w-1.5'
-                        }`}
-                        aria-label={`עבור לסרטון ${index + 1}`}
-                      />
-                    ))}
+            {/* iPhone Frame */}
+            <div className="relative mx-auto">
+              {/* Phone outer shell */}
+              <div className="relative bg-[#1a1a1a] rounded-[3rem] p-[10px] shadow-[0_0_0_2px_#333,0_0_0_4px_#1a1a1a,0_25px_60px_-12px_rgba(0,0,0,0.4)]">
+                {/* Side button - right (volume) */}
+                <div className="absolute -right-[3px] top-[120px] w-[3px] h-[30px] bg-[#333] rounded-l-sm" />
+                <div className="absolute -right-[3px] top-[165px] w-[3px] h-[30px] bg-[#333] rounded-l-sm" />
+                {/* Side button - left (power) */}
+                <div className="absolute -left-[3px] top-[140px] w-[3px] h-[45px] bg-[#333] rounded-r-sm" />
+
+                {/* Screen area */}
+                <div className="relative bg-black rounded-[2.4rem] overflow-hidden w-[280px] h-[580px] md:w-[320px] md:h-[660px]">
+                  {/* Dynamic Island / Notch */}
+                  <div className="absolute top-0 left-0 right-0 z-20 flex justify-center pt-3">
+                    <div className="w-[100px] h-[28px] md:w-[120px] md:h-[32px] bg-black rounded-full" />
                   </div>
-                </>
-              )}
+
+                  {/* YouTube embed content */}
+                  <iframe
+                    src={`https://www.youtube.com/embed/${youtubeVideoId}?autoplay=1&mute=1&loop=1&playlist=${youtubeVideoId}&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1`}
+                    className="absolute inset-0 w-full h-full border-0"
+                    allow="autoplay; encrypted-media"
+                    allowFullScreen
+                    title="YouTube video"
+                  />
+
+                  {/* Bottom bar (home indicator) */}
+                  <div className="absolute bottom-2 left-1/2 -translate-x-1/2 w-[120px] h-[4px] bg-white/30 rounded-full z-20" />
+                </div>
+              </div>
             </div>
           </motion.div>
         </div>
