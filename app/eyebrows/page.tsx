@@ -22,12 +22,13 @@ export default function Eyebrows() {
   
   const youtubeVideos = [
     'E2LKatm83hE',
-    'yVsjrG-PfLA',
-    '0wEELXTiRog',
-    'YROataWSxU0',
-    '_fIeAGCz9P0',
-    '6mSbqnxEBw8',
+    'Q55GLiQvmmA',
+    '-rnDfzpfpjQ',
+    '7B9dVNpBARc',
+    'IC03yCTdwrs',
+    'TOYRuu8LHhI',
     'wwSN_z_xcOY',
+    '7GeJuoFTees',
   ]
 
   const nextYoutube = () => {
