@@ -368,6 +368,17 @@ export default function Eyelashes() {
                           {principle.title}
                         </h3>
                       </div>
+                      {/* Mobile Image */}
+                      <div className="block md:hidden relative w-full h-[300px] rounded-2xl overflow-hidden my-6">
+                        <Image
+                          src={principle.image}
+                          alt={principle.title}
+                          fill
+                          className="object-cover"
+                          quality={95}
+                          sizes="100vw"
+                        />
+                      </div>
                       <p className="text-lg md:text-xl text-charcoal/70 leading-relaxed font-normal text-right">
                         {principle.description}
                       </p>
@@ -378,7 +389,7 @@ export default function Eyelashes() {
             </section>
           )
         }
-        
+
         // Image right, text left (asymmetric)
         return (
           <section key={index} className="py-12 md:py-20 bg-soft-grey relative overflow-hidden">
@@ -401,12 +412,23 @@ export default function Eyelashes() {
                         {principle.title}
                       </h3>
                     </div>
+                    {/* Mobile Image */}
+                    <div className="block md:hidden relative w-full h-[300px] rounded-2xl overflow-hidden my-6">
+                      <Image
+                        src={principle.image}
+                        alt={principle.title}
+                        fill
+                        className="object-cover"
+                        quality={95}
+                        sizes="100vw"
+                      />
+                    </div>
                     <p className="text-lg md:text-xl text-charcoal/70 leading-relaxed font-normal text-right">
                       {principle.description}
                     </p>
                   </div>
                 </motion.div>
-                
+
                 {/* Large Image */}
                 <motion.div
                   initial={{ opacity: 0, x: 100 }}
