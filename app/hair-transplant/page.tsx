@@ -142,25 +142,57 @@ export default function HairTransplant() {
 
       {/* Section 1: צפיפות אנטומית מקסימלית */}
       <section className="py-12 md:py-20 bg-white relative overflow-hidden">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 1 }}
-          >
-            <div className="w-full">
-              <h3 className="text-3xl md:text-4xl font-bold text-charcoal leading-tight mb-8 text-center">
-                צפיפות אנטומית מקסימלית
-              </h3>
-              <div className="text-lg md:text-xl text-charcoal/70 leading-relaxed font-normal text-right space-y-6">
-                <p>כדי להשיג מראה שאינו מסגיר את הטיפול, כזה שנראה ומרגיש כמו שיער טבעי ושופע. עלינו להיצמד לחוקי האנטומיה של הקרקפת.</p>
-                <p>הצפיפות הממוצעת בשיער טבעי עומדת על כ-80 זקיקים לס&quot;מ מרובע. כדי להעניק לך מראה מלא, ללא שטחים דלילים או מראה &quot;שקוף&quot;, אנו מחויבים להגיע לרמת צפיפות זהה לזו של הטבע.</p>
-                <h4 className="text-2xl font-bold text-charcoal mt-8">איך אנחנו עושים זאת?</h4>
-                <p>ב-Hana bi אנו משתמשים בטכנולוגיית קצה ובמכשור מיקרוסקופי ייחודי שפותח בסיאול, קוריאה – בירת החדשנות העולמית. המכשור שלנו דק ועדין במיוחד, מה שמאפשר לנו להשתיל את הזקיקים בקרבה מקסימלית זה לזה, מבלי לפגוע ברקמה, ולהבטיח תוצאה צפופה, עשירה וטבעית לחלוטין.</p>
+        <div className="max-w-[95vw] mx-auto">
+          <div className="grid md:grid-cols-[1fr_1.2fr] gap-0 items-stretch min-h-[50vh]">
+            <motion.div
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 1 }}
+              className="flex items-center p-8 md:p-10 lg:p-12 bg-white order-2 md:order-1"
+            >
+              <div className="w-full">
+                <h3 className="text-3xl md:text-4xl font-bold text-charcoal leading-tight mb-8">
+                  צפיפות אנטומית מקסימלית
+                </h3>
+                <div className="text-lg md:text-xl text-charcoal/70 leading-relaxed font-normal text-right space-y-6">
+                  <p>כדי להשיג מראה שאינו מסגיר את הטיפול, כזה שנראה ומרגיש כמו שיער טבעי ושופע. עלינו להיצמד לחוקי האנטומיה של הקרקפת.</p>
+                  <p>הצפיפות הממוצעת בשיער טבעי עומדת על כ-80 זקיקים לס&quot;מ מרובע. כדי להעניק לך מראה מלא, ללא שטחים דלילים או מראה &quot;שקוף&quot;, אנו מחויבים להגיע לרמת צפיפות זהה לזו של הטבע.</p>
+                  <div className="block md:hidden relative w-full h-[300px] rounded-2xl overflow-hidden my-4">
+                    <Image
+                      src="/files/hair/IMG_0933.PNG"
+                      alt="צפיפות אנטומית מקסימלית"
+                      fill
+                      className="object-cover"
+                      quality={95}
+                      sizes="100vw"
+                    />
+                  </div>
+                  <h4 className="text-2xl font-bold text-charcoal mt-8">איך אנחנו עושים זאת?</h4>
+                  <p>ב-Hana bi אנו משתמשים בטכנולוגיית קצה ובמכשור מיקרוסקופי ייחודי שפותח בסיאול, קוריאה – בירת החדשנות העולמית. המכשור שלנו דק ועדין במיוחד, מה שמאפשר לנו להשתיל את הזקיקים בקרבה מקסימלית זה לזה, מבלי לפגוע ברקמה, ולהבטיח תוצאה צפופה, עשירה וטבעית לחלוטין.</p>
+                </div>
               </div>
-            </div>
-          </motion.div>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, x: 100 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 1, delay: 0.2 }}
+              className="relative order-1 md:order-2 w-full h-full min-h-[400px] hidden md:block p-4"
+            >
+              <div className="relative w-full h-full rounded-2xl overflow-hidden">
+              <Image
+                src="/files/hair/IMG_0933.PNG"
+                alt="צפיפות אנטומית מקסימלית"
+                fill
+                className="object-cover"
+                quality={95}
+                sizes="(max-width: 768px) 100vw, 60vw"
+              />
+              </div>
+            </motion.div>
+          </div>
         </div>
       </section>
 
@@ -238,7 +270,7 @@ export default function HairTransplant() {
                       src="/files/hair/hairhana.jpeg"
                       alt="ארכיטקטורה של קו השיער"
                       fill
-                      className="object-contain"
+                      className="object-cover"
                       quality={95}
                       sizes="100vw"
                     />
@@ -315,7 +347,7 @@ export default function HairTransplant() {
                       src="/files/hair/hanahiluz.jpeg"
                       alt="הגנה על האזור התורם"
                       fill
-                      className="object-contain"
+                      className="object-cover"
                       quality={95}
                       sizes="100vw"
                     />
@@ -385,6 +417,116 @@ export default function HairTransplant() {
         </div>
       </section>
 
+
+      {/* Section 5: סוד המיון – רק שיערות משי */}
+      <section className="py-12 md:py-20 bg-white relative overflow-hidden">
+        <div className="max-w-[95vw] mx-auto">
+          <div className="grid md:grid-cols-[1.2fr_1fr] gap-0 items-stretch min-h-[50vh]">
+            <motion.div
+              initial={{ opacity: 0, x: -100 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 1 }}
+              className="relative w-full h-full min-h-[400px] hidden md:block p-4"
+            >
+              <div className="relative w-full h-full rounded-2xl overflow-hidden">
+              <Image
+                src="/files/hair/silk-hair-selection.PNG"
+                alt="סוד המיון – רק שיערות משי"
+                fill
+                className="object-cover"
+                quality={95}
+                sizes="(max-width: 768px) 100vw, 60vw"
+              />
+              </div>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, x: 50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 1, delay: 0.2 }}
+              className="flex items-center p-8 md:p-10 lg:p-12 bg-white"
+            >
+              <div className="w-full">
+                <h3 className="text-3xl md:text-4xl font-bold text-charcoal leading-tight mb-8">
+                  סוד המיון – רק שיערות משי
+                  <span className="block text-xl md:text-2xl font-normal text-charcoal/60 mt-2">(Silk Hair Selection)</span>
+                </h3>
+                <div className="text-lg md:text-xl text-charcoal/70 leading-relaxed font-normal text-right space-y-6">
+                  <p>האתגר הגדול ביותר ביצירת ריסים טבעיים הוא המרקם, כי שיער הגוף לרוב עבה יותר מריסים טבעיים. לכן אנו מבצעים תהליך איתור מורכב באזור העורף התחתון, שם צומחות שיערות דקות ורכות במיוחד, המכונות &quot;שיערות משי&quot;.</p>
+                  <div className="block md:hidden relative w-full h-[300px] rounded-2xl overflow-hidden my-4">
+                    <Image
+                      src="/files/hair/silk-hair-selection.PNG"
+                      alt="סוד המיון – רק שיערות משי"
+                      fill
+                      className="object-cover"
+                      quality={95}
+                      sizes="100vw"
+                    />
+                  </div>
+                  <p>אנו ממיינים אותן תחת מיקרוסקופ ובוחרים רק את הזקיקים הבודדים והעדינים ביותר, כדי להבטיח שהריס החדש יהיה רך למגע, ישתלב בטבעיות עם הריסים הקיימים, ולא יכביד על העפעף העדין.</p>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* Section 6: ארכיטקטורת ה-C-Curve */}
+      <section className="py-12 md:py-20 bg-soft-grey relative overflow-hidden">
+        <div className="max-w-[95vw] mx-auto">
+          <div className="grid md:grid-cols-[1fr_1.2fr] gap-0 items-stretch min-h-[50vh]">
+            <motion.div
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 1 }}
+              className="flex items-center p-8 md:p-10 lg:p-12 bg-soft-grey order-2 md:order-1"
+            >
+              <div className="w-full">
+                <h3 className="text-3xl md:text-4xl font-bold text-charcoal leading-tight mb-8">
+                  ארכיטקטורת ה-C-Curve
+                  <span className="block text-xl md:text-2xl font-normal text-charcoal/60 mt-2">(הקשת המושלמת)</span>
+                </h3>
+                <div className="text-lg md:text-xl text-charcoal/70 leading-relaxed font-normal text-right space-y-6">
+                  <p>בעוד שרוב הקליניקות משתילות את השיער בזווית ישרה שיוצרת מראה של &quot;גגון&quot; שמצל על העין, אנו משתמשים בשיטות מיוחדות ומדויקות שמאפשרות לנו לשלוט לא רק בזווית הכניסה, אלא גם ברוטציה של הזקיק.</p>
+                  <div className="block md:hidden relative w-full h-[300px] rounded-2xl overflow-hidden my-4">
+                    <Image
+                      src="/files/hair/c-curve.jpeg"
+                      alt="ארכיטקטורת ה-C-Curve - הקשת המושלמת"
+                      fill
+                      className="object-cover"
+                      quality={95}
+                      sizes="100vw"
+                    />
+                  </div>
+                  <p>אנו משתילים ריסים ארוכים בלבד, מה שמאפשר לנו לראות את העיקול הטבעי של השערה ולסובב אותה כך שהיא תתעגל כלפי מעלה בצורת C מושלמת. פעולה זו &quot;פותחת&quot; את העין ומעניקה לה מראה ערני, מורם וזוהר יותר – ללא צורך במעגל ריסים.</p>
+                </div>
+              </div>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, x: 100 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 1, delay: 0.2 }}
+              className="relative order-1 md:order-2 w-full h-full min-h-[400px] hidden md:block p-4"
+            >
+              <div className="relative w-full h-full rounded-2xl overflow-hidden">
+              <Image
+                src="/files/hair/c-curve.jpeg"
+                alt="ארכיטקטורת ה-C-Curve - הקשת המושלמת"
+                fill
+                className="object-cover"
+                quality={95}
+                sizes="(max-width: 768px) 100vw, 60vw"
+              />
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
 
       {/* Recovery Journey - Premium Timeline */}
       <section className="py-16 md:py-20 bg-gradient-to-b from-white via-soft-grey to-white relative overflow-hidden">

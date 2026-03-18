@@ -13,6 +13,8 @@ export default function Eyelashes() {
     phone: '',
   })
   const [isMuted, setIsMuted] = useState(true)
+  const [isVideoMuted, setIsVideoMuted] = useState(true)
+  const videoRef = useRef<HTMLVideoElement>(null)
   const containerRef = useRef<HTMLDivElement>(null)
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -40,21 +42,21 @@ export default function Eyelashes() {
       icon: Microscope,
       title: "סוד המיון – רק שיערות משי (Silk Hair Selection)",
       description: "האתגר הגדול ביותר ביצירת ריסים טבעיים הוא המרקם כי שיער הגוף לרוב עבה יותר מריסים טבעיים ולכן אנו מבצעים תהליך איתור מורכב באזור העורף התחתון שם צומחות שיערות דקות ורכות במיוחד המכונות 'שיערות משי' אנו ממיינים אותן תחת מיקרוסקופ ובוחרים רק את הזקיקים הבודדים והעדינים ביותר כדי להבטיח שהריס החדש יהיה רך למגע ישתלב בטבעיות עם הריסים הקיימים ולא יכביד על העפעף העדין",
-      image: '/images/eyelash-silk-hair.jpg',
+      image: '/files/hair/silk-hair-selection.PNG',
       layout: 'image-left',
     },
     {
       icon: Move,
       title: 'ארכיטקטורת ה-C-Curve (הקשת המושלמת)',
       description: "בעוד שרוב הקליניקות משתילות את השיער בזווית ישרה שיוצרת מראה של 'גגון' שמצל על העין אנו משתמשים בשיטות מיוחדות ומדויקות שמאפשרות לנו לשלוט לא רק בזווית הכניסה אלא גם ברוטציה של הזקיק אנו משתילים ריסים ארוכים בלבד מה שמאפשר לנו לראות את העיקול הטבעי של השערה ולסובב אותה כך שהיא תתעגל כלפי מעלה בצורת C מושלמת פעולה זו 'פותחת' את העין ומעניקה לה מראה ערני מורם וזוהר יותר ללא צורך במעגל ריסים",
-      image: '/images/eyelash-ccurve.jpg',
+      image: '/files/hair/c-curve.jpeg',
       layout: 'image-right',
     },
     {
       icon: Shield,
       title: 'בטיחות עינית (Ocular Safety Protocol)',
       description: "העפעף הוא האזור העדין ביותר בגוף האדם ולכן הפרוטוקול הרפואי שלנו הוא המחמיר ביותר בתחום הטיפול מתבצע באמצעות מגן קרנית מיוחד השומר על העין לכל אורך התהליך וההשתלה עצמה נעשית בעומק מבוקר ברמת המיקרון כדי לא לפגוע בשריר העפעף או בזרימת הדם אנו משתמשים במחטי Implanter זעירות שתוכננו במיוחד לכירורגיה של העפעפיים המבטיחות החלמה מהירה ללא צלקות וללא סימנים",
-      image: '/images/eyelash-safety.jpg',
+      image: '/files/hero/lashes.jpeg',
       layout: 'full-image',
     },
   ]
@@ -335,14 +337,18 @@ export default function Eyelashes() {
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true, margin: "-100px" }}
                     transition={{ duration: 1 }}
-                    className="relative overflow-hidden"
+                    className="relative w-full h-full min-h-[400px] hidden md:block p-4"
                   >
-                    <img
-                      src={principle.image}
-                      alt={principle.title}
-                      className="w-full h-full object-cover"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-l from-transparent to-white/10" />
+                    <div className="relative w-full h-full rounded-2xl overflow-hidden">
+                      <Image
+                        src={principle.image}
+                        alt={principle.title}
+                        fill
+                        className="object-cover"
+                        quality={95}
+                        sizes="(max-width: 768px) 100vw, 60vw"
+                      />
+                    </div>
                   </motion.div>
                   
                   {/* Text Content - Floating */}
@@ -407,14 +413,18 @@ export default function Eyelashes() {
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true, margin: "-100px" }}
                   transition={{ duration: 1, delay: 0.2 }}
-                  className="relative overflow-hidden order-1 md:order-2"
+                  className="relative order-1 md:order-2 w-full h-full min-h-[400px] hidden md:block p-4"
                 >
-                  <img
-                    src={principle.image}
-                    alt={principle.title}
-                    className="w-full h-full object-cover"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-r from-white/10 to-transparent" />
+                  <div className="relative w-full h-full rounded-2xl overflow-hidden">
+                    <Image
+                      src={principle.image}
+                      alt={principle.title}
+                      fill
+                      className="object-cover"
+                      quality={95}
+                      sizes="(max-width: 768px) 100vw, 60vw"
+                    />
+                  </div>
                 </motion.div>
               </div>
             </div>
@@ -445,21 +455,61 @@ export default function Eyelashes() {
             </p>
           </motion.div>
 
-          {/* Video Placeholder */}
+          {/* Video in iPhone Frame */}
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 1 }}
-            className="mb-8"
+            transition={{ duration: 1, delay: 0.2 }}
+            className="flex justify-center mb-8"
           >
-            <div className="relative aspect-video rounded-3xl overflow-hidden shadow-2xl bg-black/5 border border-gray-200">
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="text-center space-y-4">
-                  <Eye className="w-16 h-16 text-charcoal/20 mx-auto" />
-                  <p className="text-lg text-charcoal/40 font-medium">
-                    [VIDEO: מטופלת רגועה בזמן טיפול ריסים]
-                  </p>
+            <div className="relative mx-auto">
+              {/* Phone outer shell */}
+              <div className="relative bg-[#1a1a1a] rounded-[3rem] p-[10px] shadow-[0_0_0_2px_#333,0_0_0_4px_#1a1a1a,0_25px_60px_-12px_rgba(0,0,0,0.4)]">
+                {/* Side button - right (volume) */}
+                <div className="absolute -right-[3px] top-[120px] w-[3px] h-[30px] bg-[#333] rounded-l-sm" />
+                <div className="absolute -right-[3px] top-[165px] w-[3px] h-[30px] bg-[#333] rounded-l-sm" />
+                {/* Side button - left (power) */}
+                <div className="absolute -left-[3px] top-[140px] w-[3px] h-[45px] bg-[#333] rounded-r-sm" />
+
+                {/* Screen area */}
+                <div className="relative bg-black rounded-[2.4rem] overflow-hidden w-[280px] h-[580px] md:w-[320px] md:h-[660px]">
+                  {/* Dynamic Island / Notch */}
+                  <div className="absolute top-0 left-0 right-0 z-20 flex justify-center pt-3">
+                    <div className="w-[100px] h-[28px] md:w-[120px] md:h-[32px] bg-black rounded-full" />
+                  </div>
+
+                  {/* Video content */}
+                  <video
+                    ref={videoRef}
+                    src="/files/IMG_0904.MP4"
+                    className="absolute inset-0 w-full h-full object-cover"
+                    playsInline
+                    autoPlay
+                    muted={isVideoMuted}
+                    loop
+                  />
+
+                  {/* Sound toggle button */}
+                  <button
+                    onClick={() => {
+                      setIsVideoMuted(!isVideoMuted)
+                      if (videoRef.current) {
+                        videoRef.current.muted = !isVideoMuted
+                      }
+                    }}
+                    className="absolute bottom-4 right-4 z-20 w-10 h-10 bg-black/60 hover:bg-black/80 backdrop-blur-sm rounded-full flex items-center justify-center transition-all"
+                    aria-label={isVideoMuted ? 'הפעל צליל' : 'השתק'}
+                  >
+                    {isVideoMuted ? (
+                      <VolumeX className="w-5 h-5 text-white" />
+                    ) : (
+                      <Volume2 className="w-5 h-5 text-white" />
+                    )}
+                  </button>
+
+                  {/* Bottom bar (home indicator) */}
+                  <div className="absolute bottom-2 left-1/2 -translate-x-1/2 w-[120px] h-[4px] bg-white/30 rounded-full z-20" />
                 </div>
               </div>
             </div>

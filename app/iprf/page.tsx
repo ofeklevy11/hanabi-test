@@ -152,8 +152,8 @@ export default function IPRF() {
           >
             <div className="relative w-full aspect-video rounded-2xl overflow-hidden shadow-modern-lg bg-gray-100">
               <Image
-                src="/assets/IMG_0465.png"
-                alt="iPRF Treatment"
+                src="/files/IPRF.jpeg"
+                alt="תהליך טיפול iPRF - לקיחת דם, צנטריפוגה והפרדה, הזרקה והתחדשות"
                 fill
                 className="object-cover"
                 quality={95}
@@ -207,85 +207,108 @@ export default function IPRF() {
         </div>
       </section>
 
-      {/* Video Carousel Section */}
-      <section className="py-8 bg-white">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* Video Carousel Section - iPhone View */}
+      <section className="py-8 md:py-12 relative bg-gradient-to-b from-white via-soft-grey/30 to-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-            className="relative"
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 1 }}
+            className="relative flex items-center justify-center gap-6 md:gap-12"
           >
-            <div className="relative aspect-video rounded-2xl overflow-hidden shadow-modern-lg bg-black">
-              <AnimatePresence mode="wait">
-                <motion.video
-                  key={`${currentVideoIndex}-${isMuted}`}
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ duration: 0.5 }}
-                  src={videos[currentVideoIndex]}
-                  className="w-full h-full object-cover"
-                  controls
-                  playsInline
-                  autoPlay
-                  muted={isMuted}
-                />
-              </AnimatePresence>
-
-              {/* Sound toggle button */}
+            {/* Prev Button */}
+            {videos.length > 1 && (
               <button
-                onClick={() => setIsMuted(!isMuted)}
-                className="absolute top-4 right-4 z-20 w-10 h-10 bg-black/60 hover:bg-black/80 backdrop-blur-sm rounded-full flex items-center justify-center transition-all"
-                aria-label={isMuted ? 'הפעל צליל' : 'השתק'}
+                onClick={prevVideo}
+                className="w-12 h-12 md:w-14 md:h-14 bg-white hover:bg-gray-50 shadow-lg rounded-full flex items-center justify-center transition-all z-10 border border-gray-200 shrink-0"
+                aria-label="סרטון קודם"
               >
-                {isMuted ? (
-                  <VolumeX className="w-5 h-5 text-white" />
-                ) : (
-                  <Volume2 className="w-5 h-5 text-white" />
-                )}
+                <ChevronRight className="w-6 h-6 text-charcoal" />
               </button>
-              
-              {/* Navigation Buttons */}
-              {videos.length > 1 && (
-                <>
-                  <button
-                    onClick={prevVideo}
-                    className="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-white/90 hover:bg-white rounded-full flex items-center justify-center shadow-lg transition-all z-10"
-                    aria-label="סרטון קודם"
-                  >
-                    <ChevronRight className="w-6 h-6 text-charcoal" />
-                  </button>
-                  <button
-                    onClick={nextVideo}
-                    className="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-white/90 hover:bg-white rounded-full flex items-center justify-center shadow-lg transition-all z-10"
-                    aria-label="סרטון הבא"
-                  >
-                    <ChevronLeft className="w-6 h-6 text-charcoal" />
-                  </button>
-                </>
-              )}
-              
-              {/* Video Indicators */}
-              {videos.length > 1 && (
-                <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2 z-10">
-                  {videos.map((_, index) => (
-                    <button
-                      key={index}
-                      onClick={() => setCurrentVideoIndex(index)}
-                      className={`w-2 h-2 rounded-full transition-all ${
-                        index === currentVideoIndex
-                          ? 'bg-deep-red w-8'
-                          : 'bg-white/60 hover:bg-white/80'
-                      }`}
-                      aria-label={`עבור לסרטון ${index + 1}`}
+            )}
+
+            {/* iPhone Frame */}
+            <div className="relative mx-auto">
+              {/* Phone outer shell */}
+              <div className="relative bg-[#1a1a1a] rounded-[3rem] p-[10px] shadow-[0_0_0_2px_#333,0_0_0_4px_#1a1a1a,0_25px_60px_-12px_rgba(0,0,0,0.4)]">
+                {/* Side button - right (volume) */}
+                <div className="absolute -right-[3px] top-[120px] w-[3px] h-[30px] bg-[#333] rounded-l-sm" />
+                <div className="absolute -right-[3px] top-[165px] w-[3px] h-[30px] bg-[#333] rounded-l-sm" />
+                {/* Side button - left (power) */}
+                <div className="absolute -left-[3px] top-[140px] w-[3px] h-[45px] bg-[#333] rounded-r-sm" />
+
+                {/* Screen area */}
+                <div className="relative bg-black rounded-[2.4rem] overflow-hidden w-[280px] h-[580px] md:w-[320px] md:h-[660px]">
+                  {/* Dynamic Island / Notch */}
+                  <div className="absolute top-0 left-0 right-0 z-20 flex justify-center pt-3">
+                    <div className="w-[100px] h-[28px] md:w-[120px] md:h-[32px] bg-black rounded-full" />
+                  </div>
+
+                  {/* Video content */}
+                  <AnimatePresence mode="wait">
+                    <motion.video
+                      key={`${currentVideoIndex}-${isMuted}`}
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      transition={{ duration: 0.5 }}
+                      src={videos[currentVideoIndex]}
+                      className="absolute inset-0 w-full h-full object-cover"
+                      playsInline
+                      autoPlay
+                      muted={isMuted}
                     />
-                  ))}
+                  </AnimatePresence>
+
+                  {/* Sound toggle button */}
+                  <button
+                    onClick={() => setIsMuted(!isMuted)}
+                    className="absolute bottom-4 right-4 z-20 w-10 h-10 bg-black/60 hover:bg-black/80 backdrop-blur-sm rounded-full flex items-center justify-center transition-all"
+                    aria-label={isMuted ? 'הפעל צליל' : 'השתק'}
+                  >
+                    {isMuted ? (
+                      <VolumeX className="w-5 h-5 text-white" />
+                    ) : (
+                      <Volume2 className="w-5 h-5 text-white" />
+                    )}
+                  </button>
+
+                  {/* Bottom bar (home indicator) */}
+                  <div className="absolute bottom-2 left-1/2 -translate-x-1/2 w-[120px] h-[4px] bg-white/30 rounded-full z-20" />
                 </div>
-              )}
+              </div>
             </div>
+
+            {/* Next Button */}
+            {videos.length > 1 && (
+              <button
+                onClick={nextVideo}
+                className="w-12 h-12 md:w-14 md:h-14 bg-white hover:bg-gray-50 shadow-lg rounded-full flex items-center justify-center transition-all z-10 border border-gray-200 shrink-0"
+                aria-label="סרטון הבא"
+              >
+                <ChevronLeft className="w-6 h-6 text-charcoal" />
+              </button>
+            )}
           </motion.div>
+
+          {/* Dots indicator */}
+          {videos.length > 1 && (
+            <div className="flex justify-center gap-2.5 mt-8">
+              {videos.map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => setCurrentVideoIndex(index)}
+                  className={`rounded-full transition-all duration-300 ${
+                    index === currentVideoIndex
+                      ? 'bg-deep-red w-8 h-2.5'
+                      : 'bg-gray-300 hover:bg-gray-400 w-2.5 h-2.5'
+                  }`}
+                  aria-label={`עבור לסרטון ${index + 1}`}
+                />
+              ))}
+            </div>
+          )}
         </div>
       </section>
 
