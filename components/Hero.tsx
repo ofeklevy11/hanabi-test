@@ -3,10 +3,12 @@
 import { useState, useRef, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import Image from 'next/image'
+import { Volume2, VolumeX } from 'lucide-react'
 
 export default function Hero() {
   const [videoEnded, setVideoEnded] = useState(false)
   const [showContent, setShowContent] = useState(false)
+  const [isMuted, setIsMuted] = useState(true)
   const videoRef = useRef<HTMLVideoElement>(null)
 
   useEffect(() => {
@@ -38,7 +40,7 @@ export default function Hero() {
             <video
               ref={videoRef}
               autoPlay
-              muted
+              muted={isMuted}
               playsInline
               preload="auto"
               className="absolute inset-0 w-full h-full object-cover"
@@ -57,6 +59,24 @@ export default function Hero() {
               <source src="/gemini_generated_video_6A92905C.mp4" type="video/mp4" />
               Your browser does not support the video tag.
             </video>
+
+            {/* Sound toggle button */}
+            <button
+              onClick={() => {
+                setIsMuted(!isMuted)
+                if (videoRef.current) {
+                  videoRef.current.muted = !videoRef.current.muted
+                }
+              }}
+              className="absolute bottom-6 right-6 z-10 w-12 h-12 bg-black/50 hover:bg-black/70 backdrop-blur-sm rounded-full flex items-center justify-center transition-all"
+              aria-label={isMuted ? 'הפעל צליל' : 'השתק'}
+            >
+              {isMuted ? (
+                <VolumeX className="w-6 h-6 text-white" />
+              ) : (
+                <Volume2 className="w-6 h-6 text-white" />
+              )}
+            </button>
           </motion.div>
         )}
       </AnimatePresence>

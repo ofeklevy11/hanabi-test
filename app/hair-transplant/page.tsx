@@ -257,16 +257,18 @@ export default function HairTransplant() {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true, margin: "-100px" }}
               transition={{ duration: 1, delay: 0.2 }}
-              className="relative overflow-hidden order-1 md:order-2 w-full h-full min-h-[400px] hidden md:block"
+              className="relative order-1 md:order-2 w-full h-full min-h-[400px] hidden md:block p-4"
             >
+              <div className="relative w-full h-full rounded-2xl overflow-hidden">
               <Image
                 src="/files/hair/hairhana.jpeg"
                 alt="ארכיטקטורה של קו השיער"
                 fill
-                className="object-contain"
+                className="object-cover"
                 quality={95}
                 sizes="(max-width: 768px) 100vw, 60vw"
               />
+              </div>
             </motion.div>
           </div>
         </div>
@@ -281,16 +283,18 @@ export default function HairTransplant() {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true, margin: "-100px" }}
               transition={{ duration: 1 }}
-              className="relative overflow-hidden w-full h-full min-h-[400px] hidden md:block"
+              className="relative w-full h-full min-h-[400px] hidden md:block p-4"
             >
+              <div className="relative w-full h-full rounded-2xl overflow-hidden">
               <Image
                 src="/files/hair/hanahiluz.jpeg"
                 alt="הגנה על האזור התורם"
                 fill
-                className="object-contain"
+                className="object-cover"
                 quality={95}
                 sizes="(max-width: 768px) 100vw, 60vw"
               />
+              </div>
             </motion.div>
 
             <motion.div
@@ -348,7 +352,7 @@ export default function HairTransplant() {
                   <p>הזקיק הוא איבר חי, והזמן שלו מחוץ לגוף הוא קריטי. כדי להבטיח שכל שערה ושערה שאנחנו משתילים אכן תצמח, אנו משתמשים במערכת שימור וקירור זקיקים מתקדמת.</p>
                   <div className="block md:hidden relative w-full h-[300px] rounded-2xl overflow-hidden my-4">
                     <Image
-                      src="/files/hair/98.jpeg"
+                      src="/files/hair2.jpeg"
                       alt="98% אחוזי קליטה"
                       fill
                       className="object-contain"
@@ -366,10 +370,10 @@ export default function HairTransplant() {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true, margin: "-100px" }}
               transition={{ duration: 1, delay: 0.2 }}
-              className="relative overflow-hidden order-1 md:order-2 w-full h-full min-h-[400px] hidden md:block"
+              className="relative overflow-hidden order-1 md:order-2 w-full h-full min-h-[400px] hidden md:block rounded-2xl"
             >
               <Image
-                src="/files/hair/98.jpeg"
+                src="/files/hair2.jpeg"
                 alt="98% אחוזי קליטה"
                 fill
                 className="object-contain"
@@ -381,28 +385,6 @@ export default function HairTransplant() {
         </div>
       </section>
 
-      {/* Half Width Image */}
-      <section className="py-12 md:py-20 relative overflow-hidden">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-center">
-          <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 1 }}
-            className="relative w-1/2 rounded-2xl md:rounded-3xl overflow-hidden shadow-2xl"
-          >
-            <Image
-              src="/files/hair2.jpeg"
-              alt="השתלת שיער טבעית"
-              width={700}
-              height={400}
-              className="w-full h-auto object-cover"
-              quality={95}
-              sizes="50vw"
-            />
-          </motion.div>
-        </div>
-      </section>
 
       {/* Recovery Journey - Premium Timeline */}
       <section className="py-16 md:py-20 bg-gradient-to-b from-white via-soft-grey to-white relative overflow-hidden">

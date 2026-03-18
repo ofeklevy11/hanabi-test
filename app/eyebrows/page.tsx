@@ -2,7 +2,7 @@
 
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
-import { Microscope, Move, ChevronRight, ChevronLeft, Sparkles, CheckCircle2 } from 'lucide-react'
+import { Microscope, Move, ChevronRight, ChevronLeft, Sparkles, CheckCircle2, Volume2, VolumeX } from 'lucide-react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion'
@@ -14,6 +14,7 @@ export default function Eyebrows() {
     phone: '',
   })
   const [currentYoutubeIndex, setCurrentYoutubeIndex] = useState(0)
+  const [isMuted, setIsMuted] = useState(true)
   const containerRef = useRef<HTMLDivElement>(null)
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -203,7 +204,7 @@ export default function Eyebrows() {
                       className="absolute inset-0 w-full h-full"
                     >
                       <iframe
-                        src={`https://www.youtube.com/embed/${youtubeVideos[currentYoutubeIndex]}?autoplay=1&mute=1&loop=1&playlist=${youtubeVideos[currentYoutubeIndex]}&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1`}
+                        src={`https://www.youtube.com/embed/${youtubeVideos[currentYoutubeIndex]}?autoplay=1&mute=${isMuted ? 1 : 0}&loop=1&playlist=${youtubeVideos[currentYoutubeIndex]}&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1`}
                         className="absolute inset-0 w-full h-full border-0"
                         allow="autoplay; encrypted-media"
                         allowFullScreen
@@ -211,6 +212,19 @@ export default function Eyebrows() {
                       />
                     </motion.div>
                   </AnimatePresence>
+
+                  {/* Sound toggle button */}
+                  <button
+                    onClick={() => setIsMuted(!isMuted)}
+                    className="absolute bottom-4 right-4 z-20 w-10 h-10 bg-black/60 hover:bg-black/80 backdrop-blur-sm rounded-full flex items-center justify-center transition-all"
+                    aria-label={isMuted ? 'הפעל צליל' : 'השתק'}
+                  >
+                    {isMuted ? (
+                      <VolumeX className="w-5 h-5 text-white" />
+                    ) : (
+                      <Volume2 className="w-5 h-5 text-white" />
+                    )}
+                  </button>
 
                   {/* Bottom bar (home indicator) */}
                   <div className="absolute bottom-2 left-1/2 -translate-x-1/2 w-[120px] h-[4px] bg-white/30 rounded-full z-20" />

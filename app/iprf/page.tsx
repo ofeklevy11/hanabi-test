@@ -2,7 +2,7 @@
 
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
-import { ChevronRight, ChevronLeft } from 'lucide-react'
+import { ChevronRight, ChevronLeft, Volume2, VolumeX } from 'lucide-react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { motion, AnimatePresence } from 'framer-motion'
@@ -14,7 +14,8 @@ export default function IPRF() {
     phone: '',
   })
   const [currentVideoIndex, setCurrentVideoIndex] = useState(0)
-  
+  const [isMuted, setIsMuted] = useState(true)
+
   // Array of video sources - you can add more videos here
   const videos = [
     '/videos/iprf-video-1.mp4', // Replace with your actual video paths
@@ -219,7 +220,7 @@ export default function IPRF() {
             <div className="relative aspect-video rounded-2xl overflow-hidden shadow-modern-lg bg-black">
               <AnimatePresence mode="wait">
                 <motion.video
-                  key={currentVideoIndex}
+                  key={`${currentVideoIndex}-${isMuted}`}
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
@@ -229,9 +230,22 @@ export default function IPRF() {
                   controls
                   playsInline
                   autoPlay
-                  muted
+                  muted={isMuted}
                 />
               </AnimatePresence>
+
+              {/* Sound toggle button */}
+              <button
+                onClick={() => setIsMuted(!isMuted)}
+                className="absolute top-4 right-4 z-20 w-10 h-10 bg-black/60 hover:bg-black/80 backdrop-blur-sm rounded-full flex items-center justify-center transition-all"
+                aria-label={isMuted ? 'הפעל צליל' : 'השתק'}
+              >
+                {isMuted ? (
+                  <VolumeX className="w-5 h-5 text-white" />
+                ) : (
+                  <Volume2 className="w-5 h-5 text-white" />
+                )}
+              </button>
               
               {/* Navigation Buttons */}
               {videos.length > 1 && (

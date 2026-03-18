@@ -2,7 +2,7 @@
 
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
-import { Microscope, Move, Shield, Sparkles, CheckCircle2, Eye } from 'lucide-react'
+import { Microscope, Move, Shield, Sparkles, CheckCircle2, Eye, Volume2, VolumeX } from 'lucide-react'
 import Image from 'next/image'
 import { motion, useScroll } from 'framer-motion'
 import { useState, useRef } from 'react'
@@ -12,6 +12,7 @@ export default function Eyelashes() {
     name: '',
     phone: '',
   })
+  const [isMuted, setIsMuted] = useState(true)
   const containerRef = useRef<HTMLDivElement>(null)
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -176,12 +177,25 @@ export default function Eyelashes() {
 
                   {/* YouTube embed content */}
                   <iframe
-                    src={`https://www.youtube.com/embed/${youtubeVideoId}?autoplay=1&mute=1&loop=1&playlist=${youtubeVideoId}&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1`}
+                    src={`https://www.youtube.com/embed/${youtubeVideoId}?autoplay=1&mute=${isMuted ? 1 : 0}&loop=1&playlist=${youtubeVideoId}&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1`}
                     className="absolute inset-0 w-full h-full border-0"
                     allow="autoplay; encrypted-media"
                     allowFullScreen
                     title="YouTube video"
                   />
+
+                  {/* Sound toggle button */}
+                  <button
+                    onClick={() => setIsMuted(!isMuted)}
+                    className="absolute bottom-4 right-4 z-20 w-10 h-10 bg-black/60 hover:bg-black/80 backdrop-blur-sm rounded-full flex items-center justify-center transition-all"
+                    aria-label={isMuted ? 'הפעל צליל' : 'השתק'}
+                  >
+                    {isMuted ? (
+                      <VolumeX className="w-5 h-5 text-white" />
+                    ) : (
+                      <Volume2 className="w-5 h-5 text-white" />
+                    )}
+                  </button>
 
                   {/* Bottom bar (home indicator) */}
                   <div className="absolute bottom-2 left-1/2 -translate-x-1/2 w-[120px] h-[4px] bg-white/30 rounded-full z-20" />
