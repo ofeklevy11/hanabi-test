@@ -15,6 +15,8 @@ export default function Eyebrows() {
   })
   const [currentYoutubeIndex, setCurrentYoutubeIndex] = useState(0)
   const [isMuted, setIsMuted] = useState(true)
+  const [isVideoMuted, setIsVideoMuted] = useState(true)
+  const videoRef = useRef<HTMLVideoElement>(null)
   const containerRef = useRef<HTMLDivElement>(null)
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -557,11 +559,12 @@ export default function Eyebrows() {
 
                   {/* Video content */}
                   <video
+                    ref={videoRef}
                     src="/files/video-eye.mp4"
                     className="absolute inset-0 w-full h-full object-cover"
                     playsInline
                     autoPlay
-                    muted
+                    muted={isVideoMuted}
                     loop
                   />
 
@@ -569,6 +572,23 @@ export default function Eyebrows() {
                   <div className="absolute bottom-2 left-1/2 -translate-x-1/2 w-[120px] h-[4px] bg-white/30 rounded-full z-20" />
                 </div>
               </div>
+              {/* Sound toggle button - overlaid on phone */}
+              <button
+                onClick={() => {
+                  setIsVideoMuted(!isVideoMuted)
+                  if (videoRef.current) {
+                    videoRef.current.muted = !isVideoMuted
+                  }
+                }}
+                className="absolute bottom-8 left-1/2 -translate-x-1/2 z-30 w-12 h-12 bg-black/60 hover:bg-black/80 backdrop-blur-sm rounded-full flex items-center justify-center transition-all"
+                aria-label={isVideoMuted ? 'הפעל צליל' : 'השתק'}
+              >
+                {isVideoMuted ? (
+                  <VolumeX className="w-6 h-6 text-white" />
+                ) : (
+                  <Volume2 className="w-6 h-6 text-white" />
+                )}
+              </button>
             </div>
           </motion.div>
         </div>

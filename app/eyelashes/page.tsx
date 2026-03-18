@@ -512,29 +512,35 @@ export default function Eyelashes() {
                     loop
                   />
 
-                  {/* Sound toggle button */}
-                  <button
-                    onClick={() => {
-                      setIsVideoMuted(!isVideoMuted)
-                      if (videoRef.current) {
-                        videoRef.current.muted = !isVideoMuted
-                      }
-                    }}
-                    className="absolute bottom-4 right-4 z-20 w-10 h-10 bg-black/60 hover:bg-black/80 backdrop-blur-sm rounded-full flex items-center justify-center transition-all"
-                    aria-label={isVideoMuted ? 'הפעל צליל' : 'השתק'}
-                  >
-                    {isVideoMuted ? (
-                      <VolumeX className="w-5 h-5 text-white" />
-                    ) : (
-                      <Volume2 className="w-5 h-5 text-white" />
-                    )}
-                  </button>
-
                   {/* Bottom bar (home indicator) */}
                   <div className="absolute bottom-2 left-1/2 -translate-x-1/2 w-[120px] h-[4px] bg-white/30 rounded-full z-20" />
                 </div>
               </div>
             </div>
+
+            {/* Sound toggle button - outside phone frame */}
+            <button
+              onClick={() => {
+                setIsVideoMuted(!isVideoMuted)
+                if (videoRef.current) {
+                  videoRef.current.muted = !isVideoMuted
+                }
+              }}
+              className="mt-6 mx-auto px-6 py-3 bg-charcoal hover:bg-charcoal/80 rounded-full flex items-center gap-3 transition-all shadow-lg"
+              aria-label={isVideoMuted ? 'הפעל צליל' : 'השתק'}
+            >
+              {isVideoMuted ? (
+                <>
+                  <VolumeX className="w-5 h-5 text-white" />
+                  <span className="text-sm font-medium text-white">הפעל צליל</span>
+                </>
+              ) : (
+                <>
+                  <Volume2 className="w-5 h-5 text-white" />
+                  <span className="text-sm font-medium text-white">השתק</span>
+                </>
+              )}
+            </button>
           </motion.div>
 
           {/* Text Below Video */}
