@@ -18,6 +18,7 @@ export default function Eyebrows() {
   const [isVideoMuted, setIsVideoMuted] = useState(true)
   const videoRef = useRef<HTMLVideoElement>(null)
   const containerRef = useRef<HTMLDivElement>(null)
+  const touchStartRef = useRef<{ x: number; y: number } | null>(null)
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start start", "end end"]
@@ -39,6 +40,21 @@ export default function Eyebrows() {
 
   const prevYoutube = () => {
     setCurrentYoutubeIndex((prev) => (prev - 1 + youtubeVideos.length) % youtubeVideos.length)
+  }
+
+  const handleSwipeStart = (e: React.TouchEvent) => {
+    touchStartRef.current = { x: e.touches[0].clientX, y: e.touches[0].clientY }
+  }
+
+  const handleSwipeEnd = (e: React.TouchEvent) => {
+    if (!touchStartRef.current) return
+    const deltaX = e.changedTouches[0].clientX - touchStartRef.current.x
+    const deltaY = e.changedTouches[0].clientY - touchStartRef.current.y
+    touchStartRef.current = null
+    if (Math.abs(deltaX) > 50 && Math.abs(deltaX) > Math.abs(deltaY)) {
+      if (deltaX < 0) nextYoutube()
+      else prevYoutube()
+    }
   }
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -214,6 +230,13 @@ export default function Eyebrows() {
                       />
                     </motion.div>
                   </AnimatePresence>
+
+                  {/* Swipe overlay - captures touch gestures above iframe */}
+                  <div
+                    className="absolute inset-0 z-10"
+                    onTouchStart={handleSwipeStart}
+                    onTouchEnd={handleSwipeEnd}
+                  />
 
                   {/* Sound toggle button */}
                   <button
@@ -503,9 +526,11 @@ export default function Eyebrows() {
               <video
                 src="/files/1.mp4"
                 className="w-full h-auto"
-                controls
+                autoPlay
+                loop
+                muted
                 playsInline
-                preload="metadata"
+                preload="auto"
               >
                 הדפדפן שלך לא תומך בתגית הוידאו.
               </video>
@@ -551,7 +576,7 @@ export default function Eyebrows() {
                 <div className="absolute -left-[3px] top-[140px] w-[3px] h-[45px] bg-[#333] rounded-r-sm" />
 
                 {/* Screen area */}
-                <div className="relative bg-black rounded-[2.4rem] overflow-hidden w-[280px] h-[580px] md:w-[320px] md:h-[660px]">
+                <div className="relative bg-black rounded-[2.4rem] overflow-hidden w-[85vw] max-w-[320px] aspect-[9/19.5]">
                   {/* Dynamic Island / Notch */}
                   <div className="absolute top-0 left-0 right-0 z-20 flex justify-center pt-3">
                     <div className="w-[100px] h-[28px] md:w-[120px] md:h-[32px] bg-black rounded-full" />

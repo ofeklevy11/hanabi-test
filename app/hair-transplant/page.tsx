@@ -265,12 +265,13 @@ export default function HairTransplant() {
                 </h3>
                 <div className="text-lg md:text-xl text-charcoal/70 leading-relaxed font-normal text-right space-y-6">
                   <p>מראה מלאכותי (&quot;מראה בובה&quot;) נובע בדרך כלל מתכנון לקוי. ב-Hana bi, אנו בונים את קו השיער שלך בשכבות אנטומיות:</p>
-                  <div className="block md:hidden relative w-full h-[300px] rounded-2xl overflow-hidden my-4">
+                  <div className="block md:hidden relative w-full rounded-2xl overflow-hidden my-4">
                     <Image
                       src="/files/hair/hairhana.jpeg"
                       alt="ארכיטקטורה של קו השיער"
-                      fill
-                      className="object-cover"
+                      width={800}
+                      height={600}
+                      className="w-full h-auto object-contain"
                       quality={95}
                       sizes="100vw"
                     />
@@ -342,12 +343,13 @@ export default function HairTransplant() {
                 </h3>
                 <div className="text-lg md:text-xl text-charcoal/70 leading-relaxed font-normal text-right space-y-6">
                   <p>הצלחה של השתלת שיער נמדדת לא רק באיך שהחלק הקדמי נראה, אלא גם בשמירה על החלק האחורי של הראש. ב-Hana bi, אנו מתייחסים לאזור התורם שלך ביראת קודש.</p>
-                  <div className="block md:hidden relative w-full h-[300px] rounded-2xl overflow-hidden my-4">
+                  <div className="block md:hidden relative w-full rounded-2xl overflow-hidden my-4">
                     <Image
                       src="/files/hair/hanahiluz.jpeg"
                       alt="הגנה על האזור התורם"
-                      fill
-                      className="object-cover"
+                      width={800}
+                      height={600}
+                      className="w-full h-auto object-contain"
                       quality={95}
                       sizes="100vw"
                     />
