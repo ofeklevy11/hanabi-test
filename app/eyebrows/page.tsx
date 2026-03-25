@@ -57,11 +57,24 @@ export default function Eyebrows() {
     }
   }
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const [isSubmitting, setIsSubmitting] = useState(false)
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    console.log('Form submitted:', formData)
-    setFormData({ name: '', phone: '' })
-    alert('תודה! נחזור אליך בהקדם לתיאום פגישת ייעוץ.')
+    setIsSubmitting(true)
+    try {
+      await fetch('https://hook.eu2.make.com/qo9qlswoe53nbtc6fd4v0macorqlf9pb', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ...formData, source: 'דף השתלת גבות', submittedAt: new Date().toLocaleString('he-IL', { timeZone: 'Asia/Jerusalem' }) }),
+      })
+      setFormData({ name: '', phone: '' })
+      alert('תודה! נחזור אליך בהקדם לתיאום פגישת ייעוץ.')
+    } catch (error) {
+      alert('אירעה שגיאה, אנא נסה שוב.')
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {

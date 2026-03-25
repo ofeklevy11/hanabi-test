@@ -13,13 +13,24 @@ export default function AppointmentForm() {
     message: '',
   })
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const [isSubmitting, setIsSubmitting] = useState(false)
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    // Handle form submission here
-    console.log('Form submitted:', formData)
-    // Reset form
-    setFormData({ name: '', phone: '', email: '', treatment: '', message: '' })
-    alert('תודה! נחזור אליך בהקדם.')
+    setIsSubmitting(true)
+    try {
+      await fetch('https://hook.eu2.make.com/qo9qlswoe53nbtc6fd4v0macorqlf9pb', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ...formData, source: 'טופס קביעת פגישה', submittedAt: new Date().toLocaleString('he-IL', { timeZone: 'Asia/Jerusalem' }) }),
+      })
+      setFormData({ name: '', phone: '', email: '', treatment: '', message: '' })
+      alert('תודה! נחזור אליך בהקדם.')
+    } catch (error) {
+      alert('אירעה שגיאה, אנא נסה שוב.')
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
