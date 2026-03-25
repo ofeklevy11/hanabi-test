@@ -96,15 +96,14 @@ export default function WhyAsia() {
             transition={{ duration: 0.6, delay: 0.4 }}
             className="bg-soft-grey rounded-2xl border border-gray-100 overflow-hidden"
           >
-            {/* Image */}
-            <div className="relative w-full h-64 md:h-80 bg-gray-100 overflow-hidden">
-              <Image
-                src="/assets/IMG_0459.PNG"
-                alt="Bio-Integration (קוריאה) - Advanced Nutrient Protocol"
-                fill
-                className="object-cover"
-                quality={95}
-                sizes="(max-width: 768px) 100vw, 50vw"
+            {/* Video */}
+            <div className="relative w-full h-64 md:h-80 bg-gray-100 overflow-hidden pointer-events-none">
+              <iframe
+                src="https://www.youtube.com/embed/rSt3daiPIgU?autoplay=1&mute=1&loop=1&playlist=rSt3daiPIgU&controls=0&showinfo=0&rel=0&modestbranding=1&disablekb=1"
+                title="מערכות קירור לשמירה על הזקיק"
+                allow="autoplay; encrypted-media"
+                className="absolute inset-0 w-full h-full"
+                tabIndex={-1}
               />
             </div>
             {/* Content */}
@@ -114,11 +113,13 @@ export default function WhyAsia() {
                   <Shield className="w-8 h-8 text-deep-red" />
                 </div>
                 <h4 className="text-2xl font-bold text-charcoal">
-                  Bio-Integration (קוריאה)
+                  מערכות קירור לשמירה על הזקיק
                 </h4>
               </div>
               <p className="text-lg text-charcoal/70 leading-relaxed">
-                פרוטוקול שימור זקיקים בנוזלי הזנה מתקדמים (המשמשים להשתלות איברים), המבטיח שכל זקיק שמושתל – נקלט וצומח.
+                ההבדל שבין השתלת שיער סטנדרטית לתוצאה מושלמת טמון בפרטים הקטנים ביותר – אלו שקורים מחוץ לקרקפת.
+                <br /><br />
+                במרפאת Hana Bi, אנו פועלים לפי הפרוטוקולים המחמירים ביותר המקובלים במרכזים הרפואיים המובילים ביפן ובדרום קוריאה. אחד המפתחות הקריטיים להצלחת ההשתלה הוא שמירה על &quot;חיות הזקיק&quot; (Graft Viability) מרגע הוצאתו ועד להשתלתו מחדש.
               </p>
             </div>
           </motion.div>
