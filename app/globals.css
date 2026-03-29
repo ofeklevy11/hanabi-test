@@ -47,3 +47,49 @@
   }
 }
 
+/* Accessibility Styles */
+.accessibility-high-contrast {
+  filter: contrast(1.5);
+}
+
+.accessibility-grayscale {
+  filter: grayscale(1);
+}
+
+.accessibility-high-contrast.accessibility-grayscale {
+  filter: contrast(1.5) grayscale(1);
+}
+
+.accessibility-highlight-links a {
+  outline: 3px solid #FFD700 !important;
+  outline-offset: 2px;
+  text-decoration: underline !important;
+  color: #0000EE !important;
+}
+
+.accessibility-big-cursor,
+.accessibility-big-cursor * {
+  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='48' viewBox='0 0 24 24'%3E%3Cpath d='M4 4l7.07 17 2.51-7.39L21 11.07z' fill='%23000' stroke='%23fff' stroke-width='1'/%3E%3C/svg%3E") 4 4, auto !important;
+}
+
+.accessibility-stop-animations,
+.accessibility-stop-animations * {
+  animation-duration: 0s !important;
+  animation-delay: 0s !important;
+  transition-duration: 0s !important;
+  transition-delay: 0s !important;
+}
+
+.accessibility-readable-font,
+.accessibility-readable-font * {
+  font-family: Arial, Helvetica, sans-serif !important;
+  letter-spacing: 0.02em;
+}
+
+.accessibility-text-spacing,
+.accessibility-text-spacing * {
+  letter-spacing: 0.12em !important;
+  word-spacing: 0.16em !important;
+  line-height: 1.8 !important;
+}
+

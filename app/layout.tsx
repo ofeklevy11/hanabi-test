@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import './globals.css'
+import AccessibilityWidget from '@/components/AccessibilityWidget'
 
 export const metadata: Metadata = {
   title: 'HANA BI - אסתטיקה ביולוגית מתקדמת',
@@ -13,7 +14,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="he" dir="rtl">
-      <body>{children}</body>
+      <body>
+        {children}
+        <AccessibilityWidget />
+      </body>
     </html>
   )
 }

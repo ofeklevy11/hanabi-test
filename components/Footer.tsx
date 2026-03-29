@@ -12,8 +12,9 @@ const quickLinks = [
 ]
 
 const legalLinks = [
-  { href: '#', label: 'מדיניות פרטיות' },
-  { href: '#', label: 'הצהרת נגישות' },
+  { href: '/terms', label: 'תקנון האתר' },
+  { href: '/privacy', label: 'מדיניות פרטיות' },
+  { href: '/accessibility', label: 'הצהרת נגישות' },
 ]
 
 export default function Footer() {

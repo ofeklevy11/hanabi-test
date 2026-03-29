@@ -58,6 +58,7 @@ export default function Eyebrows() {
   }
 
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const [agreedToPrivacy, setAgreedToPrivacy] = useState(false)
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -69,6 +70,7 @@ export default function Eyebrows() {
         body: JSON.stringify({ ...formData, source: 'דף השתלת גבות', submittedAt: new Date().toLocaleString('he-IL', { timeZone: 'Asia/Jerusalem' }) }),
       })
       setFormData({ name: '', phone: '' })
+      setAgreedToPrivacy(false)
       alert('תודה! נחזור אליך בהקדם לתיאום פגישת ייעוץ.')
     } catch (error) {
       alert('אירעה שגיאה, אנא נסה שוב.')
@@ -922,6 +924,23 @@ export default function Eyebrows() {
                 placeholder="הזן מספר טלפון נייד"
               />
             </div>
+
+            <label className="flex items-start gap-3 cursor-pointer mt-4">
+              <input
+                type="checkbox"
+                checked={agreedToPrivacy}
+                onChange={(e) => setAgreedToPrivacy(e.target.checked)}
+                required
+                className="mt-1 w-5 h-5 accent-deep-red cursor-pointer shrink-0"
+              />
+              <span className="text-sm text-charcoal/70 leading-relaxed">
+                אני מאשר/ת את{' '}
+                <Link href="/privacy" target="_blank" className="text-deep-red hover:underline font-medium">
+                  מדיניות הפרטיות
+                </Link>{' '}
+                ומסכים/ה לשימוש בפרטים שמסרתי לצורך יצירת קשר.
+              </span>
+            </label>
 
             <motion.button
               type="submit"
