@@ -7,8 +7,10 @@ import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { CheckCircle2, Sparkles } from 'lucide-react'
 import { useState } from 'react'
+import { useRouter } from 'next/navigation'
 
 export default function HairTransplant() {
+  const router = useRouter()
   const [formData, setFormData] = useState({
     name: '',
     phone: '',
@@ -21,14 +23,20 @@ export default function HairTransplant() {
     e.preventDefault()
     setIsSubmitting(true)
     try {
-      await fetch('https://hook.eu2.make.com/qo9qlswoe53nbtc6fd4v0macorqlf9pb', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ...formData, source: 'דף השתלת שיער', submittedAt: new Date().toLocaleString('he-IL', { timeZone: 'Asia/Jerusalem' }) }),
-      })
-      setFormData({ name: '', phone: '' })
-      setAgreedToPrivacy(false)
-      alert('תודה! נחזור אליך בהקדם לתיאום פגישת ייעוץ.')
+      const payload = { ...formData, source: 'דף השתלת שיער', submittedAt: new Date().toLocaleString('he-IL', { timeZone: 'Asia/Jerusalem' }) }
+      await Promise.all([
+        fetch('https://hook.eu2.make.com/qo9qlswoe53nbtc6fd4v0macorqlf9pb', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+        }),
+        fetch('https://hook.eu2.make.com/wwr2v4bsxhwbb4uue69w3w8fknw9i4q0', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+        }),
+      ])
+      router.push('/thank-you')
     } catch (error) {
       alert('אירעה שגיאה, אנא נסה שוב.')
     } finally {

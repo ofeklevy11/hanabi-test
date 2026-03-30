@@ -14,7 +14,8 @@
       "WebFetch(domain:commentpicker.com)",
       "Bash(yt-dlp:*)",
       "Bash(pip install:*)",
-      "Bash(npx next:*)"
+      "Bash(npx next:*)",
+      "Bash(npm run:*)"
     ]
   }
 }

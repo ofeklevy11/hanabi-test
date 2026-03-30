@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { Send } from 'lucide-react'
@@ -16,19 +17,26 @@ export default function AppointmentForm() {
 
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [agreedToPrivacy, setAgreedToPrivacy] = useState(false)
+  const router = useRouter()
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setIsSubmitting(true)
     try {
-      await fetch('https://hook.eu2.make.com/qo9qlswoe53nbtc6fd4v0macorqlf9pb', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ...formData, source: 'טופס קביעת פגישה', submittedAt: new Date().toLocaleString('he-IL', { timeZone: 'Asia/Jerusalem' }) }),
-      })
-      setFormData({ name: '', phone: '', email: '', treatment: '', message: '' })
-      setAgreedToPrivacy(false)
-      alert('תודה! נחזור אליך בהקדם.')
+      const payload = { ...formData, source: 'טופס קביעת פגישה', submittedAt: new Date().toLocaleString('he-IL', { timeZone: 'Asia/Jerusalem' }) }
+      await Promise.all([
+        fetch('https://hook.eu2.make.com/qo9qlswoe53nbtc6fd4v0macorqlf9pb', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+        }),
+        fetch('https://hook.eu2.make.com/wwr2v4bsxhwbb4uue69w3w8fknw9i4q0', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+        }),
+      ])
+      router.push('/thank-you')
     } catch (error) {
       alert('אירעה שגיאה, אנא נסה שוב.')
     } finally {
