@@ -6,7 +6,7 @@ import { Microscope, Move, ChevronRight, ChevronLeft, Sparkles, CheckCircle2, Vo
 import Link from 'next/link'
 import Image from 'next/image'
 import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion'
-import { useState, useRef } from 'react'
+import { useState, useRef, useEffect, useCallback } from 'react'
 import { useRouter } from 'next/navigation'
 
 export default function Eyebrows() {
@@ -35,6 +35,56 @@ export default function Eyebrows() {
     'wwSN_z_xcOY',
     '7GeJuoFTees',
   ]
+
+  const playerRef = useRef<any>(null)
+  const iframeRef = useRef<HTMLIFrameElement>(null)
+
+  // Load YouTube IFrame API
+  useEffect(() => {
+    if (typeof window !== 'undefined' && !(window as any).YT) {
+      const tag = document.createElement('script')
+      tag.src = 'https://www.youtube.com/iframe_api'
+      document.head.appendChild(tag)
+    }
+  }, [])
+
+  // Initialize YouTube player when iframe is ready or video changes
+  useEffect(() => {
+    const initPlayer = () => {
+      if (iframeRef.current && (window as any).YT?.Player) {
+        playerRef.current = new (window as any).YT.Player(iframeRef.current, {
+          events: {
+            onReady: () => {
+              if (isMuted) {
+                playerRef.current?.mute()
+              } else {
+                playerRef.current?.unMute()
+              }
+            }
+          }
+        })
+      }
+    }
+
+    if ((window as any).YT?.Player) {
+      const timer = setTimeout(initPlayer, 300)
+      return () => clearTimeout(timer)
+    } else {
+      (window as any).onYouTubeIframeAPIReady = initPlayer
+    }
+  }, [currentYoutubeIndex])
+
+  const toggleMute = useCallback(() => {
+    const newMuted = !isMuted
+    setIsMuted(newMuted)
+    if (playerRef.current?.mute && playerRef.current?.unMute) {
+      if (newMuted) {
+        playerRef.current.mute()
+      } else {
+        playerRef.current.unMute()
+      }
+    }
+  }, [isMuted])
 
   const nextYoutube = () => {
     setCurrentYoutubeIndex((prev) => (prev + 1) % youtubeVideos.length)
@@ -245,7 +295,9 @@ export default function Eyebrows() {
                       className="absolute inset-0 w-full h-full"
                     >
                       <iframe
-                        src={`https://www.youtube.com/embed/${youtubeVideos[currentYoutubeIndex]}?autoplay=1&mute=${isMuted ? 1 : 0}&loop=1&playlist=${youtubeVideos[currentYoutubeIndex]}&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1`}
+                        ref={iframeRef}
+                        id="yt-player-eyebrows"
+                        src={`https://www.youtube.com/embed/${youtubeVideos[currentYoutubeIndex]}?autoplay=1&mute=1&loop=1&playlist=${youtubeVideos[currentYoutubeIndex]}&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1&enablejsapi=1&origin=${typeof window !== 'undefined' ? window.location.origin : ''}`}
                         className="absolute inset-0 w-full h-full border-0"
                         allow="autoplay; encrypted-media"
                         allowFullScreen
@@ -263,7 +315,7 @@ export default function Eyebrows() {
 
                   {/* Sound toggle button */}
                   <button
-                    onClick={() => setIsMuted(!isMuted)}
+                    onClick={toggleMute}
                     className="absolute bottom-4 right-4 z-20 w-10 h-10 bg-black/60 hover:bg-black/80 backdrop-blur-sm rounded-full flex items-center justify-center transition-all"
                     aria-label={isMuted ? 'הפעל צליל' : 'השתק'}
                   >

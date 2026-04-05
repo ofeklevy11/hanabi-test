@@ -6,7 +6,7 @@ import { Microscope, Move, Shield, Sparkles, CheckCircle2, Eye, Volume2, VolumeX
 import Image from 'next/image'
 import Link from 'next/link'
 import { motion, useScroll } from 'framer-motion'
-import { useState, useRef } from 'react'
+import { useState, useRef, useEffect, useCallback } from 'react'
 import { useRouter } from 'next/navigation'
 
 export default function Eyelashes() {
@@ -25,6 +25,56 @@ export default function Eyelashes() {
   })
 
   const youtubeVideoId = '-rnDfzpfpjQ'
+
+  const playerRef = useRef<any>(null)
+  const iframeRef = useRef<HTMLIFrameElement>(null)
+
+  // Load YouTube IFrame API
+  useEffect(() => {
+    if (typeof window !== 'undefined' && !(window as any).YT) {
+      const tag = document.createElement('script')
+      tag.src = 'https://www.youtube.com/iframe_api'
+      document.head.appendChild(tag)
+    }
+  }, [])
+
+  // Initialize YouTube player when iframe is ready
+  useEffect(() => {
+    const initPlayer = () => {
+      if (iframeRef.current && (window as any).YT?.Player) {
+        playerRef.current = new (window as any).YT.Player(iframeRef.current, {
+          events: {
+            onReady: () => {
+              if (isMuted) {
+                playerRef.current?.mute()
+              } else {
+                playerRef.current?.unMute()
+              }
+            }
+          }
+        })
+      }
+    }
+
+    if ((window as any).YT?.Player) {
+      const timer = setTimeout(initPlayer, 300)
+      return () => clearTimeout(timer)
+    } else {
+      (window as any).onYouTubeIframeAPIReady = initPlayer
+    }
+  }, [])
+
+  const toggleMute = useCallback(() => {
+    const newMuted = !isMuted
+    setIsMuted(newMuted)
+    if (playerRef.current?.mute && playerRef.current?.unMute) {
+      if (newMuted) {
+        playerRef.current.mute()
+      } else {
+        playerRef.current.unMute()
+      }
+    }
+  }, [isMuted])
 
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [agreedToPrivacy, setAgreedToPrivacy] = useState(false)
@@ -203,7 +253,9 @@ export default function Eyelashes() {
 
                   {/* YouTube embed content */}
                   <iframe
-                    src={`https://www.youtube.com/embed/${youtubeVideoId}?autoplay=1&mute=${isMuted ? 1 : 0}&loop=1&playlist=${youtubeVideoId}&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1`}
+                    ref={iframeRef}
+                    id="yt-player-eyelashes"
+                    src={`https://www.youtube.com/embed/${youtubeVideoId}?autoplay=1&mute=1&loop=1&playlist=${youtubeVideoId}&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1&enablejsapi=1&origin=${typeof window !== 'undefined' ? window.location.origin : ''}`}
                     className="absolute inset-0 w-full h-full border-0"
                     allow="autoplay; encrypted-media"
                     allowFullScreen
@@ -212,7 +264,7 @@ export default function Eyelashes() {
 
                   {/* Sound toggle button */}
                   <button
-                    onClick={() => setIsMuted(!isMuted)}
+                    onClick={toggleMute}
                     className="absolute bottom-4 right-4 z-20 w-10 h-10 bg-black/60 hover:bg-black/80 backdrop-blur-sm rounded-full flex items-center justify-center transition-all"
                     aria-label={isMuted ? 'הפעל צליל' : 'השתק'}
                   >
