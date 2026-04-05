@@ -921,7 +921,7 @@ export default function EyebrowsLP() {
       </section>
 
       {/* Consultation Form - Minimalist Luxury */}
-      <section className="py-8 md:py-10 bg-gradient-to-b from-white to-soft-grey relative overflow-hidden">
+      <section id="appointment" className="py-8 md:py-10 bg-gradient-to-b from-white to-soft-grey relative overflow-hidden">
         <div className="absolute inset-0">
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-4xl h-96 bg-gradient-to-br from-deep-red/3 to-transparent rounded-full blur-3xl" />
         </div>

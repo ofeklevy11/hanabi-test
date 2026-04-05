@@ -336,7 +336,7 @@ export default function IPRF() {
       </section>
 
       {/* Consultation Form Section */}
-      <section className="py-8 md:py-10 bg-soft-grey">
+      <section id="appointment" className="py-8 md:py-10 bg-soft-grey">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 30 }}

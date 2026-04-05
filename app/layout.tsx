@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import './globals.css'
 import AccessibilityWidget from '@/components/AccessibilityWidget'
 import FacebookPixel from '@/components/FacebookPixel'
+import FloatingCTA from '@/components/FloatingCTA'
 
 export const metadata: Metadata = {
   title: 'HANA BI - אסתטיקה ביולוגית מתקדמת',
@@ -18,6 +19,7 @@ export default function RootLayout({
       <body>
         <FacebookPixel />
         {children}
+        <FloatingCTA />
         <AccessibilityWidget />
       </body>
     </html>
