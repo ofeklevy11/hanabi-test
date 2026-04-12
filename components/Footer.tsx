@@ -33,15 +33,15 @@ export default function Footer() {
                 </a>
               </li>
               <li>
-                <a href="tel:+972-3-000-0000" className="flex items-center gap-3 text-white/70 hover:text-white transition-colors">
+                <a href="tel:0528266062" className="flex items-center gap-3 text-white/70 hover:text-white transition-colors">
                   <Phone className="w-5 h-5 shrink-0" />
-                  <span dir="ltr">+972-3-000-0000</span>
+                  <span dir="ltr">052-826-6062</span>
                 </a>
               </li>
               <li>
-                <a href="https://wa.me/9720500000000" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-white/70 hover:text-white transition-colors">
+                <a href="https://wa.me/972528266062" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-white/70 hover:text-white transition-colors">
                   <MessageCircle className="w-5 h-5 shrink-0" />
-                  <span dir="ltr">+972-50-000-0000</span>
+                  <span dir="ltr">052-826-6062</span>
                 </a>
               </li>
             </ul>

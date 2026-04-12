@@ -1,25 +1,38 @@
 'use client'
 
-import { useState, useRef, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import Image from 'next/image'
 export default function Hero() {
   const [videoEnded, setVideoEnded] = useState(false)
   const [showContent, setShowContent] = useState(false)
-  const videoRef = useRef<HTMLVideoElement>(null)
 
   useEffect(() => {
-    const video = videoRef.current
-    if (video) {
-      const handleEnded = () => {
-        setVideoEnded(true)
-        // Small delay before showing content for smooth transition
-        setTimeout(() => {
-          setShowContent(true)
-        }, 300)
-      }
-      video.addEventListener('ended', handleEnded)
-      return () => video.removeEventListener('ended', handleEnded)
+    // Load YouTube IFrame API
+    if (!(window as any).YT) {
+      const tag = document.createElement('script')
+      tag.src = 'https://www.youtube.com/iframe_api'
+      document.head.appendChild(tag)
+    }
+
+    const initPlayer = () => {
+      new (window as any).YT.Player('hero-yt-player', {
+        events: {
+          onStateChange: (event: any) => {
+            // YT.PlayerState.ENDED === 0
+            if (event.data === 0) {
+              setVideoEnded(true)
+              setTimeout(() => setShowContent(true), 300)
+            }
+          },
+        },
+      })
+    }
+
+    if ((window as any).YT?.Player) {
+      initPlayer()
+    } else {
+      (window as any).onYouTubeIframeAPIReady = initPlayer
     }
   }, [])
 
@@ -34,28 +47,17 @@ export default function Hero() {
             transition={{ duration: 0.5 }}
             className="absolute inset-0 z-30"
           >
-            <video
-              ref={videoRef}
-              autoPlay
-              muted
-              playsInline
-              preload="auto"
-              className="absolute inset-0 w-full h-full object-cover"
+            <iframe
+              id="hero-yt-player"
+              src="https://www.youtube.com/embed/ImyiHGiw44c?autoplay=1&mute=1&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1&enablejsapi=1&origin=https://hanabi.co.il"
+              className="absolute inset-0 w-full h-full border-0 pointer-events-none"
               style={{
-                objectFit: 'cover',
-                width: '100%',
-                minWidth: '100%'
+                transform: 'scale(1.5)',
+                transformOrigin: 'center center',
               }}
-              onLoadedMetadata={(e) => {
-                const video = e.target as HTMLVideoElement
-                if (video) {
-                  video.currentTime = 0
-                }
-              }}
-            >
-              <source src="/hero-video.mp4" type="video/mp4" />
-              Your browser does not support the video tag.
-            </video>
+              allow="autoplay; encrypted-media"
+              title="HANA BI"
+            />
 
           </motion.div>
         )}
