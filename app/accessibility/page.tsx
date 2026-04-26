@@ -42,7 +42,7 @@ export default function Accessibility() {
               <h2 className="text-2xl font-bold text-charcoal mb-4">5. יצירת קשר בנושא נגישות</h2>
               <p>אם נתקלתם בקושי בגלישה או שיש לכם הצעה לשיפור, נשמח לעמוד לשירותכם:</p>
               <ul className="list-disc list-inside space-y-2 mt-2">
-                <li>טלפון: <a href="tel:0528266062" className="text-deep-red hover:underline" dir="ltr">052-826-6062</a></li>
+                <li>טלפון: <a href="tel:0585065359" className="text-deep-red hover:underline" dir="ltr">058-506-5359</a></li>
                 <li>דוא&quot;ל: <a href="mailto:hanabi@gmail.com" className="text-deep-red hover:underline">hanabi@gmail.com</a></li>
               </ul>
             </section>
