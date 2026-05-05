@@ -17,8 +17,6 @@ export default function Eyebrows() {
   })
   const [currentYoutubeIndex, setCurrentYoutubeIndex] = useState(0)
   const [isMuted, setIsMuted] = useState(true)
-  const [isVideoMuted, setIsVideoMuted] = useState(true)
-  const videoRef = useRef<HTMLVideoElement>(null)
   const containerRef = useRef<HTMLDivElement>(null)
   const touchStartRef = useRef<{ x: number; y: number } | null>(null)
   const { scrollYProgress } = useScroll({
@@ -609,86 +607,6 @@ export default function Eyebrows() {
               >
                 הדפדפן שלך לא תומך בתגית הוידאו.
               </video>
-            </div>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Pain-Free Experience Section */}
-      <section className="py-8 md:py-10 bg-white relative overflow-hidden">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          {/* Header */}
-          <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 1 }}
-            className="text-center mb-8"
-          >
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-charcoal mb-4 leading-tight">
-              האם הטיפול כואב?
-            </h2>
-            <p className="text-2xl md:text-3xl lg:text-4xl text-deep-red font-bold mt-4">
-              ממש לא
-            </p>
-          </motion.div>
-
-          {/* Video in iPhone Frame */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 1, delay: 0.2 }}
-            className="flex justify-center"
-          >
-            <div className="relative mx-auto">
-              {/* Phone outer shell */}
-              <div className="relative bg-[#1a1a1a] rounded-[3rem] p-[10px] shadow-[0_0_0_2px_#333,0_0_0_4px_#1a1a1a,0_25px_60px_-12px_rgba(0,0,0,0.4)]">
-                {/* Side button - right (volume) */}
-                <div className="absolute -right-[3px] top-[120px] w-[3px] h-[30px] bg-[#333] rounded-l-sm" />
-                <div className="absolute -right-[3px] top-[165px] w-[3px] h-[30px] bg-[#333] rounded-l-sm" />
-                {/* Side button - left (power) */}
-                <div className="absolute -left-[3px] top-[140px] w-[3px] h-[45px] bg-[#333] rounded-r-sm" />
-
-                {/* Screen area */}
-                <div className="relative bg-black rounded-[2.4rem] overflow-hidden w-[85vw] max-w-[320px] aspect-[9/19.5]">
-                  {/* Dynamic Island / Notch */}
-                  <div className="absolute top-0 left-0 right-0 z-20 flex justify-center pt-3">
-                    <div className="w-[100px] h-[28px] md:w-[120px] md:h-[32px] bg-black rounded-full" />
-                  </div>
-
-                  {/* Video content */}
-                  <video
-                    ref={videoRef}
-                    src="/files/video-eye.mp4"
-                    className="absolute inset-0 w-full h-full object-cover"
-                    playsInline
-                    autoPlay
-                    muted={isVideoMuted}
-                    loop
-                  />
-
-                  {/* Bottom bar (home indicator) */}
-                  <div className="absolute bottom-2 left-1/2 -translate-x-1/2 w-[120px] h-[4px] bg-white/30 rounded-full z-20" />
-                </div>
-              </div>
-              {/* Sound toggle button - overlaid on phone */}
-              <button
-                onClick={() => {
-                  setIsVideoMuted(!isVideoMuted)
-                  if (videoRef.current) {
-                    videoRef.current.muted = !isVideoMuted
-                  }
-                }}
-                className="absolute bottom-8 left-1/2 -translate-x-1/2 z-30 w-12 h-12 bg-black/60 hover:bg-black/80 backdrop-blur-sm rounded-full flex items-center justify-center transition-all"
-                aria-label={isVideoMuted ? 'הפעל צליל' : 'השתק'}
-              >
-                {isVideoMuted ? (
-                  <VolumeX className="w-6 h-6 text-white" />
-                ) : (
-                  <Volume2 className="w-6 h-6 text-white" />
-                )}
-              </button>
             </div>
           </motion.div>
         </div>
