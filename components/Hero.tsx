@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 
-const DESKTOP_VIDEO_ID = 'ImyiHGiw44c'
+const DESKTOP_VIDEO_ID = '2nJJjlzGNOs'
 const MOBILE_VIDEO_ID = 'Si61kNqklzY'
 
 export default function Hero() {
