@@ -3,35 +3,14 @@
 import { useState, useEffect, useRef, useCallback } from 'react'
 import { motion } from 'framer-motion'
 
-const DESKTOP_VIDEO_ID = '2nJJjlzGNOs'
+const DESKTOP_VIDEO_SRC = '/files/hero/HERO_VIDEO_DESKTOP.mp4'
 const MOBILE_VIDEO_ID = 'Si61kNqklzY'
 const DESKTOP_END_TRIM_SECONDS = 3
 
-const QUALITY_PREFS = ['highres', 'hd2160', 'hd1440', 'hd1080', 'hd720', 'large'] as const
+const videoCoverClassName =
+  'absolute top-1/2 left-1/2 w-[100vw] h-[56.25vw] min-h-[100vh] min-w-[177.78vh] -translate-x-1/2 -translate-y-1/2 pointer-events-none border-0'
 
-type YTPlayer = {
-  mute: () => void
-  playVideo: () => void
-  seekTo: (seconds: number, allowSeekAhead: boolean) => void
-  getCurrentTime: () => number
-  getDuration: () => number
-  setPlaybackQuality: (quality: string) => void
-  getAvailableQualityLevels: () => string[]
-  destroy: () => void
-}
-
-function forceHighestQuality(player: YTPlayer) {
-  const available = player.getAvailableQualityLevels?.() ?? []
-  for (const quality of QUALITY_PREFS) {
-    if (available.includes(quality)) {
-      player.setPlaybackQuality(quality)
-      return
-    }
-  }
-}
-
-function buildEmbedSrc(videoId: string) {
-  const origin = typeof window !== 'undefined' ? window.location.origin : ''
+function buildMobileEmbedSrc(videoId: string) {
   const params = new URLSearchParams({
     autoplay: '1',
     mute: '1',
@@ -41,34 +20,19 @@ function buildEmbedSrc(videoId: string) {
     playsinline: '1',
     rel: '0',
     modestbranding: '1',
-    enablejsapi: '1',
     iv_load_policy: '3',
     disablekb: '1',
     fs: '0',
-    origin,
+    cc_load_policy: '0',
+    origin: typeof window !== 'undefined' ? window.location.origin : '',
   })
   return `https://www.youtube.com/embed/${videoId}?${params}`
-}
-
-// Cover the hero at native 16:9 — YouTube picks stream quality from player size, not CSS scale.
-const videoCoverStyle: React.CSSProperties = {
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  width: '100vw',
-  height: '56.25vw',
-  minHeight: '100vh',
-  minWidth: '177.78vh',
-  transform: 'translate(-50%, -50%)',
-  border: 0,
 }
 
 export default function Hero() {
   const [isMobile, setIsMobile] = useState(false)
   const [ready, setReady] = useState(false)
-  const iframeRef = useRef<HTMLIFrameElement>(null)
-  const playerRef = useRef<YTPlayer | null>(null)
-  const trimIntervalRef = useRef<ReturnType<typeof setInterval> | null>(null)
+  const desktopVideoRef = useRef<HTMLVideoElement>(null)
 
   useEffect(() => {
     const checkMobile = () => setIsMobile(window.innerWidth < 768)
@@ -78,95 +42,47 @@ export default function Hero() {
     return () => window.removeEventListener('resize', checkMobile)
   }, [])
 
-  const videoId = isMobile ? MOBILE_VIDEO_ID : DESKTOP_VIDEO_ID
-
-  const clearTrimInterval = useCallback(() => {
-    if (trimIntervalRef.current) {
-      clearInterval(trimIntervalRef.current)
-      trimIntervalRef.current = null
+  const handleDesktopTimeUpdate = useCallback(() => {
+    const video = desktopVideoRef.current
+    if (!video || !Number.isFinite(video.duration)) return
+    if (video.currentTime >= video.duration - DESKTOP_END_TRIM_SECONDS) {
+      video.currentTime = 0
     }
   }, [])
 
-  const startDesktopTrimLoop = useCallback(
-    (player: YTPlayer) => {
-      clearTrimInterval()
-      if (isMobile) return
-
-      trimIntervalRef.current = setInterval(() => {
-        const duration = player.getDuration()
-        const current = player.getCurrentTime()
-        if (duration > 0 && current >= duration - DESKTOP_END_TRIM_SECONDS) {
-          player.seekTo(0, true)
-        }
-      }, 200)
-    },
-    [isMobile, clearTrimInterval]
-  )
-
   useEffect(() => {
-    if (!ready || !iframeRef.current) return
-
-    const initPlayer = () => {
-      const YT = (window as Window & { YT?: { Player: new (el: HTMLIFrameElement, opts: object) => YTPlayer } }).YT
-      if (!YT?.Player || !iframeRef.current) return
-
-      playerRef.current?.destroy?.()
-      playerRef.current = new YT.Player(iframeRef.current, {
-        events: {
-          onReady: (event: { target: YTPlayer }) => {
-            const player = event.target
-            player.mute()
-            player.playVideo()
-            forceHighestQuality(player)
-            startDesktopTrimLoop(player)
-          },
-          onStateChange: (event: { data: number; target: YTPlayer }) => {
-            // Re-apply HD after buffering; YouTube sometimes downgrades mid-playback.
-            if (event.data === 1) {
-              forceHighestQuality(event.target)
-            }
-          },
-        },
-      })
-    }
-
-    if (!(window as Window & { YT?: unknown }).YT) {
-      const existing = document.querySelector('script[src*="youtube.com/iframe_api"]')
-      if (!existing) {
-        const tag = document.createElement('script')
-        tag.src = 'https://www.youtube.com/iframe_api'
-        document.head.appendChild(tag)
-      }
-    }
-
-    if ((window as Window & { YT?: { Player?: unknown } }).YT?.Player) {
-      initPlayer()
-    } else {
-      ;(window as Window & { onYouTubeIframeAPIReady?: () => void }).onYouTubeIframeAPIReady = initPlayer
-    }
-
-    return () => {
-      clearTrimInterval()
-      playerRef.current?.destroy?.()
-      playerRef.current = null
-    }
-  }, [ready, videoId, startDesktopTrimLoop, clearTrimInterval])
+    if (isMobile || !desktopVideoRef.current) return
+    const video = desktopVideoRef.current
+    video.play().catch(() => {})
+  }, [isMobile, ready])
 
   if (!ready) return <section className="relative min-h-[70vh] md:min-h-[85vh] lg:min-h-[90vh] bg-black" />
 
   return (
     <section className="relative min-h-[70vh] md:min-h-[85vh] lg:min-h-[90vh] flex items-center justify-center overflow-hidden bg-black">
-      <div className="absolute inset-0 z-10 overflow-hidden">
-        <iframe
-          ref={iframeRef}
-          key={videoId}
-          src={buildEmbedSrc(videoId)}
-          className="pointer-events-none"
-          style={videoCoverStyle}
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          referrerPolicy="strict-origin-when-cross-origin"
-          title="סרטון תדמית"
-        />
+      <div className="absolute inset-0 z-10 overflow-hidden pointer-events-none">
+        {isMobile ? (
+          <iframe
+            key={MOBILE_VIDEO_ID}
+            src={buildMobileEmbedSrc(MOBILE_VIDEO_ID)}
+            className={videoCoverClassName}
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            referrerPolicy="strict-origin-when-cross-origin"
+            title="סרטון תדמית"
+          />
+        ) : (
+          <video
+            ref={desktopVideoRef}
+            src={DESKTOP_VIDEO_SRC}
+            className={`${videoCoverClassName} object-cover`}
+            autoPlay
+            muted
+            playsInline
+            preload="auto"
+            onTimeUpdate={handleDesktopTimeUpdate}
+            aria-hidden
+          />
+        )}
       </div>
 
       <motion.div
