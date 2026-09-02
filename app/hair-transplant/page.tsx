@@ -164,7 +164,7 @@ export default function HairTransplant() {
         </div>
       </section>
 
-      {/* Section 1: צפיפות אנטומית מקסימלית */}
+      {/* Section 1: המנגנון הביולוגי והמענה הקליני המדויק */}
       <section className="py-12 md:py-20 bg-white relative overflow-hidden">
         <div className="max-w-[95vw] mx-auto">
           <div className="grid md:grid-cols-[1fr_1.2fr] gap-0 items-stretch min-h-[50vh]">
@@ -177,23 +177,108 @@ export default function HairTransplant() {
             >
               <div className="w-full">
                 <h3 className="text-3xl md:text-4xl font-bold text-charcoal leading-tight mb-8">
-                  צפיפות אנטומית מקסימלית
+                  המנגנון הביולוגי והמענה הקליני המדויק
                 </h3>
                 <div className="text-lg md:text-xl text-charcoal/70 leading-relaxed font-normal text-right space-y-6">
-                  <p>כדי להשיג מראה שאינו מסגיר את הטיפול, כזה שנראה ומרגיש כמו שיער טבעי ושופע. עלינו להיצמד לחוקי האנטומיה של הקרקפת.</p>
-                  <p>הצפיפות הממוצעת בשיער טבעי עומדת על כ-80 זקיקים לס&quot;מ מרובע. כדי להעניק לך מראה מלא, ללא שטחים דלילים או מראה &quot;שקוף&quot;, אנו מחויבים להגיע לרמת צפיפות זהה לזו של הטבע.</p>
-                  <div className="block md:hidden relative w-full h-[300px] rounded-2xl overflow-hidden my-4">
+                  <p>התקרחות גנטית (Androgenetic Alopecia) אינה נובעת מגורמים סביבתיים שטחיים, חפיפות מרובות או זרימת דם לקויה, אלא מתהליך גנטי-הורמונלי מובנה בעל מנגנון פיזיולוגי ברור: מיניאטוריזציה של זקיקי השיער.</p>
+                  <div className="block md:hidden relative w-full rounded-2xl overflow-hidden my-4">
                     <Image
-                      src="/files/hair/IMG_0933.PNG"
-                      alt="צפיפות אנטומית מקסימלית"
-                      fill
-                      className="object-cover"
+                      src="/files/hair/biological-mechanism.png"
+                      alt="המנגנון הביולוגי של התקרחות גנטית"
+                      width={1024}
+                      height={558}
+                      className="w-full h-auto object-contain"
                       quality={95}
                       sizes="100vw"
                     />
                   </div>
-                  <h4 className="text-2xl font-bold text-charcoal mt-8">איך אנחנו עושים זאת?</h4>
-                  <p>ב-Hana bi אנו משתמשים בטכנולוגיית קצה ובמכשור מיקרוסקופי ייחודי שפותח בסיאול, קוריאה – בירת החדשנות העולמית. המכשור שלנו דק ועדין במיוחד, מה שמאפשר לנו להשתיל את הזקיקים בקרבה מקסימלית זה לזה, מבלי לפגוע ברקמה, ולהבטיח תוצאה צפופה, עשירה וטבעית לחלוטין.</p>
+                  <h4 className="text-2xl font-bold text-charcoal mt-8">המנגנון ההורמונלי והגנטי</h4>
+                  <p>הגורם המרכזי לתהליך הוא ההורמון DHT (דיהידרוטסטוסטרון), אנדרוגן עוצמתי המיוצר בגוף כתוצאה מהמרת טסטוסטרון חופשי על ידי האנזים 5-אלפא רדוקטאז (5-alpha reductase).</p>
+                  <ul className="space-y-4 list-disc pr-6">
+                    <li><strong>היקשרות לקולטנים:</strong> DHT נקשר לקולטני אנדרוגנים (Androgen Receptors) הממוקמים בזקיקי השיער באזורים בעלי רגישות גנטית – בעיקר במפרצים, בקו השיער הקדמי ובפדחת.</li>
+                    <li><strong>קיצור פאזת האנאגן (Anagen Phase):</strong> שלב הצמיחה הפעיל של השערה, שאמור להימשך בין 2 ל-6 שנים, מתקצר בהדרגה למספר חודשים בלבד.</li>
+                    <li><strong>תהליך המיניאטוריזציה:</strong> בכל מחזור צמיחה חדש, השערה צומחת דקה, בהירה וחלשה יותר (טרנספורמציה לשערה פלומתית – Vellus Hair), עד לניוון מוחלט של הזקיק (Fibrosis) והפסקת ייצור השיער.</li>
+                    <li><strong>עמידות האזור התורם:</strong> זקיקי השיער בחלק האחורי והצדדי של הקרקפת נעדרים רגישות גנטית ל-DHT. עמידות זו נשמרת גנטית גם לאחר העברת הזקיקים לאזורים הדלילים.</li>
+                  </ul>
+                </div>
+              </div>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, x: 100 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 1, delay: 0.2 }}
+              className="order-1 md:order-2 w-full h-full min-h-[400px] hidden md:flex items-center p-4"
+            >
+              <div className="relative w-full rounded-2xl overflow-hidden">
+              <Image
+                src="/files/hair/biological-mechanism.png"
+                alt="המנגנון הביולוגי של התקרחות גנטית"
+                width={1024}
+                height={558}
+                className="w-full h-auto"
+                quality={95}
+                sizes="(max-width: 768px) 100vw, 60vw"
+              />
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* Section 2: הגישה הטיפולית */}
+      <section className="py-12 md:py-20 bg-soft-grey relative overflow-hidden">
+        <div className="max-w-[95vw] mx-auto">
+          <div className="grid md:grid-cols-[1fr_1.2fr] gap-0 items-stretch min-h-[50vh]">
+            <motion.div
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 1 }}
+              className="flex items-center p-8 md:p-10 lg:p-12 bg-soft-grey order-2 md:order-1"
+            >
+              <div className="w-full">
+                <h3 className="text-3xl md:text-4xl font-bold text-charcoal leading-tight mb-8">
+                  הגישה הטיפולית
+                </h3>
+                <div className="text-lg md:text-xl text-charcoal/70 leading-relaxed font-normal text-right space-y-6">
+                  <p>אבחון קליני מדויק הוא הבסיס לכל תהליך טיפולי מוצלח. הצעד הראשון מחייב הגעה לבחינה מקצועית של צוות רפואי, המבצע הערכה של צפיפות הזקיקים, איכות הקרקפת ומאפייני ההתקרחות האינדיבידואליים.</p>
+                  <p>רמת הטיפול מותאמת באופן מדויק בהתאם למצב ההתקרחותי ולשלב שבו נמצאים הזקיקים:</p>
+                  <div className="block md:hidden relative w-full rounded-2xl overflow-hidden my-4">
+                    <Image
+                      src="/files/hair/IMG_0933.PNG"
+                      alt="הגישה הטיפולית - אבחון קליני"
+                      width={800}
+                      height={600}
+                      className="w-full h-auto object-contain"
+                      quality={95}
+                      sizes="100vw"
+                    />
+                  </div>
+                  <div className="flex items-start gap-4">
+                    <div className="w-12 h-12 bg-deep-red/10 rounded-xl flex items-center justify-center shrink-0 border border-deep-red/20">
+                      <span className="text-xl font-bold text-deep-red">1</span>
+                    </div>
+                    <div>
+                      <h4 className="text-xl md:text-2xl font-bold text-charcoal mb-2">טיפול בזקיקים מוחלשים (מצב Baby Hair)</h4>
+                      <p>כאשר הזקיק עדיין פעיל אך מצוי בתהליך מיניאטוריזציה (שערה דקה וחלשה), הטיפול מתמקד בעצירת ההידרדרות ושיקום הזקיק. השילוב כולל טיפולים קליניים ייעודיים לצד שימור יומי באמצעות טיפות חיצוניות מרוכזות, המזינות את הזקיק בחומרים פעילים, מאריכות את פאזת הצמיחה ומעודדות התעבות וחיזוק של השערה לרמתה המקורית.</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-4">
+                    <div className="w-12 h-12 bg-deep-red/10 rounded-xl flex items-center justify-center shrink-0 border border-deep-red/20">
+                      <span className="text-xl font-bold text-deep-red">2</span>
+                    </div>
+                    <div>
+                      <h4 className="text-xl md:text-2xl font-bold text-charcoal mb-2">טיפול באזורים נטולי זקיקים פעילים</h4>
+                      <p>כאשר הזקיקים באזור מסוים עברו ניוון מלא ולא קיימת בהם צמיחה, תכשירים חיצוניים אינם יכולים להשיב את הזקיק לחיים. במצב זה, הדרך היחידה למילוי האזור היא השתלת שיער והחדרת זקיקים בריאים מהאזור התורם העמיד.</p>
+                    </div>
+                  </div>
+                  <p className="font-bold text-charcoal">הצלחת השתלת השיער נשענת על מיומנות כירורגית קפדנית:</p>
+                  <ul className="space-y-4 list-disc pr-6">
+                    <li><strong>דיוק זוויות הצמיחה:</strong> התאמה אנטומית מלאה לזווית ולכיוון הצמיחה הטבעיים של כל אזור בקרקפת.</li>
+                    <li><strong>צפיפות מקסימלית:</strong> תכנון קפדני של מספר הזקיקים לסנטימטר מרובע ליצירת כיסוי מלא, עשיר וטבעי.</li>
+                  </ul>
                 </div>
               </div>
             </motion.div>
@@ -208,9 +293,213 @@ export default function HairTransplant() {
               <div className="relative w-full h-full rounded-2xl overflow-hidden">
               <Image
                 src="/files/hair/IMG_0933.PNG"
-                alt="צפיפות אנטומית מקסימלית"
+                alt="הגישה הטיפולית - אבחון קליני"
                 fill
                 className="object-cover"
+                quality={95}
+                sizes="(max-width: 768px) 100vw, 60vw"
+              />
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* השתלת שיער זאת אומנות - Header */}
+      <section className="pt-16 md:pt-24 pb-4 md:pb-6 bg-white relative overflow-hidden">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 1 }}
+            className="text-center"
+          >
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-charcoal mb-4">
+              השתלת שיער זאת אומנות
+            </h2>
+            <p className="text-xl md:text-2xl text-deep-red font-semibold mb-6">
+              הטכנולוגיה, הדיוק והמדע שמאחורי התוצאה המושלמת
+            </p>
+            <p className="text-lg md:text-xl text-charcoal/70 max-w-4xl mx-auto leading-relaxed font-normal">
+              תוצאה פנומנלית בהשתלת שיער אינה מקרית. היא תוצר של תכנון הנדסי מדויק, שליטה אבסולוטית בזוויות הצמיחה, ושימוש בטכנולוגיה הרפואית הסטרילית והמתקדמת ביותר בעולם.
+            </p>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Art Section 1: לקיחת הזקיקים */}
+      <section className="py-12 md:py-20 bg-white relative overflow-hidden">
+        <div className="max-w-[95vw] mx-auto">
+          <div className="grid md:grid-cols-[1.2fr_1fr] gap-0 items-stretch min-h-[50vh]">
+            <motion.div
+              initial={{ opacity: 0, x: -100 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 1 }}
+              className="w-full h-full min-h-[400px] hidden md:flex items-center p-4"
+            >
+              <div className="relative w-full rounded-2xl overflow-hidden">
+              <Image
+                src="/files/hair/hanahiluz.jpeg"
+                alt="לקיחת הזקיקים מהאזור התורם"
+                width={1408}
+                height={768}
+                className="w-full h-auto"
+                quality={95}
+                sizes="(max-width: 768px) 100vw, 60vw"
+              />
+              </div>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, x: 50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 1, delay: 0.2 }}
+              className="flex items-center p-8 md:p-10 lg:p-12 bg-white"
+            >
+              <div className="w-full">
+                <h3 className="text-3xl md:text-4xl font-bold text-charcoal leading-tight mb-3">
+                  1. לקיחת הזקיקים (Extraction Phase)
+                </h3>
+                <p className="text-xl md:text-2xl text-deep-red font-semibold mb-8">
+                  אפס צלקות, מקסימום שמירה על המאגר התורם
+                </p>
+                <div className="text-lg md:text-xl text-charcoal/70 leading-relaxed font-normal text-right space-y-6">
+                  <p>השלב הראשון והקריטי קובע את איכות הזקיקים שישיבו לך את השיער. לקיחת הזקיקים מהאזור התורם מבוצעת בדיוק מיקרוסקופי, בצורה מבוקרת ומפוזרת:</p>
+                  <div className="block md:hidden relative w-full rounded-2xl overflow-hidden my-4">
+                    <Image
+                      src="/files/hair/hanahiluz.jpeg"
+                      alt="לקיחת הזקיקים מהאזור התורם"
+                      width={800}
+                      height={600}
+                      className="w-full h-auto object-contain"
+                      quality={95}
+                      sizes="100vw"
+                    />
+                  </div>
+                  <ul className="space-y-4 list-disc pr-6">
+                    <li><strong>הגנה מוחלטת על הזקיקים השכנים:</strong> אנו משתמשים במיקרו-פאנץ&apos; בעל קוטר זעיר. הטכניקה ייחודית בכך שהיא מחלצת את הזקיקים בשלמותם, מבלי לפגוע או להחליש את הזקיקים הסמוכים שנשארים בקרקפת.</li>
+                    <li><strong>תוצאה חלקת עור ללא סימנים:</strong> הלקיחה הפיזורית מונעת יצירת דלילות באזור התורם או צלקות ליניאריות. העור מחלים בצורה מלאה, ללא שום זכר או סימן – אפילו בתספורת קצרה ביותר.</li>
+                  </ul>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* Art Section 2: הטכניקה ההיברידית */}
+      <section className="py-12 md:py-20 bg-soft-grey relative overflow-hidden">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 1 }}
+            className="text-center mb-10"
+          >
+            <h3 className="text-3xl md:text-4xl font-bold text-charcoal leading-tight mb-3">
+              2. הטכניקה ההיברידית
+            </h3>
+            <p className="text-xl md:text-2xl text-deep-red font-semibold mb-6">
+              הסטנדרט היחיד שמבטיח צפיפות וטבעיות מקסימלית
+            </p>
+            <div className="text-lg md:text-xl text-charcoal/70 leading-relaxed font-normal max-w-4xl mx-auto space-y-4">
+              <p>אנחנו לא מתפשרים על שיטה אחת בלבד. אנו עובדים אך ורק בטכניקה היברידית, משום שהיא משלבת את היתרונות העליונים של שתי הטכנולוגיות המתקדמות בתחום – FUE ו-DHI. זו הדרך היחידה להגיע לכיסוי אבסולוטי, צפוף וטבעי מבלי לסכן שיער קיים.</p>
+              <p className="font-medium text-charcoal">כך אנחנו מתאימים כל טכניקה למצב המדויק בקרקפת שלך:</p>
+            </div>
+          </motion.div>
+
+          <div className="grid md:grid-cols-2 gap-6 md:gap-8 items-stretch">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.8 }}
+              className="bg-white rounded-2xl p-8 md:p-10 shadow-lg"
+            >
+              <h4 className="text-2xl md:text-3xl font-bold text-charcoal leading-tight mb-6">
+                טכניקת DHI – עיבוי כירורגי עדין בין שיערות קיימות
+              </h4>
+              <ul className="text-lg md:text-xl text-charcoal/70 leading-relaxed font-normal text-right space-y-4 list-disc pr-6">
+                <li><strong>מתי משתמשים:</strong> כאשר באזור המיועד למילוי עדיין ישנו שיער טבעי, והמטרה היא לעבות את הצפיפות מבלי לפגוע בזקיקים הקיימים.</li>
+                <li><strong>איך זה עובד:</strong> באמצעות מכשיר מיקרוסקופי ייעודי – עט צ&apos;וי (Choi Pen). העט מאפשר להשתיל את הזקיק ישירות בדיוק רב-ממדי.</li>
+                <li><strong>היתרון הפסיכולוגי והרפואי:</strong> אפס טראומה לשיער הקיים שלך. הזקיקים החדשים מוחדרים בסמוך לשיער הטבעי במיומנות רבה, מבלי לפגוע בשורשים הסמוכים.</li>
+              </ul>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.8, delay: 0.15 }}
+              className="bg-white rounded-2xl p-8 md:p-10 shadow-lg"
+            >
+              <h4 className="text-2xl md:text-3xl font-bold text-charcoal leading-tight mb-6">
+                טכניקת FUE – שחזור עוצמתי לאזורים חלקים
+              </h4>
+              <ul className="text-lg md:text-xl text-charcoal/70 leading-relaxed font-normal text-right space-y-4 list-disc pr-6">
+                <li><strong>מתי משתמשים:</strong> כאשר האזור המיועד להשתלה חלק לחלוטין משיער (כמו מפרצים שנסוגו לחלוטין או אזור הפדחת).</li>
+                <li><strong>איך זה עובד:</strong> יצירת ערוצים זעירים ומדויקים מראש בפיזור צפוף, ולאחריהם החדרת הזקיקים החזקים מהאזור התורם לבניית קו שיער חדש ועוצמתי.</li>
+              </ul>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* Art Section 3: הנדסת ההשתלה */}
+      <section className="py-12 md:py-20 bg-white relative overflow-hidden">
+        <div className="max-w-[95vw] mx-auto">
+          <div className="grid md:grid-cols-[1fr_1.2fr] gap-0 items-stretch min-h-[50vh]">
+            <motion.div
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 1 }}
+              className="flex items-center p-8 md:p-10 lg:p-12 bg-white order-2 md:order-1"
+            >
+              <div className="w-full">
+                <h3 className="text-3xl md:text-4xl font-bold text-charcoal leading-tight mb-8">
+                  3. הנדסת ההשתלה: הדיוק הקוריאני, מחט ה-KNU והבינה המלאכותית
+                </h3>
+                <div className="text-lg md:text-xl text-charcoal/70 leading-relaxed font-normal text-right space-y-6">
+                  <p>ההבדל בין השתלה חובבנית לתוצאה עוצרת נשימה טמון בזוויות, בעומק ובמיקרו-אדריכלות של הקרקפת.</p>
+                  <div className="block md:hidden relative w-full rounded-2xl overflow-hidden my-4">
+                    <Image
+                      src="/files/hair/hairhana.jpeg"
+                      alt="הנדסת ההשתלה - זוויות ודיוק"
+                      width={800}
+                      height={600}
+                      className="w-full h-auto object-contain"
+                      quality={95}
+                      sizes="100vw"
+                    />
+                  </div>
+                  <ul className="space-y-4 list-disc pr-6">
+                    <li><strong>מחטי KNU Implanter Needle המקוריות:</strong> אנו משתמשים אך ורק במחטי ה-KNU המקוריות – אב הטיפוס החלוצי שפותח בבית החולים של אוניברסיטת קיונגפוק (Kyungpook National University) בדרום קוריאה על ידי פרופ&apos; יונג-צ&apos;ול צ&apos;וי, אשר הוליד את ה-Choi Pen. המחטים שלנו מגיעות בקטרים סופר-דקים של 0.6 מ&quot;מ ו-0.7 מ&quot;מ, המאפשרים החדרת זקיק במינימום פגיעה ברקמה.</li>
+                    <li><strong>אנגולציה טבעית (הנחת הזקיק בזווית מדויקת):</strong> הטעות הנפוצה והקריטית ביותר בהשתלות שיער היא החדרת הזקיק בזווית ישרה של 90 מעלות – מה שיוצר מראה מלאכותי, נוקשה ולא טבעי (&quot;שיער בובה&quot;). אנו משתילים כל זקיק בזווית חדה וטבעית בדיוק לפי כיוון הצמיחה המקורי של הקרקפת שלך.</li>
+                    <li><strong>אנליזת AI ומערכות קוריאניות מתקדמות:</strong> בשילוב טכנולוגיית בינה מלאכותית ומערכות סריקה קוריאניות, אנו מחשבים את מקסום הצפיפות לסנטימטר מרובע. התוצאה היא מראה מלא, צפוף, אחיד ובלתי ניתן לזיהוי.</li>
+                  </ul>
+                </div>
+              </div>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, x: 100 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 1, delay: 0.2 }}
+              className="order-1 md:order-2 w-full h-full min-h-[400px] hidden md:flex items-center p-4"
+            >
+              <div className="relative w-full rounded-2xl overflow-hidden">
+              <Image
+                src="/files/hair/hairhana.jpeg"
+                alt="הנדסת ההשתלה - זוויות ודיוק"
+                width={1408}
+                height={768}
+                className="w-full h-auto"
                 quality={95}
                 sizes="(max-width: 768px) 100vw, 60vw"
               />
@@ -234,7 +523,7 @@ export default function HairTransplant() {
               תוצאות לפני ואחרי
             </h2>
             <p className="text-xl md:text-2xl text-charcoal/60 max-w-3xl mx-auto font-normal">
-              השתלות שיער שבוצעו במרפאת Hana Bi
+              השתלת שיער בטכניקה המתקדמת בעולם
             </p>
           </motion.div>
         </div>
@@ -268,125 +557,6 @@ export default function HairTransplant() {
                 </div>
               </motion.div>
             ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Section 2: ארכיטקטורה של קו השיער */}
-      <section className="py-12 md:py-20 bg-soft-grey relative overflow-hidden">
-        <div className="max-w-[95vw] mx-auto">
-          <div className="grid md:grid-cols-[1fr_1.2fr] gap-0 items-stretch min-h-[50vh]">
-            <motion.div
-              initial={{ opacity: 0, x: -50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 1 }}
-              className="flex items-center p-8 md:p-10 lg:p-12 bg-soft-grey order-2 md:order-1"
-            >
-              <div className="w-full">
-                <h3 className="text-3xl md:text-4xl font-bold text-charcoal leading-tight mb-8">
-                  ארכיטקטורה של קו השיער: אומנות הסידור
-                </h3>
-                <div className="text-lg md:text-xl text-charcoal/70 leading-relaxed font-normal text-right space-y-6">
-                  <p>מראה מלאכותי (&quot;מראה בובה&quot;) נובע בדרך כלל מתכנון לקוי. ב-Hana bi, אנו בונים את קו השיער שלך בשכבות אנטומיות:</p>
-                  <div className="block md:hidden relative w-full rounded-2xl overflow-hidden my-4">
-                    <Image
-                      src="/files/hair/hairhana.jpeg"
-                      alt="ארכיטקטורה של קו השיער"
-                      width={800}
-                      height={600}
-                      className="w-full h-auto object-contain"
-                      quality={95}
-                      sizes="100vw"
-                    />
-                  </div>
-                  <ul className="space-y-4 list-disc pr-6">
-                    <li><strong>הקו הראשון (The Frontal Design):</strong> מבוצע באמצעות &quot;סינגלים&quot; (זקיקים של שערה בודדת בלבד). כדי למנוע מראה נוקשה, אנו מעצבים קו מזוגזג וא-סימטרי בעדינות, המדמה את קו הצמיחה הטבעי איתו נולדנו.</li>
-                    <li><strong>קווי העומק:</strong> בקו השני אנו משלבים זקיקי &quot;דאבל&quot; (זוגות), ומהקו השלישי והלאה עוברים לזקיקי &quot;טריפל&quot; המעניקים את עובי וחוזק השיער.</li>
-                    <li><strong>נפח מקסימלי:</strong> בכל חלקי הקרקפת הפנימיים, אנו מתמקדים ביצירת צפיפות מקסימלית תוך שימוש בזקיקים מרובי שערות.</li>
-                  </ul>
-                </div>
-              </div>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, x: 100 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 1, delay: 0.2 }}
-              className="relative order-1 md:order-2 w-full h-full min-h-[400px] hidden md:block p-4"
-            >
-              <div className="relative w-full h-full rounded-2xl overflow-hidden">
-              <Image
-                src="/files/hair/hairhana.jpeg"
-                alt="ארכיטקטורה של קו השיער"
-                fill
-                className="object-cover"
-                quality={95}
-                sizes="(max-width: 768px) 100vw, 60vw"
-              />
-              </div>
-            </motion.div>
-          </div>
-        </div>
-      </section>
-
-      {/* Section 3: הגנה על האזור התורם */}
-      <section className="py-12 md:py-20 bg-white relative overflow-hidden">
-        <div className="max-w-[95vw] mx-auto">
-          <div className="grid md:grid-cols-[1.2fr_1fr] gap-0 items-stretch min-h-[50vh]">
-            <motion.div
-              initial={{ opacity: 0, x: -100 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 1 }}
-              className="relative w-full h-full min-h-[400px] hidden md:block p-4"
-            >
-              <div className="relative w-full h-full rounded-2xl overflow-hidden">
-              <Image
-                src="/files/hair/hanahiluz.jpeg"
-                alt="הגנה על האזור התורם"
-                fill
-                className="object-cover"
-                quality={95}
-                sizes="(max-width: 768px) 100vw, 60vw"
-              />
-              </div>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, x: 50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 1, delay: 0.2 }}
-              className="flex items-center p-8 md:p-10 lg:p-12 bg-white"
-            >
-              <div className="w-full">
-                <h3 className="text-3xl md:text-4xl font-bold text-charcoal leading-tight mb-8">
-                  הגנה על האזור התורם: המשאב היקר ביותר שלך
-                </h3>
-                <div className="text-lg md:text-xl text-charcoal/70 leading-relaxed font-normal text-right space-y-6">
-                  <p>הצלחה של השתלת שיער נמדדת לא רק באיך שהחלק הקדמי נראה, אלא גם בשמירה על החלק האחורי של הראש. ב-Hana bi, אנו מתייחסים לאזור התורם שלך ביראת קודש.</p>
-                  <div className="block md:hidden relative w-full rounded-2xl overflow-hidden my-4">
-                    <Image
-                      src="/files/hair/hanahiluz.jpeg"
-                      alt="הגנה על האזור התורם"
-                      width={800}
-                      height={600}
-                      className="w-full h-auto object-contain"
-                      quality={95}
-                      sizes="100vw"
-                    />
-                  </div>
-                  <h4 className="text-2xl font-bold text-charcoal mt-8">חילוץ זקיקים בטכנולוגיית &quot;Micro-Extraction&quot;:</h4>
-                  <p>באמצעות מכשור קוריאני עדין ודק במיוחד, אנו מחלצים את הזקיקים אחד-אחד בדיוק כירורגי. הכלים המיוחדים שלנו מאפשרים לנו:</p>
-                  <ul className="space-y-4 list-disc pr-6">
-                    <li><strong>למנוע פגיעה בזקיקים שכנים:</strong> אנו שומרים על המרחק האופטימלי כדי שהשיער באזור התורם ימשיך להיראות מלא וטבעי, ללא צלקות נראות לעין או מראה &quot;אכול&quot;.</li>
-                    <li><strong>דילול מבוקר וחכם:</strong> הפיזור נעשה בצורה כזו שגם לאחר לקיחת הזקיקים, האזור האחורי שומר על אחידות ועל נראות טבעית לחלוטין.</li>
-                  </ul>
-                </div>
-              </div>
-            </motion.div>
           </div>
         </div>
       </section>
