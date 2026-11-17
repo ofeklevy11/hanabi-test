@@ -1,6 +1,7 @@
 'use client'
 
 import Navbar from '@/components/Navbar'
+import { submitLead } from '@/lib/submitLead'
 import Footer from '@/components/Footer'
 import { Reveal, Chapter, DetailList, RecoveryTimeline, AutoplayVideo, VideoWall, fieldClassName, type TimelineStep } from '@/components/TreatmentBlocks'
 import Link from 'next/link'
@@ -35,19 +36,7 @@ export default function Eyebrows() {
     setIsSubmitting(true)
     try {
       const payload = { ...formData, source: 'דף השתלת גבות', submittedAt: new Date().toLocaleString('he-IL', { timeZone: 'Asia/Jerusalem' }) }
-      await Promise.all([
-        fetch('https://hook.eu2.make.com/qo9qlswoe53nbtc6fd4v0macorqlf9pb', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload),
-        }),
-        fetch('https://hook.eu2.make.com/wwr2v4bsxhwbb4uue69w3w8fknw9i4q0', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload),
-        }),
-      ])
-      router.push('/thank-you')
+      if (await submitLead(payload)) router.push('/thank-you')
     } catch (error) {
       alert('אירעה שגיאה, אנא נסה שוב.')
     } finally {

@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import { submitLead } from '@/lib/submitLead'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import Section from './Section'
@@ -23,19 +24,7 @@ export default function Contact() {
     setIsSubmitting(true)
     try {
       const payload = { ...formData, source: 'דף ראשי - צור קשר', submittedAt: new Date().toLocaleString('he-IL', { timeZone: 'Asia/Jerusalem' }) }
-      await Promise.all([
-        fetch('https://hook.eu2.make.com/qo9qlswoe53nbtc6fd4v0macorqlf9pb', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload),
-        }),
-        fetch('https://hook.eu2.make.com/wwr2v4bsxhwbb4uue69w3w8fknw9i4q0', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload),
-        }),
-      ])
-      router.push('/thank-you')
+      if (await submitLead(payload)) router.push('/thank-you')
     } catch (error) {
       alert('אירעה שגיאה, אנא נסה שוב.')
     } finally {
