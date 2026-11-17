@@ -75,7 +75,6 @@ export default function ArticleHub({ articles }: { articles: Article[] }) {
             className="relative flex h-[92svh] md:h-[86vh] w-full md:max-w-3xl flex-col overflow-hidden rounded-t-3xl md:rounded-3xl bg-paper shadow-2xl"
           >
             <div className="flex items-center justify-between border-b border-charcoal/10 bg-white px-6 py-4">
-              <span className="text-sm font-bold text-deep-red">{active.category}</span>
               <button
                 type="button"
                 onClick={() => setOpenSlug(null)}
@@ -84,6 +83,7 @@ export default function ArticleHub({ articles }: { articles: Article[] }) {
               >
                 <X className="h-5 w-5" aria-hidden />
               </button>
+              <span className="text-sm font-bold text-deep-red">{active.category}</span>
             </div>
 
             <div className="flex-1 overflow-y-auto">
