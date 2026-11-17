@@ -3,6 +3,7 @@
 import Navbar from '@/components/Navbar'
 import { submitLead } from '@/lib/submitLead'
 import Footer from '@/components/Footer'
+import TreatmentFaq from '@/components/TreatmentFaq'
 import { Reveal, Chapter, RecoveryTimeline, AutoplayVideo, VideoWall, fieldClassName, type TimelineStep } from '@/components/TreatmentBlocks'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -276,6 +277,12 @@ export default function Eyelashes() {
         </div>
       </section>
 
+      <TreatmentFaq items={[
+  { q: "מה מיוחד בשחזור הריסים ב-HANA BI?", a: "שחזור הריסים נעשה בארכיטקטורת C-Curve, עם שיערות משי (Silk Hair) שנבחרות ידנית. ההליך כולל פרוטוקול בטיחות עינית עם מגן לקרנית, ומחטי Implanter מיקרו-כירורגיות שמכניסות כל ריס במיקום המדויק." },
+  { q: "כיצד נלקחים הזקיקים העדינים לשחזור הריסים?", a: "הזקיקים נלקחים מאזור העורף התחתון, שם השיער דק ורך במיוחד. הבחירה נעשית לפי עובי ואורך השערה, כדי שהריס המושתל ייראה טבעי." },
+  { q: "האם השתלת ריסים כואבת?", a: "ההליך נעשה תחת הרדמה מקומית ובזהירות רבה באזור העדין של העפעף. ההרגשה במהלך ההליך נסבלת ברוב המקרים, והנחיות ההחלמה נמסרות במרפאה." },
+  { q: "האם הריסים המושתלים נשמרים לכל החיים?", a: "הריסים המושתלים נשמרים לכל החיים ונצמחים במחזור טבעי. ייתכן שיידרש תיקון קטן לאורך זמן, והוא נבדק במעקב." },
+      ]} />
       {/* Consultation form */}
       <section id="appointment" className="relative scroll-mt-20 bg-paper py-20 md:py-28 overflow-hidden">
         <span

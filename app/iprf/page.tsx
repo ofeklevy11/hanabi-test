@@ -4,6 +4,7 @@ import Navbar from '@/components/Navbar'
 import { submitLead } from '@/lib/submitLead'
 import { Reveal, LocalVideoWall } from '@/components/TreatmentBlocks'
 import Footer from '@/components/Footer'
+import TreatmentFaq from '@/components/TreatmentFaq'
 import Link from 'next/link'
 import Image from 'next/image'
 import { motion } from 'framer-motion'
@@ -187,6 +188,12 @@ export default function IPRF() {
       </section>
 
       {/* Consultation Form Section */}
+      <TreatmentFaq items={[
+  { q: "מה הטיפול iPRF?", a: "טיפול iPRF מבוסס על מטריצת פיברין אוטולוגית שמופקת מדמו של המטופל עצמו. החומר מוזרק לאזור הטיפול, ואין בו חומרים סינתטיים או תרופות." },
+  { q: "כמה זמן נמשך הטיפול?", a: "הטיפול עצמו קצר יחסית. גורמי הצמיחה משתחררים בהדרגה במשך כעשרה ימים רצופים, ומספר הטיפולים הנדרש נקבע בהתייעצות." },
+  { q: "האם iPRF מתאים לכולם?", a: "לא בהכרח. מטופלים עם מצבים רפואיים מסוימים או שנוטלים תרופות מסוימות צריכים בדיקה נוספת לפני הטיפול." },
+  { q: "למה iPRF עוזר לשיער ולעור?", a: "החומר מעודד יצירת כלי דם חדשים סביב הזקיק, ומגרה את התאים לייצר מחדש קולגן ואלסטין. התוצאה נשמרת לכל החיים כחלק מהתהליך המצטבר." },
+      ]} />
       <section id="appointment" className="py-20 md:py-28 bg-white">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div

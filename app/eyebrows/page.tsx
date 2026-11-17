@@ -3,6 +3,7 @@
 import Navbar from '@/components/Navbar'
 import { submitLead } from '@/lib/submitLead'
 import Footer from '@/components/Footer'
+import TreatmentFaq from '@/components/TreatmentFaq'
 import { Reveal, Chapter, DetailList, RecoveryTimeline, AutoplayVideo, LoopVideo, VideoWall, fieldClassName, type TimelineStep } from '@/components/TreatmentBlocks'
 import Link from 'next/link'
 import Image from 'next/image'
@@ -377,6 +378,13 @@ export default function Eyebrows() {
         </div>
       </section>
 
+      <TreatmentFaq items={[
+  { q: "מה ההבדל בין השתלת גבות לעיצוב גבות?", a: "עיצוב גבות משנה את צורת השערות הקיימות. השתלת גבות מוסיפה שערות חדשות, שערה אחר שערה, בזווית ובכיוון שנקבעו לפי מבנה הפנים." },
+  { q: "מדוע בהשתלת גבות משתמשים בזקיקי Singles ממוינים במיקרוסקופ?", a: "זקיק בודד (Single) מאפשר לקבוע את הכיוון והזווית של כל שערה בדיוק. המיון תחת מיקרוסקופ מבטיח שכל זקיק מתאים למקומו, ולכן הגבה נראית טבעית ומאוזנת לאורך זמן." },
+  { q: "האם השתלת גבות מתאימה גם לגברים?", a: "כן. התכנון לגברים שונה בכיוון, בצורה ובצפיפות, ומותאם למבנה הפנים ולגבה הקיימת." },
+  { q: "האם השתלה נשמרת לכל החיים?", a: "שיער מושתל נשמר לכל החיים וצומח באופן טבעי. דרגת התוצאה נקבעת בתכנון, ולכן ההתייעצות היא שלב מכריע." },
+  { q: "כמה זמן לוקח להתקבע השתלת גבות?", a: "השלבים מתוארים בעמוד ההחלמה. הביקורת הראשונה מתקיימת ביום העשירי, והתוצאה הסופית מתבהרת לאחר כמה חודשים." },
+      ]} />
       {/* Consultation form */}
       <section id="appointment" className="relative scroll-mt-20 bg-paper py-20 md:py-28 overflow-hidden">
         <span
