@@ -1,68 +1,83 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { Sparkles, Cpu, Shield } from 'lucide-react'
 import Image from 'next/image'
+
+function Reveal({ children, delay = 0, className }: { children: React.ReactNode; delay?: number; className?: string }) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 28 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: '-80px' }}
+      transition={{ duration: 0.9, delay, ease: [0.22, 1, 0.36, 1] }}
+      className={className}
+    >
+      {children}
+    </motion.div>
+  )
+}
+
+const mediaFrameClassName =
+  'relative w-full overflow-hidden rounded-2xl md:rounded-3xl ring-1 ring-charcoal/10 shadow-[0_40px_100px_-45px_rgba(0,0,0,0.45)]'
+
+function Feature({
+  number,
+  title,
+  flipped = false,
+  media,
+  children,
+}: {
+  number: string
+  title: string
+  flipped?: boolean
+  media: React.ReactNode
+  children: React.ReactNode
+}) {
+  return (
+    <article className="grid md:grid-cols-2 gap-8 md:gap-16 items-center py-12 md:py-16 border-t border-charcoal/10">
+      <Reveal className={flipped ? 'md:order-2' : undefined}>{media}</Reveal>
+      <Reveal delay={0.1} className={flipped ? 'md:order-1' : undefined}>
+        <span className="block text-5xl md:text-7xl font-light text-deep-red tabular-nums leading-none mb-5" aria-hidden>
+          {number}
+        </span>
+        <h4 className="text-2xl md:text-4xl font-bold text-charcoal leading-tight mb-5">{title}</h4>
+        <div className="text-lg text-charcoal/70 leading-relaxed space-y-5">{children}</div>
+      </Reveal>
+    </article>
+  )
+}
 
 export default function WhyAsia() {
   return (
-    <section className="py-16 md:py-20 bg-white">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-          className="text-center mb-10"
-        >
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-charcoal mb-8 leading-tight">
+    <section className="relative bg-white pt-20 md:pt-28 pb-8 md:pb-12 overflow-hidden">
+      <div className="bio-grid absolute inset-x-0 top-0 h-[34rem]" aria-hidden />
+
+      <div className="relative max-w-6xl mx-auto px-6 lg:px-8">
+        <Reveal className="text-center max-w-4xl mx-auto">
+          <h2 className="text-4xl md:text-6xl font-extrabold text-charcoal leading-tight">
             למה המזרח הרחוק מוביל את עולם האסתטיקה?
           </h2>
-        </motion.div>
+          <div className="w-16 h-1 bg-deep-red rounded-full mx-auto mt-8 mb-8" aria-hidden />
+          <p className="text-xl md:text-2xl font-light text-charcoal/70 leading-relaxed">
+            בעולם האסתטיקה הרפואית, קוריאה ויפן נמצאות עשור אחד לפני כולם
+          </p>
+          <p className="text-xl md:text-2xl font-semibold text-deep-red leading-relaxed mt-2">
+            HANA BI הביאה את העתיד הזה לכאן
+          </p>
+        </Reveal>
 
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          className="space-y-6 mb-10"
-        >
-          <div className="text-xl md:text-2xl text-charcoal-light leading-relaxed font-normal text-center max-w-4xl mx-auto space-y-2">
-            <p>
-              בעולם האסתטיקה הרפואית, קוריאה ויפן נמצאות עשור אחד לפני כולם
-            </p>
-            <p>
-              <span className="text-deep-red font-semibold">HANA BI הביאה את העתיד הזה לכאן</span>
-            </p>
-          </div>
-        </motion.div>
-
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8, delay: 0.4 }}
-          className="mb-8"
-        >
-          <h3 className="text-2xl md:text-3xl font-bold text-charcoal mb-6 text-center">
-            ההבדל הטכנולוגי
-          </h3>
-          <p className="text-lg md:text-xl text-charcoal/70 leading-relaxed text-center max-w-3xl mx-auto mb-8">
+        <Reveal className="text-center max-w-3xl mx-auto mt-16 md:mt-24 mb-10 md:mb-14">
+          <h3 className="text-3xl md:text-5xl font-bold text-charcoal mb-6">ההבדל הטכנולוגי</h3>
+          <p className="text-lg md:text-xl text-charcoal/70 leading-relaxed">
             הטכנולוגיה שלנו מאפשרת רמת דיוק מיקרוסקופית, הרחק מעבר למה שהעין האנושית מסוגלת לראות. דיוק זה מבטיח החלמה מואצת, ותוצאות סופיות שלא ניתן להשיג בשיטות מסורתיות.
           </p>
-        </motion.div>
+        </Reveal>
 
-        {/* מערכות קירור לשמירה על הזקיק */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="bg-soft-grey rounded-2xl border border-gray-100 overflow-hidden mb-8"
-        >
-          <div className="grid md:grid-cols-2 gap-0 md:items-center">
-            {/* Video */}
-            <div className="relative w-full aspect-video overflow-hidden pointer-events-none">
+        <Feature
+          number="01"
+          title="מערכות קירור לשמירה על הזקיק"
+          media={
+            <div className={`${mediaFrameClassName} aspect-video pointer-events-none bg-black`}>
               <iframe
                 src="https://www.youtube.com/embed/rSt3daiPIgU?autoplay=1&mute=1&loop=1&playlist=rSt3daiPIgU&controls=0&showinfo=0&rel=0&modestbranding=1&disablekb=1"
                 title="מערכות קירור לשמירה על הזקיק"
@@ -71,36 +86,20 @@ export default function WhyAsia() {
                 tabIndex={-1}
               />
             </div>
-            {/* Content */}
-            <div className="p-8 md:p-10 flex flex-col justify-center">
-              <div className="flex items-center gap-4 mb-6">
-                <div className="w-16 h-16 bg-deep-red/10 rounded-2xl flex items-center justify-center">
-                  <Shield className="w-8 h-8 text-deep-red" />
-                </div>
-                <h4 className="text-2xl font-bold text-charcoal">
-                  מערכות קירור לשמירה על הזקיק
-                </h4>
-              </div>
-              <p className="text-lg text-charcoal/70 leading-relaxed">
-                ההבדל שבין השתלת שיער סטנדרטית לתוצאה מושלמת טמון בפרטים הקטנים ביותר – אלו שקורים מחוץ לקרקפת.
-                <br /><br />
-                במרפאת Hana Bi, אנו פועלים לפי הפרוטוקולים המחמירים ביותר המקובלים במרכזים הרפואיים המובילים ביפן ובדרום קוריאה. אחד המפתחות הקריטיים להצלחת ההשתלה הוא שמירה על &quot;חיות הזקיק&quot; (Graft Viability) מרגע הוצאתו ועד להשתלתו מחדש.
-              </p>
-            </div>
-          </div>
-        </motion.div>
-
-        {/* Nano-Tools */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.3 }}
-          className="bg-soft-grey rounded-2xl border border-gray-100 overflow-hidden mb-8"
+          }
         >
-          <div className="grid md:grid-cols-2 gap-0">
-            {/* Image */}
-            <div className="relative w-full aspect-[4/3] overflow-hidden">
+          <p>ההבדל שבין השתלת שיער סטנדרטית לתוצאה מושלמת טמון בפרטים הקטנים ביותר – אלו שקורים מחוץ לקרקפת.</p>
+          <p>
+            במרפאת Hana Bi, אנו פועלים לפי הפרוטוקולים המחמירים ביותר המקובלים במרכזים הרפואיים המובילים ביפן ובדרום קוריאה. אחד המפתחות הקריטיים להצלחת ההשתלה הוא שמירה על &quot;חיות הזקיק&quot; (Graft Viability) מרגע הוצאתו ועד להשתלתו מחדש.
+          </p>
+        </Feature>
+
+        <Feature
+          number="02"
+          title="Nano-Tools (יפן)"
+          flipped
+          media={
+            <div className={`${mediaFrameClassName} aspect-[4/3]`}>
               <Image
                 src="/assets/IMG_0457.PNG"
                 alt="Nano-Tools (יפן) - Advanced Medical Tools"
@@ -110,34 +109,16 @@ export default function WhyAsia() {
                 sizes="(max-width: 768px) 100vw, 50vw"
               />
             </div>
-            {/* Content */}
-            <div className="p-8 md:p-10 flex flex-col justify-center">
-              <div className="flex items-center gap-4 mb-6">
-                <div className="w-16 h-16 bg-deep-red/10 rounded-2xl flex items-center justify-center">
-                  <Cpu className="w-8 h-8 text-deep-red" />
-                </div>
-                <h4 className="text-2xl font-bold text-charcoal">
-                  Nano-Tools (יפן)
-                </h4>
-              </div>
-              <p className="text-lg text-charcoal/70 leading-relaxed">
-                שימוש במחטים וכלי השתלה דקים פי 3 מהסטנדרט, המאפשרים צפיפות שיער גבוהה ב-40% והחלמה כמעט מיידית.
-              </p>
-            </div>
-          </div>
-        </motion.div>
-
-        {/* אנחנו לא משחקים בניחושים */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8, delay: 0.4 }}
-          className="bg-soft-grey rounded-2xl border border-gray-100 overflow-hidden"
+          }
         >
-          <div className="grid md:grid-cols-2 gap-0">
-            {/* Image */}
-            <div className="relative w-full aspect-[4/3] overflow-hidden">
+          <p>שימוש במחטים וכלי השתלה דקים פי 3 מהסטנדרט, המאפשרים צפיפות שיער גבוהה ב-40% והחלמה כמעט מיידית.</p>
+        </Feature>
+
+        <Feature
+          number="03"
+          title="אנחנו לא משחקים בניחושים"
+          media={
+            <div className={`${mediaFrameClassName} aspect-[4/3]`}>
               <Image
                 src="/assets/hana-bi.jpeg"
                 alt="מערכת סריקה AI מתקדמת"
@@ -147,24 +128,11 @@ export default function WhyAsia() {
                 sizes="(max-width: 768px) 100vw, 50vw"
               />
             </div>
-            {/* Content */}
-            <div className="p-8 md:p-10 flex flex-col justify-center">
-              <div className="flex items-center gap-4 mb-6">
-                <div className="w-16 h-16 bg-deep-red/10 rounded-2xl flex items-center justify-center">
-                  <Sparkles className="w-8 h-8 text-deep-red" />
-                </div>
-                <h4 className="text-2xl font-bold text-charcoal">
-                  אנחנו לא משחקים בניחושים
-                </h4>
-              </div>
-              <p className="text-lg text-charcoal/70 leading-relaxed">
-                כל טיפול מגובה בסריקות AI שמנתחות את עומק הרקמה ומבטיחות בטיחות מוחלטת.
-              </p>
-            </div>
-          </div>
-        </motion.div>
+          }
+        >
+          <p>כל טיפול מגובה בסריקות AI שמנתחות את עומק הרקמה ומבטיחות בטיחות מוחלטת.</p>
+        </Feature>
       </div>
     </section>
   )
 }
-

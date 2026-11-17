@@ -2,11 +2,11 @@
 
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
-import { Microscope, Move, ChevronRight, ChevronLeft, Sparkles, CheckCircle2, Volume2, VolumeX } from 'lucide-react'
+import { Reveal, Chapter, DetailList, RecoveryTimeline, AutoplayVideo, VideoWall, fieldClassName, type TimelineStep } from '@/components/TreatmentBlocks'
 import Link from 'next/link'
 import Image from 'next/image'
-import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion'
-import { useState, useRef, useEffect, useCallback } from 'react'
+import { motion } from 'framer-motion'
+import { useRef, useState } from 'react'
 import { useRouter } from 'next/navigation'
 
 export default function Eyebrows() {
@@ -15,15 +15,8 @@ export default function Eyebrows() {
     name: '',
     phone: '',
   })
-  const [currentYoutubeIndex, setCurrentYoutubeIndex] = useState(0)
-  const [isMuted, setIsMuted] = useState(true)
   const containerRef = useRef<HTMLDivElement>(null)
-  const touchStartRef = useRef<{ x: number; y: number } | null>(null)
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start start", "end end"]
-  })
-  
+
   const youtubeVideos = [
     'E2LKatm83hE',
     'Q55GLiQvmmA',
@@ -33,79 +26,6 @@ export default function Eyebrows() {
     'wwSN_z_xcOY',
     '7GeJuoFTees',
   ]
-
-  const playerRef = useRef<any>(null)
-  const iframeRef = useRef<HTMLIFrameElement>(null)
-
-  // Load YouTube IFrame API
-  useEffect(() => {
-    if (typeof window !== 'undefined' && !(window as any).YT) {
-      const tag = document.createElement('script')
-      tag.src = 'https://www.youtube.com/iframe_api'
-      document.head.appendChild(tag)
-    }
-  }, [])
-
-  // Initialize YouTube player when iframe is ready or video changes
-  useEffect(() => {
-    const initPlayer = () => {
-      if (iframeRef.current && (window as any).YT?.Player) {
-        playerRef.current = new (window as any).YT.Player(iframeRef.current, {
-          events: {
-            onReady: () => {
-              if (isMuted) {
-                playerRef.current?.mute()
-              } else {
-                playerRef.current?.unMute()
-              }
-            }
-          }
-        })
-      }
-    }
-
-    if ((window as any).YT?.Player) {
-      const timer = setTimeout(initPlayer, 300)
-      return () => clearTimeout(timer)
-    } else {
-      (window as any).onYouTubeIframeAPIReady = initPlayer
-    }
-  }, [currentYoutubeIndex])
-
-  const toggleMute = useCallback(() => {
-    const newMuted = !isMuted
-    setIsMuted(newMuted)
-    if (playerRef.current?.mute && playerRef.current?.unMute) {
-      if (newMuted) {
-        playerRef.current.mute()
-      } else {
-        playerRef.current.unMute()
-      }
-    }
-  }, [isMuted])
-
-  const nextYoutube = () => {
-    setCurrentYoutubeIndex((prev) => (prev + 1) % youtubeVideos.length)
-  }
-
-  const prevYoutube = () => {
-    setCurrentYoutubeIndex((prev) => (prev - 1 + youtubeVideos.length) % youtubeVideos.length)
-  }
-
-  const handleSwipeStart = (e: React.TouchEvent) => {
-    touchStartRef.current = { x: e.touches[0].clientX, y: e.touches[0].clientY }
-  }
-
-  const handleSwipeEnd = (e: React.TouchEvent) => {
-    if (!touchStartRef.current) return
-    const deltaX = e.changedTouches[0].clientX - touchStartRef.current.x
-    const deltaY = e.changedTouches[0].clientY - touchStartRef.current.y
-    touchStartRef.current = null
-    if (Math.abs(deltaX) > 50 && Math.abs(deltaX) > Math.abs(deltaY)) {
-      if (deltaX < 0) nextYoutube()
-      else prevYoutube()
-    }
-  }
 
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [agreedToPrivacy, setAgreedToPrivacy] = useState(false)
@@ -142,27 +62,82 @@ export default function Eyebrows() {
     })
   }
 
-  const principles = [
+  // Density levels. Each level lists its media in display order: images or a video.
+  // Files go in public/files/eyebrows/. An empty src shows a labelled placeholder.
+  const densityLevels: { name: string; note: string; media: { label: string; src: string; video?: boolean }[] }[] = [
     {
-      icon: Microscope,
-      title: "הדרך לתוצאה מדויקת וטבעית מתחילה בסינגלים",
-      description: "כדי להבין את ההבדל, צריך להסתכל על השורשים. בשיער הראש שלנו, הזקיקים צומחים בדרך כלל בקבוצות (משפחות) של 2, 3 ואפילו 4 שיערות יחד. אלו נקראים דאבלים (Doubles) וטריפלים (Triples). לעומת זאת, בגבה טבעית יש אך ורק זקיקים בודדים (Singles). הטעות הנפוצה בקליניקות רבות היא שימוש בזקיקים כפולים מהראש כדי ליצור נפח מהיר. התוצאה במקרים אלו היא מראה גס, צפוף מידי ולא טבעי. אצלנו ב-HANA BI: אנו ממיינים את השיערות במיקרוסקופ ומבודדים רק את הזקיקים הבודדים והעדינים ביותר. רק כך ניתן ליצור גבה רכה ואוורירית שנראית כאילו נולדת איתה.",
-      image: '/assets/1.jpeg',
-      layout: 'image-left', // Image on left, text overlay on right
+      name: 'צפיפות מינימלית',
+      note: 'מראה עדין וטבעי',
+      media: [
+        { label: 'לפני', src: '/files/eyebrows/density-1-before.jpg' },
+        { label: 'אחרי', src: '/files/eyebrows/density-1-after.jpg' },
+      ],
     },
     {
-      icon: Move,
-      title: 'טכנולוגיה ייעודית מסיאול, קוריאה',
-      description: "טכנולוגיה ייעודית וכלים מיקרוסקופיים שפותחו בסיאול, קוריאה – חלוצת עולם האסתטיקה והשתלות השיער. באמצעות המכשור הקוריאני המתקדם, אנו מבצעים אופטימיזציה של כל זקיק:\n\n• זיהוי עקומת השערה: זיהוי מיידי של כיוון העיקול הטבעי של השערה עוד לפני ההשתלה.\n\n• כיול זוויות מיקרוסקופי: סיבוב והטמעת הזקיק בזווית המדויקת ביותר ביחס לפני השטח של העור.\n\n• זרימה הרמונית: הבטחת השתלבות מושלמת במבנה ה'מניפה' הטבעי של הגבה, ללא שיערות סוררות או צמיחה הפוכה.",
-      image: '/assets/2.jpeg',
-      layout: 'image-right', // Image on right, text overlay on left
+      name: 'צפיפות בינונית',
+      note: 'מראה מלא ומאוזן',
+      media: [
+        { label: 'לפני', src: '/files/eyebrows/density-2-before-1.jpg' },
+        { label: 'לפני', src: '/files/eyebrows/density-2-before-2.jpg' },
+        { label: 'תוצאה סופית', src: '/files/eyebrows/density-2-result.mp4', video: true },
+      ],
+    },
+    {
+      name: 'צפיפות מקסימלית',
+      note: 'מראה דחוס, עשיר ודומיננטי',
+      media: [
+        { label: 'לפני', src: '/files/eyebrows/density-3-before.jpg' },
+        { label: 'אחרי', src: '/files/eyebrows/density-3-result.mp4', video: true },
+      ],
+    },
+  ]
+
+  const timeline: TimelineStep[] = [
+    {
+      kind: 'stage',
+      step: 1,
+      title: '10 ימי התקבעות',
+      when: 'ימים 1-10',
+      text: 'בעשרת הימים הראשונים לאחר ההשתלה מתרחש תהליך ביולוגי של קליטת הזקיקים ברקמה החדשה. בימים אלו תיתכן הופעה של גלדים נקודתיים זעירים, המעידים על תהליך ריפוי תקין של העור. בשלב זה חיוני להימנע ממגע באזור כדי לאפשר לשורשים להתבסס במקומם ולהתחבר לאספקת הדם.',
+    },
+    {
+      kind: 'check',
+      title: 'תחנת ביקורת ראשונה',
+      when: 'יום 10',
+      text: 'בדיוק עשרה ימים לאחר ההליך, אנו נפגשים בקליניקה לביקורת ראשונה. במפגש זה הצוות המקצועי מבצע חפיפה עדינה ומבוקרת להסרת הגלדים. בסיום הטיפול, הגבות נקיות לחלוטין, העור חוזר למרקמו החלק והמראה המתקבל נקי ואסתטי.',
+    },
+    {
+      kind: 'stage',
+      step: 2,
+      title: 'התחדשות השורש',
+      when: 'חודש 1 עד 3',
+      text: 'בשלב זה מתרחש תהליך טבעי המכונה Shock Loss. השיער המושתל נושר, אך זהו סימן חיובי המעיד על הצלחת התהליך. השורש עצמו נשאר חי ובריא מתחת לעור, ונכנס לשלב של מנוחה ואגירת אנרגיה לקראת הצמיחה המחודשת.',
+    },
+    {
+      kind: 'check',
+      title: 'תחנת ביקורת שנייה',
+      when: 'חודש 3',
+      text: 'שלושה חודשים מהטיפול, אנו נפגשים לביקורת אמצע. מטרת המפגש היא לוודא שתהליך הנשירה הסתיים ושהזקיקים עוברים ממצב מנוחה למצב פעיל. בשלב זה אנו מצפים לראות את הניצנים הראשונים של השיער החדש והקבוע.',
+    },
+    {
+      kind: 'stage',
+      step: 3,
+      title: 'צמיחה והתעבות',
+      when: 'חודשים 4-10',
+      text: 'החל מהחודש הרביעי מתחילה הצמיחה המשמעותית. מחודש לחודש הגבה מתמלאת, השיערות הופכות עבות וחיוניות יותר, והמבנה המעוצב מתחיל לקבל את נפחו הסופי תוך השתלבות הרמונית בתווי הפנים.',
+    },
+    {
+      kind: 'final',
+      title: 'תחנת ביקורת סופית',
+      when: 'שנה מהטיפול',
+      text: 'בתום השנה הראשונה אנו נפגשים למעמד הסיכום. בשלב זה תהליך הצמיחה הושלם במלואו. אנו מבצעים בדיקת איכות סופית של העיצוב, צפיפות השיער וכיווני הצמיחה, כדי לוודא שהתוצאה היא מושלמת, טבעית ותישאר איתך לכל החיים.',
     },
   ]
 
   return (
     <main ref={containerRef} className="min-h-screen bg-white relative overflow-hidden">
       <Navbar transparent />
-      
+
       {/* Hero Section - Full Width Image */}
       <section className="relative min-h-[70vh] md:min-h-[85vh] lg:min-h-[90vh] flex items-center justify-center overflow-hidden">
         {/* Background Image */}
@@ -234,645 +209,209 @@ export default function Eyebrows() {
         <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-white to-transparent z-10" />
       </section>
 
-      {/* YouTube Shorts Carousel - iPhone View */}
-      <section className="py-8 md:py-12 relative bg-gradient-to-b from-white via-soft-grey/30 to-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.8 }}
-            className="text-center mb-8"
-          >
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-charcoal">
-              לפני ואחרי
-            </h2>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 1 }}
-            className="relative flex items-center justify-center gap-6 md:gap-12"
-          >
-            {/* Prev Button */}
-            <button
-              onClick={prevYoutube}
-              className="w-12 h-12 md:w-14 md:h-14 bg-white hover:bg-gray-50 shadow-lg rounded-full flex items-center justify-center transition-all z-10 border border-gray-200 shrink-0"
-              aria-label="סרטון קודם"
-            >
-              <ChevronRight className="w-6 h-6 text-charcoal" />
-            </button>
-
-            {/* iPhone Frame */}
-            <div className="relative mx-auto">
-              {/* Phone outer shell */}
-              <div className="relative bg-[#1a1a1a] rounded-[3rem] p-[10px] shadow-[0_0_0_2px_#333,0_0_0_4px_#1a1a1a,0_25px_60px_-12px_rgba(0,0,0,0.4)]">
-                {/* Side button - right (volume) */}
-                <div className="absolute -right-[3px] top-[120px] w-[3px] h-[30px] bg-[#333] rounded-l-sm" />
-                <div className="absolute -right-[3px] top-[165px] w-[3px] h-[30px] bg-[#333] rounded-l-sm" />
-                {/* Side button - left (power) */}
-                <div className="absolute -left-[3px] top-[140px] w-[3px] h-[45px] bg-[#333] rounded-r-sm" />
-
-                {/* Screen area */}
-                <div className="relative bg-black rounded-[2.4rem] overflow-hidden w-[280px] h-[580px] md:w-[320px] md:h-[660px]">
-                  {/* Dynamic Island / Notch */}
-                  <div className="absolute top-0 left-0 right-0 z-20 flex justify-center pt-3">
-                    <div className="w-[100px] h-[28px] md:w-[120px] md:h-[32px] bg-black rounded-full" />
-                  </div>
-
-                  {/* YouTube embed content */}
-                  <AnimatePresence mode="wait">
-                    <motion.div
-                      key={currentYoutubeIndex}
-                      initial={{ opacity: 0, scale: 1.05 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      exit={{ opacity: 0, scale: 0.95 }}
-                      transition={{ duration: 0.5 }}
-                      className="absolute inset-0 w-full h-full"
-                    >
-                      <iframe
-                        ref={iframeRef}
-                        id="yt-player-eyebrows"
-                        src={`https://www.youtube.com/embed/${youtubeVideos[currentYoutubeIndex]}?autoplay=1&mute=1&loop=1&playlist=${youtubeVideos[currentYoutubeIndex]}&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1&enablejsapi=1&origin=${typeof window !== 'undefined' ? window.location.origin : ''}`}
-                        className="absolute inset-0 w-full h-full border-0"
-                        allow="autoplay; encrypted-media"
-                        allowFullScreen
-                        title="YouTube video"
-                      />
-                    </motion.div>
-                  </AnimatePresence>
-
-                  {/* Swipe overlay - captures touch gestures above iframe */}
-                  <div
-                    className="absolute inset-0 z-10"
-                    onTouchStart={handleSwipeStart}
-                    onTouchEnd={handleSwipeEnd}
-                  />
-
-                  {/* Sound toggle button */}
-                  <button
-                    onClick={toggleMute}
-                    className="absolute bottom-4 right-4 z-20 w-10 h-10 bg-black/60 hover:bg-black/80 backdrop-blur-sm rounded-full flex items-center justify-center transition-all"
-                    aria-label={isMuted ? 'הפעל צליל' : 'השתק'}
-                  >
-                    {isMuted ? (
-                      <VolumeX className="w-5 h-5 text-white" />
-                    ) : (
-                      <Volume2 className="w-5 h-5 text-white" />
-                    )}
-                  </button>
-
-                  {/* Bottom bar (home indicator) */}
-                  <div className="absolute bottom-2 left-1/2 -translate-x-1/2 w-[120px] h-[4px] bg-white/30 rounded-full z-20" />
-                </div>
-              </div>
-            </div>
-
-            {/* Next Button */}
-            <button
-              onClick={nextYoutube}
-              className="w-12 h-12 md:w-14 md:h-14 bg-white hover:bg-gray-50 shadow-lg rounded-full flex items-center justify-center transition-all z-10 border border-gray-200 shrink-0"
-              aria-label="סרטון הבא"
-            >
-              <ChevronLeft className="w-6 h-6 text-charcoal" />
-            </button>
-          </motion.div>
-
-          {/* Dots indicator */}
-          <div className="flex justify-center gap-2.5 mt-8">
-            {youtubeVideos.map((_, index) => (
-              <button
-                key={index}
-                onClick={() => setCurrentYoutubeIndex(index)}
-                className={`rounded-full transition-all duration-300 ${
-                  index === currentYoutubeIndex
-                    ? 'bg-deep-red w-8 h-2.5'
-                    : 'bg-gray-300 hover:bg-gray-400 w-2.5 h-2.5'
-                }`}
-                aria-label={`עבור לסרטון ${index + 1}`}
-              />
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Introduction - Floating Text Over White */}
-      <section className="py-16 md:py-20 bg-white relative">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 60 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 1.2 }}
-            className="space-y-6 text-center"
-          >
-            <motion.p
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 1, delay: 0.2 }}
-              className="text-4xl md:text-5xl lg:text-6xl text-charcoal leading-[1.2] font-bold"
-            >
+      {/* Opening statement */}
+      <section className="relative py-20 md:py-32 bg-white overflow-hidden">
+        <span
+          className="pointer-events-none select-none absolute -top-10 -left-10 md:left-8 text-[18rem] md:text-[30rem] leading-none text-deep-red/[0.04] font-bold"
+          aria-hidden
+        >
+          花
+        </span>
+        <div className="relative max-w-7xl mx-auto px-6 lg:px-8 grid lg:grid-cols-12 gap-x-16 gap-y-10">
+          <Reveal className="lg:col-span-7">
+            <p className="text-4xl md:text-6xl font-extrabold text-charcoal leading-[1.15] tracking-tight">
               הגבה היא מבנה אנטומי מתוחכם
-              <br />
-              <span className="text-3xl md:text-4xl lg:text-5xl font-normal">המורכב ממאות זקיקים בעלי זווית וכיוון ייחודיים</span>
-            </motion.p>
-            
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8, delay: 0.4 }}
-              className="pt-4"
-            >
-              <p className="text-2xl md:text-3xl lg:text-4xl text-charcoal leading-relaxed font-medium">
-                ב-<span className="text-deep-red font-bold">Hana bi</span> אנו מתמחים בשחזור אנטומי של סידור ומבנה הגבות, תוך התאמה טבעית ומדויקת לתווי הפנים הייחודיים של כל מטופל
-              </p>
-            </motion.div>
-            
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Principles - Organic Asymmetric Layout */}
-      {principles.map((principle, index) => {
-        const Icon = principle.icon
-        const isFullImage = principle.layout === 'full-image'
-        const isImageLeft = principle.layout === 'image-left'
-        
-        if (isFullImage) {
-          // Full width image with professional text layout
-          return (
-            <section key={index} className="relative min-h-[50vh] md:min-h-[60vh] flex flex-col items-center justify-center overflow-hidden bg-white">
-              {/* Content Container */}
-              <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full py-12 md:py-20">
-                {/* Image Section - Above Text */}
-                <motion.div
-                  initial={{ opacity: 0, y: 50 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-100px" }}
-                  transition={{ duration: 1 }}
-                  className="relative w-full mb-8 rounded-2xl md:rounded-3xl overflow-hidden shadow-2xl"
-                >
-                  <div className="relative aspect-[16/9] md:aspect-[21/9] w-full">
-                    <Image
-                      src={principle.image}
-                      alt={principle.title}
-                      fill
-                      className="object-contain"
-                      quality={95}
-                      priority={index === 0}
-                      sizes="100vw"
-                    />
-                  </div>
-                </motion.div>
-
-                {/* Text Content Below Image */}
-                <div className="grid md:grid-cols-2 gap-8 md:gap-12 lg:gap-20 items-start">
-                  {/* Left Side - Icon & Title */}
-                  <motion.div
-                    initial={{ opacity: 0, x: -80 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 1, delay: 0.3 }}
-                    className="space-y-6 md:space-y-8"
-                  >
-                    <div className="w-16 h-16 md:w-20 md:h-20 bg-deep-red/10 rounded-2xl md:rounded-3xl flex items-center justify-center border border-deep-red/20 shadow-lg">
-                      <Icon className="w-8 h-8 md:w-12 md:h-12 text-deep-red" />
-                    </div>
-                    <h3 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-charcoal leading-tight">
-                      {principle.title}
-                    </h3>
-                  </motion.div>
-                  
-                  {/* Right Side - Description */}
-                  <motion.div
-                    initial={{ opacity: 0, x: 80 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 1, delay: 0.5 }}
-                    className="space-y-6 bg-soft-grey rounded-2xl p-6 md:p-8 border border-gray-100"
-                  >
-                    <div className="h-px w-20 md:w-24 bg-gradient-to-l from-deep-red/30 via-deep-red/20 to-transparent mb-4" />
-                    <p className="text-base md:text-lg lg:text-xl xl:text-2xl text-charcoal/80 leading-relaxed font-normal whitespace-pre-line">
-                      {principle.description}
-                    </p>
-                    <div className="h-px w-20 md:w-24 bg-gradient-to-r from-transparent via-deep-red/20 to-deep-red/30 mt-4" />
-                  </motion.div>
-                </div>
-              </div>
-            </section>
-          )
-        }
-        
-        if (isImageLeft) {
-          // Image left, text right (asymmetric)
-          return (
-            <section key={index} className="py-12 md:py-20 bg-white relative overflow-hidden">
-              <div className="max-w-[95vw] mx-auto">
-                <div className="grid md:grid-cols-[1.2fr_1fr] gap-0 items-stretch min-h-[50vh]">
-                  {/* Large Image */}
-                  <motion.div
-                    initial={{ opacity: 0, x: -100 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true, margin: "-100px" }}
-                    transition={{ duration: 1 }}
-                    className="relative overflow-hidden w-full min-h-[300px] sm:min-h-[400px] md:min-h-0 md:h-full"
-                  >
-                    <Image
-                      src={principle.image}
-                      alt={principle.title}
-                      fill
-                      className="object-contain"
-                      quality={95}
-                      priority={index === 0}
-                      sizes="(max-width: 768px) 100vw, 60vw"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-l from-transparent to-white/10" />
-                  </motion.div>
-                  
-                  {/* Text Content - Floating */}
-                  <motion.div
-                    initial={{ opacity: 0, x: 50 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true, margin: "-100px" }}
-                    transition={{ duration: 1, delay: 0.2 }}
-                    className="flex items-center p-8 md:p-10 lg:p-12 bg-white"
-                  >
-                    <div className="w-full">
-                      <div className="flex items-center gap-4 mb-8">
-                        <div className="w-14 h-14 bg-deep-red/10 rounded-xl flex items-center justify-center shrink-0">
-                          <Icon className="w-7 h-7 text-deep-red" />
-                        </div>
-                        <h3 className="text-3xl md:text-4xl font-bold text-charcoal leading-tight">
-                          {principle.title}
-                        </h3>
-                      </div>
-                      <p className="text-lg md:text-xl text-charcoal/70 leading-relaxed font-normal text-right">
-                        {principle.description}
-                      </p>
-                    </div>
-                  </motion.div>
-                </div>
-              </div>
-            </section>
-          )
-        }
-        
-        // Image right, text left (asymmetric)
-        return (
-          <section key={index} className="py-12 md:py-20 bg-soft-grey relative overflow-hidden">
-            <div className="max-w-[95vw] mx-auto">
-              <div className="grid md:grid-cols-[1fr_1.2fr] gap-0 items-stretch min-h-[50vh]">
-                {/* Text Content - Floating */}
-                <motion.div
-                  initial={{ opacity: 0, x: -50 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true, margin: "-100px" }}
-                  transition={{ duration: 1 }}
-                  className="flex items-center p-8 md:p-10 lg:p-12 bg-soft-grey order-2 md:order-1"
-                >
-                  <div className="w-full">
-                    <div className="flex items-center gap-4 mb-8">
-                      <div className="w-14 h-14 bg-deep-red/10 rounded-xl flex items-center justify-center shrink-0">
-                        <Icon className="w-7 h-7 text-deep-red" />
-                      </div>
-                      <h3 className="text-3xl md:text-4xl font-bold text-charcoal leading-tight">
-                        {principle.title}
-                      </h3>
-                    </div>
-                    <p className="text-lg md:text-xl text-charcoal/70 leading-relaxed font-normal text-right whitespace-pre-line">
-                      {principle.description}
-                    </p>
-                  </div>
-                </motion.div>
-                
-                {/* Large Image */}
-                <motion.div
-                  initial={{ opacity: 0, x: 100 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true, margin: "-100px" }}
-                  transition={{ duration: 1, delay: 0.2 }}
-                  className="relative overflow-hidden order-1 md:order-2 w-full min-h-[300px] sm:min-h-[400px] md:min-h-0 md:h-full"
-                >
-                  <Image
-                    src={principle.image}
-                    alt={principle.title}
-                    fill
-                    className="object-contain"
-                    quality={95}
-                    sizes="(max-width: 768px) 100vw, 60vw"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-r from-white/10 to-transparent" />
-                </motion.div>
-              </div>
-            </div>
-          </section>
-        )
-      })}
-
-      {/* AI Skin Diagnosis Section */}
-      <section className="py-16 md:py-20 bg-white relative overflow-hidden">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 1 }}
-            className="text-center mb-8"
-          >
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-charcoal mb-6 leading-tight">
-              מערכת מבוססת AI לאבחון רקמת העור
-            </h2>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 1, delay: 0.2 }}
-            className="flex justify-center"
-          >
-            <div className="w-[90%] rounded-2xl md:rounded-3xl overflow-hidden shadow-2xl bg-black">
-              <video
-                src="/files/1.mp4"
-                className="w-full h-auto"
-                autoPlay
-                loop
-                muted
-                playsInline
-                preload="auto"
-              >
-                הדפדפן שלך לא תומך בתגית הוידאו.
-              </video>
-            </div>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Recovery Journey - Premium Timeline */}
-      <section className="py-16 md:py-20 bg-gradient-to-b from-white via-soft-grey to-white relative overflow-hidden">
-        <div className="absolute inset-0">
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-5xl h-[800px] bg-gradient-to-br from-deep-red/3 via-transparent to-transparent rounded-full blur-3xl" />
-        </div>
-
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          {/* Header */}
-          <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 1 }}
-            className="text-center mb-10"
-          >
-            <h2 className="text-5xl md:text-6xl lg:text-7xl font-bold text-charcoal mb-6 leading-tight">
-              השלבים שלאחר השתלת הגבות
-            </h2>
-            <p className="text-2xl md:text-3xl text-charcoal/70 max-w-4xl mx-auto leading-relaxed font-medium mb-8">
-              ליווי רפואי מלא מיום הטיפול ועד לתוצאה הסופית
             </p>
-            <motion.p
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8, delay: 0.3 }}
-              className="text-lg md:text-xl text-charcoal/60 max-w-4xl mx-auto leading-relaxed font-normal"
-            >
-              המחויבות שלנו כלפייך לא מסתיימת ברגע היציאה מהקליניקה. תהליך שחזור הגבות הוא תהליך ביולוגי מתמשך, וכדי להבטיח את קליטת השתלים בצורה האופטימלית, אנו מלווים אותך לאורך שנה שלמה הכוללת שלוש תחנות ביקורת קריטיות לבקרת איכות. כך ייראה המסע המשותף שלנו:
-            </motion.p>
-          </motion.div>
+            <p className="text-2xl md:text-3xl font-light text-charcoal/60 leading-snug mt-6">
+              המורכב ממאות זקיקים בעלי זווית וכיוון ייחודיים
+            </p>
+          </Reveal>
+          <Reveal delay={0.15} className="lg:col-span-5 lg:self-end border-t-2 border-deep-red pt-6">
+            <p className="text-xl md:text-2xl text-charcoal leading-relaxed">
+              ב-<span className="text-deep-red font-bold">Hana bi</span> אנו מתמחים בשחזור אנטומי של סידור ומבנה הגבות, תוך התאמה טבעית ומדויקת לתווי הפנים הייחודיים של כל מטופל
+            </p>
+          </Reveal>
+        </div>
+      </section>
 
-          {/* Timeline */}
-          <div className="space-y-12 md:space-y-16">
-            {/* Stage 1 */}
-            <motion.div
-              initial={{ opacity: 0, x: -50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 1 }}
-              className="relative"
-            >
-              <div className="flex flex-col md:flex-row gap-8 items-start">
-                <div className="md:w-1/3 space-y-6">
-                  <div className="flex items-center gap-4">
-                    <div className="w-16 h-16 bg-deep-red/10 rounded-2xl flex items-center justify-center shrink-0 border border-deep-red/20">
-                      <span className="text-2xl font-bold text-deep-red">1</span>
-                    </div>
-                    <div>
-                      <h3 className="text-2xl md:text-3xl font-bold text-charcoal">שבוע ההתקבעות</h3>
-                      <p className="text-sm text-charcoal/50 font-medium">ימים 1-7</p>
-                    </div>
-                  </div>
-                </div>
-                <div className="md:w-2/3">
-                  <p className="text-lg md:text-xl text-charcoal/70 leading-relaxed font-normal">
-                    בשבוע הראשון לאחר ההשתלה מתרחש תהליך ביולוגי של קליטת הזקיקים ברקמה החדשה. בימים אלו תיתכן הופעה של גלדים נקודתיים זעירים, המעידים על תהליך ריפוי תקין של העור. בשלב זה חיוני להימנע ממגע באזור כדי לאפשר לשורשים להתבסס במקומם ולהתחבר לאספקת הדם.
-                  </p>
+      {/* Client videos across the full width */}
+      <section className="relative bg-paper py-20 md:py-28 overflow-hidden">
+        <div className="bio-grid absolute inset-x-0 top-0 h-80" aria-hidden />
+        <Reveal className="relative text-center px-6 mb-10 md:mb-14">
+          <h2 className="text-4xl md:text-6xl font-extrabold text-charcoal tracking-tight">לקוחות שעברו את התהליך</h2>
+          <div className="w-16 h-1 bg-deep-red rounded-full mx-auto mt-7" aria-hidden />
+        </Reveal>
+        <div className="relative max-w-[1800px] mx-auto">
+          <VideoWall ids={youtubeVideos} label="סרטון לקוחה" />
+        </div>
+        <p className="lg:hidden text-center text-sm text-charcoal/50 mt-5">החליקו הצידה כדי לראות את כל הסרטונים</p>
+      </section>
+
+      {/* The two technique chapters */}
+      <section className="bg-white pt-8 md:pt-12 pb-4 md:pb-8">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8">
+          <Chapter
+            number="01"
+            title="הדרך לתוצאה מדויקת וטבעית מתחילה בסינגלים"
+            image="/assets/1.jpeg"
+            alt="הדרך לתוצאה מדויקת וטבעית מתחילה בסינגלים"
+            imageWidth={1600}
+            imageHeight={872}
+            lead="כדי להבין את ההבדל, צריך להסתכל על השורשים."
+          >
+            <p>בשיער הראש שלנו, הזקיקים צומחים בדרך כלל בקבוצות (משפחות) של 2, 3 ואפילו 4 שיערות יחד. אלו נקראים דאבלים (Doubles) וטריפלים (Triples). לעומת זאת, בגבה טבעית יש אך ורק זקיקים בודדים (Singles).</p>
+            <p>הטעות הנפוצה בקליניקות רבות היא שימוש בזקיקים כפולים מהראש כדי ליצור נפח מהיר. התוצאה במקרים אלו היא מראה גס, צפוף מידי ולא טבעי.</p>
+            <p>אצלנו ב-HANA BI: אנו ממיינים את השיערות במיקרוסקופ ומבודדים רק את הזקיקים הבודדים והעדינים ביותר. רק כך ניתן ליצור גבה רכה ואוורירית שנראית כאילו נולדת איתה.</p>
+          </Chapter>
+
+          {/* What it looks like during the procedure */}
+          <div className="border-t border-charcoal/10 py-12 md:py-20 grid md:grid-cols-[1fr_auto] gap-10 md:gap-20 items-center">
+            <Reveal className="text-center md:text-right">
+              <h3 className="text-3xl md:text-5xl font-bold text-charcoal leading-tight tracking-tight">אז איך זה נראה בזמן ההשתלה?</h3>
+              <div className="w-16 h-1 bg-deep-red rounded-full mt-7 mx-auto md:mx-0" aria-hidden />
+            </Reveal>
+            <Reveal delay={0.15} className="mx-auto w-full max-w-[340px] md:w-[340px]">
+              <div className="rounded-[2.25rem] bg-white ring-1 ring-charcoal/10 p-2.5 shadow-[0_40px_100px_-45px_rgba(0,0,0,0.45)]">
+                <div className="rounded-[1.75rem] overflow-hidden bg-black">
+                  <AutoplayVideo src="/files/eyebrows/during-procedure.mp4" label="כך נראית השתלת גבות בזמן הטיפול" />
                 </div>
               </div>
-            </motion.div>
-
-            {/* Checkpoint 1 */}
-            <motion.div
-              initial={{ opacity: 0, x: 50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 1, delay: 0.2 }}
-              className="relative pl-8 md:pl-0"
-            >
-
-              <div className="flex flex-col md:flex-row gap-8 items-start">
-                <div className="md:w-1/3 space-y-6">
-                  <div className="flex items-center gap-4">
-                    <div className="w-16 h-16 bg-gradient-to-br from-deep-red to-deep-red-dark rounded-2xl flex items-center justify-center shrink-0 shadow-lg">
-                      <CheckCircle2 className="w-8 h-8 text-white" />
-                    </div>
-                    <div>
-                      <h3 className="text-2xl md:text-3xl font-bold text-charcoal">תחנת ביקורת ראשונה</h3>
-                      <p className="text-sm text-charcoal/50 font-medium">יום 8</p>
-                    </div>
-                  </div>
-                </div>
-                <div className="md:w-2/3">
-                  <p className="text-lg md:text-xl text-charcoal/70 leading-relaxed font-normal">
-                    בדיוק שמונה ימים לאחר ההליך, אנו נפגשים בקליניקה לביקורת ראשונה. במפגש זה הצוות המקצועי מבצע ניקוי עדין ומבוקר להסרת הגלדים. בסיום הטיפול, הגבות נקיות לחלוטין, העור חוזר למרקמו החלק והמראה המתקבל נקי ואסתטי.
-                  </p>
-                </div>
-              </div>
-            </motion.div>
-
-            {/* Stage 2 */}
-            <motion.div
-              initial={{ opacity: 0, x: -50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 1 }}
-              className="relative"
-            >
-              <div className="flex flex-col md:flex-row gap-8 items-start">
-                <div className="md:w-1/3 space-y-6">
-                  <div className="flex items-center gap-4">
-                    <div className="w-16 h-16 bg-deep-red/10 rounded-2xl flex items-center justify-center shrink-0 border border-deep-red/20">
-                      <span className="text-2xl font-bold text-deep-red">2</span>
-                    </div>
-                    <div>
-                      <h3 className="text-2xl md:text-3xl font-bold text-charcoal">התחדשות השורש</h3>
-                      <p className="text-sm text-charcoal/50 font-medium">חודש 1 עד 3</p>
-                    </div>
-                  </div>
-                </div>
-                <div className="md:w-2/3">
-                  <p className="text-lg md:text-xl text-charcoal/70 leading-relaxed font-normal">
-                    בשלב זה מתרחש תהליך טבעי המכונה Shock Loss. השיער המושתל נושר, אך זהו סימן חיובי המעיד על הצלחת התהליך. השורש עצמו נשאר חי ובריא מתחת לעור, ונכנס לשלב של מנוחה ואגירת אנרגיה לקראת הצמיחה המחודשת.
-                  </p>
-                </div>
-              </div>
-            </motion.div>
-
-            {/* Checkpoint 2 */}
-            <motion.div
-              initial={{ opacity: 0, x: 50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 1, delay: 0.2 }}
-              className="relative"
-            >
-              <div className="flex flex-col md:flex-row gap-8 items-start">
-                <div className="md:w-1/3 space-y-6">
-                  <div className="flex items-center gap-4">
-                    <div className="w-16 h-16 bg-gradient-to-br from-deep-red to-deep-red-dark rounded-2xl flex items-center justify-center shrink-0 shadow-lg">
-                      <CheckCircle2 className="w-8 h-8 text-white" />
-                    </div>
-                    <div>
-                      <h3 className="text-2xl md:text-3xl font-bold text-charcoal">תחנת ביקורת שנייה</h3>
-                      <p className="text-sm text-charcoal/50 font-medium">חודש 3</p>
-                    </div>
-                  </div>
-                </div>
-                <div className="md:w-2/3">
-                  <p className="text-lg md:text-xl text-charcoal/70 leading-relaxed font-normal">
-                    שלושה חודשים מהטיפול, אנו נפגשים לביקורת אמצע. מטרת המפגש היא לוודא שתהליך הנשירה הסתיים ושהזקיקים עוברים ממצב מנוחה למצב פעיל. בשלב זה אנו מצפים לראות את הניצנים הראשונים של השיער החדש והקבוע.
-                  </p>
-                </div>
-              </div>
-            </motion.div>
-
-            {/* Stage 3 */}
-            <motion.div
-              initial={{ opacity: 0, x: -50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 1 }}
-              className="relative"
-            >
-              <div className="flex flex-col md:flex-row gap-8 items-start">
-                <div className="md:w-1/3 space-y-6">
-                  <div className="flex items-center gap-4">
-                    <div className="w-16 h-16 bg-deep-red/10 rounded-2xl flex items-center justify-center shrink-0 border border-deep-red/20">
-                      <span className="text-2xl font-bold text-deep-red">3</span>
-                    </div>
-                    <div>
-                      <h3 className="text-2xl md:text-3xl font-bold text-charcoal">צמיחה והתעבות</h3>
-                      <p className="text-sm text-charcoal/50 font-medium">חודשים 4-10</p>
-                    </div>
-                  </div>
-                </div>
-                <div className="md:w-2/3">
-                  <p className="text-lg md:text-xl text-charcoal/70 leading-relaxed font-normal">
-                    החל מהחודש הרביעי מתחילה הצמיחה המשמעותית. מחודש לחודש הגבה מתמלאת, השיערות הופכות עבות וחיוניות יותר, והמבנה המעוצב מתחיל לקבל את נפחו הסופי תוך השתלבות הרמונית בתווי הפנים.
-                  </p>
-                </div>
-              </div>
-            </motion.div>
-
-            {/* Final Checkpoint */}
-            <motion.div
-              initial={{ opacity: 0, x: 50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 1, delay: 0.2 }}
-              className="relative"
-            >
-              <div className="flex flex-col md:flex-row gap-8 items-start">
-                <div className="md:w-1/3 space-y-6">
-                  <div className="flex items-center gap-4">
-                    <div className="w-16 h-16 bg-gradient-to-br from-deep-red to-deep-red-dark rounded-2xl flex items-center justify-center shrink-0 shadow-lg">
-                      <Sparkles className="w-8 h-8 text-white" />
-                    </div>
-                    <div>
-                      <h3 className="text-2xl md:text-3xl font-bold text-charcoal">תחנת ביקורת סופית</h3>
-                      <p className="text-sm text-charcoal/50 font-medium">שנה מהטיפול</p>
-                    </div>
-                  </div>
-                </div>
-                <div className="md:w-2/3">
-                  <p className="text-lg md:text-xl text-charcoal/70 leading-relaxed font-normal">
-                    בתום השנה הראשונה אנו נפגשים למעמד הסיכום. בשלב זה תהליך הצמיחה הושלם במלואו. אנו מבצעים בדיקת איכות סופית של העיצוב, צפיפות השיער וכיווני הצמיחה, כדי לוודא שהתוצאה היא מושלמת, טבעית ותישאר איתך לכל החיים.
-                  </p>
-                </div>
-              </div>
-            </motion.div>
+            </Reveal>
           </div>
-        </div>
-      </section>
 
-      {/* Result Image */}
-      <section className="py-12 md:py-20 relative overflow-hidden">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-center">
-          <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 1 }}
-            className="relative w-full max-w-2xl rounded-2xl md:rounded-3xl overflow-hidden shadow-2xl"
+          <Chapter
+            number="02"
+            title="טכנולוגיה ייעודית מסיאול, קוריאה"
+            image="/assets/2.jpeg"
+            alt="טכנולוגיה ייעודית מסיאול, קוריאה"
+            imageWidth={1600}
+            imageHeight={872}
+            lead="טכנולוגיה ייעודית וכלים מיקרוסקופיים שפותחו בסיאול, קוריאה – חלוצת עולם האסתטיקה והשתלות השיער. באמצעות המכשור הקוריאני המתקדם, אנו מבצעים אופטימיזציה של כל זקיק:"
           >
-            <Image
-              src="/files/eyebrows-result.png"
-              alt="תוצאת השתלת גבות"
-              width={800}
-              height={600}
-              className="w-full h-auto object-cover"
-              quality={95}
-              sizes="(max-width: 768px) 100vw, 672px"
+            <DetailList
+              items={[
+                { term: 'זיהוי עקומת השערה', text: 'זיהוי מיידי של כיוון העיקול הטבעי של השערה עוד לפני ההשתלה.' },
+                { term: 'כיול זוויות מיקרוסקופי', text: 'סיבוב והטמעת הזקיק בזווית המדויקת ביותר ביחס לפני השטח של העור.' },
+                { term: 'זרימה הרמונית', text: "הבטחת השתלבות מושלמת במבנה ה'מניפה' הטבעי של הגבה, ללא שיערות סוררות או צמיחה הפוכה." },
+              ]}
             />
-          </motion.div>
+          </Chapter>
+
         </div>
       </section>
 
-      {/* Consultation Form - Minimalist Luxury */}
-      <section id="appointment" className="py-8 md:py-10 bg-gradient-to-b from-white to-soft-grey relative overflow-hidden">
-        <div className="absolute inset-0">
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-4xl h-96 bg-gradient-to-br from-deep-red/3 to-transparent rounded-full blur-3xl" />
-        </div>
+      {/* Density choice */}
+      <section className="bg-paper py-20 md:py-28">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8">
+          <Reveal className="text-center max-w-4xl mx-auto mb-10 md:mb-14">
+            <h2 className="text-4xl md:text-6xl font-extrabold text-charcoal leading-tight tracking-tight">בחירת דרגת צפיפות ועיצוב מבנה הגבה</h2>
+            <div className="w-16 h-1 bg-deep-red rounded-full mx-auto mt-7" aria-hidden />
+          </Reveal>
 
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 1 }}
-            className="text-center mb-6"
-          >
-            <h2 className="text-5xl md:text-6xl lg:text-7xl font-bold text-charcoal mb-4 leading-tight">
-              הצעד הראשון לגבות מושלמות
-            </h2>
-            <p className="text-xl md:text-2xl text-charcoal/60 max-w-2xl mx-auto leading-relaxed font-normal">
-              השאירי פרטים ונבדוק יחד אם הטיפול מתאים לך
+        <ol className="divide-y divide-charcoal/10 border-y border-charcoal/10">
+          {densityLevels.map(({ name, note, media }, i) => {
+            // The result video is the hero: larger, and centred between the "before" photos when there are two
+            const hero = media.find((item) => item.video)
+            const others = media.filter((item) => !item.video)
+            const ordered = hero ? (others.length > 1 ? [others[0], hero, ...others.slice(1)] : [...others, hero]) : media
+            const layout = !hero
+              ? 'grid-cols-2 max-w-3xl'
+              : others.length > 1
+                ? 'grid-cols-2 md:grid-cols-[1fr_1.55fr_1fr] max-w-5xl'
+                : 'grid-cols-2 md:grid-cols-[1fr_1.55fr] max-w-4xl'
+            return (
+              <li key={name}>
+                <Reveal className="py-10 md:py-14">
+                  <div className="flex items-center justify-center gap-5 mb-7 md:mb-9">
+                    <span className="shrink-0 w-12 h-12 md:w-14 md:h-14 rounded-full ring-2 ring-deep-red text-deep-red text-xl md:text-2xl font-bold flex items-center justify-center" aria-hidden>
+                      {i + 1}
+                    </span>
+                    <span className="text-2xl md:text-4xl font-bold text-charcoal tracking-tight leading-tight">
+                      {name} <span className="block md:inline font-light text-charcoal/60 text-lg md:text-2xl mt-1 md:mt-0">({note})</span>
+                    </span>
+                  </div>
+
+                  <div className={`grid gap-3 md:gap-5 items-center mx-auto ${layout}`}>
+                    {ordered.map((item, m) => {
+                      const isHero = item === hero
+                      return (
+                        <figure
+                          key={m}
+                          className={`relative aspect-[4/3] overflow-hidden ${
+                            isHero
+                              ? `rounded-3xl bg-black ring-1 ring-black/5 shadow-[0_40px_90px_-40px_rgba(0,0,0,0.55)] ${others.length > 1 ? 'col-span-2 md:col-span-1 order-last md:order-none' : ''}`
+                              : `rounded-2xl ${item.src ? 'bg-black ring-1 ring-black/5' : ''}`
+                          }`}
+                        >
+                          {!item.src ? (
+                            <figcaption className="absolute inset-0 flex items-center justify-center rounded-2xl border-2 border-dashed border-charcoal/20 bg-soft-grey text-charcoal/40 text-lg font-bold">
+                              {item.label}
+                            </figcaption>
+                          ) : (
+                            <>
+                              {item.video ? (
+                                <video src={item.src} className="absolute inset-0 w-full h-full object-cover" autoPlay loop muted playsInline preload="metadata" aria-label={`${name} - ${item.label}`} />
+                              ) : (
+                                <Image src={item.src} alt={`${name} - ${item.label}`} fill className="object-cover" quality={95} sizes="(max-width: 768px) 50vw, 380px" />
+                              )}
+                              <figcaption
+                                className={`absolute bottom-2.5 right-2.5 text-sm font-bold rounded-full px-3.5 py-1 ${isHero ? 'bg-deep-red text-white md:text-base md:px-4 md:py-1.5' : 'bg-white/90 text-charcoal'}`}
+                              >
+                                {item.label}
+                              </figcaption>
+                            </>
+                          )}
+                        </figure>
+                      )
+                    })}
+                  </div>
+                </Reveal>
+              </li>
+            )
+          })}
+        </ol>
+        </div>
+      </section>
+
+      {/* Recovery journey timeline */}
+      <section className="bg-white py-20 md:py-32">
+        <div className="max-w-6xl mx-auto px-6 lg:px-8">
+          <Reveal className="text-center max-w-4xl mx-auto mb-12 md:mb-20">
+            <h2 className="text-4xl md:text-7xl font-extrabold text-charcoal leading-tight tracking-tight">השלבים שלאחר השתלת הגבות</h2>
+            <p className="text-2xl md:text-3xl font-light text-deep-red mt-5">ליווי רפואי מלא מיום הטיפול ועד לתוצאה הסופית</p>
+            <p className="text-lg md:text-xl text-charcoal/65 leading-relaxed mt-8">
+              המחויבות שלנו כלפייך לא מסתיימת ברגע היציאה מהקליניקה. תהליך שחזור הגבות הוא תהליך ביולוגי מתמשך, וכדי להבטיח את קליטת השתלים בצורה האופטימלית, אנו מלווים אותך לאורך שנה שלמה הכוללת שלוש תחנות ביקורת קריטיות לבקרת איכות. כך ייראה המסע המשותף שלנו:
             </p>
-          </motion.div>
+          </Reveal>
+
+          <RecoveryTimeline steps={timeline} tone="paper" />
+        </div>
+      </section>
+
+      {/* Consultation form */}
+      <section id="appointment" className="relative scroll-mt-20 bg-paper py-20 md:py-28 overflow-hidden">
+        <span
+          className="pointer-events-none select-none absolute -bottom-16 -right-10 text-[20rem] md:text-[32rem] leading-none text-deep-red/[0.04] font-bold"
+          aria-hidden
+        >
+          美
+        </span>
+        <div className="relative max-w-6xl mx-auto px-6 lg:px-8 grid md:grid-cols-2 gap-12 lg:gap-20 items-center">
+          <Reveal className="text-center md:text-right">
+            <h2 className="text-4xl md:text-7xl font-extrabold text-charcoal leading-[1.08] tracking-tight">הצעד הראשון לגבות מושלמות</h2>
+            <p className="text-xl md:text-2xl font-light text-charcoal/65 leading-relaxed mt-6">השאירי פרטים ונבדוק יחד אם הטיפול מתאים לך</p>
+          </Reveal>
 
           <motion.form
             onSubmit={handleSubmit}
-            initial={{ opacity: 0, y: 50 }}
+            initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 1, delay: 0.2 }}
-            className="space-y-8 max-w-2xl mx-auto"
+            viewport={{ once: true, margin: '-80px' }}
+            transition={{ duration: 0.9, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
+            className="bg-white rounded-3xl p-7 md:p-10 space-y-6 ring-1 ring-charcoal/10 shadow-[0_40px_100px_-45px_rgba(0,0,0,0.35)]"
           >
             <div>
-              <label htmlFor="name" className="block text-charcoal font-medium mb-3 text-right text-base">
+              <label htmlFor="name" className="block text-charcoal font-semibold mb-2 text-right">
                 שם מלא
               </label>
               <input
@@ -882,13 +421,13 @@ export default function Eyebrows() {
                 value={formData.name}
                 onChange={handleChange}
                 required
-                className="w-full px-6 py-5 border-b-2 border-gray-200 bg-transparent focus:outline-none focus:border-deep-red transition-all text-right text-lg font-normal"
+                className={fieldClassName}
                 placeholder="הזן את שמך המלא"
               />
             </div>
 
             <div>
-              <label htmlFor="phone" className="block text-charcoal font-medium mb-3 text-right text-base">
+              <label htmlFor="phone" className="block text-charcoal font-semibold mb-2 text-right">
                 טלפון נייד
               </label>
               <input
@@ -898,12 +437,12 @@ export default function Eyebrows() {
                 value={formData.phone}
                 onChange={handleChange}
                 required
-                className="w-full px-6 py-5 border-b-2 border-gray-200 bg-transparent focus:outline-none focus:border-deep-red transition-all text-right text-lg font-normal"
+                className={fieldClassName}
                 placeholder="הזן מספר טלפון נייד"
               />
             </div>
 
-            <label className="flex items-start gap-3 cursor-pointer mt-4">
+            <label className="flex items-start gap-3 cursor-pointer">
               <input
                 type="checkbox"
                 checked={agreedToPrivacy}
@@ -924,7 +463,7 @@ export default function Eyebrows() {
               type="submit"
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
-              className="w-full bg-deep-red text-white px-8 py-6 rounded-full text-lg font-medium hover:opacity-90 transition-all mt-8"
+              className="w-full bg-deep-red text-white px-8 py-5 rounded-full text-lg font-semibold hover:bg-deep-red-dark transition-colors"
             >
               לתיאום פגישת ייעוץ
             </motion.button>

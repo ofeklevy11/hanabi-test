@@ -2,11 +2,11 @@
 
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
-import { Microscope, Move, Shield, Sparkles, CheckCircle2, Eye, Volume2, VolumeX } from 'lucide-react'
+import { Reveal, Chapter, RecoveryTimeline, AutoplayVideo, VideoWall, fieldClassName, type TimelineStep } from '@/components/TreatmentBlocks'
 import Image from 'next/image'
 import Link from 'next/link'
-import { motion, useScroll } from 'framer-motion'
-import { useState, useRef, useEffect, useCallback } from 'react'
+import { motion } from 'framer-motion'
+import { useRef, useState } from 'react'
 import { useRouter } from 'next/navigation'
 
 export default function Eyelashes() {
@@ -15,66 +15,9 @@ export default function Eyelashes() {
     name: '',
     phone: '',
   })
-  const [isMuted, setIsMuted] = useState(true)
-  const [isVideoMuted, setIsVideoMuted] = useState(true)
-  const videoRef = useRef<HTMLVideoElement>(null)
   const containerRef = useRef<HTMLDivElement>(null)
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start start", "end end"]
-  })
 
   const youtubeVideoId = '-rnDfzpfpjQ'
-
-  const playerRef = useRef<any>(null)
-  const iframeRef = useRef<HTMLIFrameElement>(null)
-
-  // Load YouTube IFrame API
-  useEffect(() => {
-    if (typeof window !== 'undefined' && !(window as any).YT) {
-      const tag = document.createElement('script')
-      tag.src = 'https://www.youtube.com/iframe_api'
-      document.head.appendChild(tag)
-    }
-  }, [])
-
-  // Initialize YouTube player when iframe is ready
-  useEffect(() => {
-    const initPlayer = () => {
-      if (iframeRef.current && (window as any).YT?.Player) {
-        playerRef.current = new (window as any).YT.Player(iframeRef.current, {
-          events: {
-            onReady: () => {
-              if (isMuted) {
-                playerRef.current?.mute()
-              } else {
-                playerRef.current?.unMute()
-              }
-            }
-          }
-        })
-      }
-    }
-
-    if ((window as any).YT?.Player) {
-      const timer = setTimeout(initPlayer, 300)
-      return () => clearTimeout(timer)
-    } else {
-      (window as any).onYouTubeIframeAPIReady = initPlayer
-    }
-  }, [])
-
-  const toggleMute = useCallback(() => {
-    const newMuted = !isMuted
-    setIsMuted(newMuted)
-    if (playerRef.current?.mute && playerRef.current?.unMute) {
-      if (newMuted) {
-        playerRef.current.mute()
-      } else {
-        playerRef.current.unMute()
-      }
-    }
-  }, [isMuted])
 
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [agreedToPrivacy, setAgreedToPrivacy] = useState(false)
@@ -111,27 +54,39 @@ export default function Eyelashes() {
     })
   }
 
-  const principles = [
+  const timeline: TimelineStep[] = [
     {
-      icon: Microscope,
-      title: "סוד המיון – רק שיערות משי (Silk Hair Selection)",
-      description: "האתגר הגדול ביותר ביצירת ריסים טבעיים הוא המרקם כי שיער הגוף לרוב עבה יותר מריסים טבעיים ולכן אנו מבצעים תהליך איתור מורכב באזור העורף התחתון שם צומחות שיערות דקות ורכות במיוחד המכונות 'שיערות משי' אנו ממיינים אותן תחת מיקרוסקופ ובוחרים רק את הזקיקים הבודדים והעדינים ביותר כדי להבטיח שהריס החדש יהיה רך למגע ישתלב בטבעיות עם הריסים הקיימים ולא יכביד על העפעף העדין",
-      image: '/files/hair/silk-hair-selection.PNG',
-      layout: 'image-left',
+      kind: 'stage',
+      step: 1,
+      title: '10 ימי החלמה',
+      when: 'ימים 1-10',
+      text: 'בעשרת הימים הראשונים העפעף עשוי להיות מעט נפוח ואדמומי. זהו סימן חיובי לזרימת דם מוגברת לאזור. יש להימנע מאיפור עיניים ומגע כדי לאפשר לזקיקים להתקבע.',
     },
     {
-      icon: Move,
-      title: 'ארכיטקטורת ה-C-Curve (הקשת המושלמת)',
-      description: "בעוד שרוב הקליניקות משתילות את השיער בזווית ישרה שיוצרת מראה של 'גגון' שמצל על העין אנו משתמשים בשיטות מיוחדות ומדויקות שמאפשרות לנו לשלוט לא רק בזווית הכניסה אלא גם ברוטציה של הזקיק אנו משתילים ריסים ארוכים בלבד מה שמאפשר לנו לראות את העיקול הטבעי של השערה ולסובב אותה כך שהיא תתעגל כלפי מעלה בצורת C מושלמת פעולה זו 'פותחת' את העין ומעניקה לה מראה ערני מורם וזוהר יותר ללא צורך במעגל ריסים",
-      image: '/files/hair/c-curve.jpeg',
-      layout: 'image-right',
+      kind: 'check',
+      title: 'ביקורת ראשונה',
+      when: 'יום 10',
+      text: 'מפגש קצר בקליניקה לווידוא החלמה תקינה. בסיום המפגש העפעף חוזר למראהו הרגיל.',
     },
     {
-      icon: Shield,
-      title: 'בטיחות עינית (Ocular Safety Protocol)',
-      description: "העפעף הוא האזור העדין ביותר בגוף האדם ולכן הפרוטוקול הרפואי שלנו הוא המחמיר ביותר בתחום הטיפול מתבצע באמצעות מגן קרנית מיוחד השומר על העין לכל אורך התהליך וההשתלה עצמה נעשית בעומק מבוקר ברמת המיקרון כדי לא לפגוע בשריר העפעף או בזרימת הדם אנו משתמשים במחטי Implanter זעירות שתוכננו במיוחד לכירורגיה של העפעפיים המבטיחות החלמה מהירה ללא צלקות וללא סימנים",
-      image: '/files/hero/lashes.jpeg',
-      layout: 'full-image',
+      kind: 'stage',
+      step: 2,
+      title: 'שלב הנשירה',
+      when: 'חודש 1-3',
+      text: 'כמו בגבות, גם כאן מתרחש ה-Shock Loss. הריסים המושתלים נושרים כדי לפנות מקום לצמיחה החדשה. אל דאגה – השורש חי ומתחזק מתחת לעור.',
+    },
+    {
+      kind: 'stage',
+      step: 3,
+      title: 'הצמיחה והתחזוקה',
+      when: 'חודש 4 ואילך',
+      text: 'הריסים החדשים מתחילים לצמוח! חשוב לדעת: מכיוון שמקורם בשיער הראש, הם ימשיכו לצמוח לאורך. חלק משגרת הטיפוח החדשה שלך תכלול גזירה עדינה אחת לכמה שבועות כדי לשמור על האורך הרצוי.',
+    },
+    {
+      kind: 'final',
+      title: 'התוצאה הסופית',
+      when: 'שנה',
+      text: 'הריסים הגיעו לשיא צפיפותם ועוביים. המבט שלך מודגש, פתוח ומרשים – באופן טבעי ולתמיד.',
     },
   ]
 
@@ -212,638 +167,150 @@ export default function Eyelashes() {
         <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-white to-transparent z-10" />
       </section>
 
-      {/* YouTube Shorts - iPhone View */}
-      <section className="py-8 md:py-12 relative bg-gradient-to-b from-white via-soft-grey/30 to-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.8 }}
-            className="text-center mb-8"
-          >
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-charcoal">
-              לפני ואחרי
-            </h2>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 1 }}
-            className="relative flex items-center justify-center"
-          >
-            {/* iPhone Frame */}
-            <div className="relative mx-auto">
-              {/* Phone outer shell */}
-              <div className="relative bg-[#1a1a1a] rounded-[3rem] p-[10px] shadow-[0_0_0_2px_#333,0_0_0_4px_#1a1a1a,0_25px_60px_-12px_rgba(0,0,0,0.4)]">
-                {/* Side button - right (volume) */}
-                <div className="absolute -right-[3px] top-[120px] w-[3px] h-[30px] bg-[#333] rounded-l-sm" />
-                <div className="absolute -right-[3px] top-[165px] w-[3px] h-[30px] bg-[#333] rounded-l-sm" />
-                {/* Side button - left (power) */}
-                <div className="absolute -left-[3px] top-[140px] w-[3px] h-[45px] bg-[#333] rounded-r-sm" />
-
-                {/* Screen area */}
-                <div className="relative bg-black rounded-[2.4rem] overflow-hidden w-[280px] h-[580px] md:w-[320px] md:h-[660px]">
-                  {/* Dynamic Island / Notch */}
-                  <div className="absolute top-0 left-0 right-0 z-20 flex justify-center pt-3">
-                    <div className="w-[100px] h-[28px] md:w-[120px] md:h-[32px] bg-black rounded-full" />
-                  </div>
-
-                  {/* YouTube embed content */}
-                  <iframe
-                    ref={iframeRef}
-                    id="yt-player-eyelashes"
-                    src={`https://www.youtube.com/embed/${youtubeVideoId}?autoplay=1&mute=1&loop=1&playlist=${youtubeVideoId}&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1&enablejsapi=1&origin=${typeof window !== 'undefined' ? window.location.origin : ''}`}
-                    className="absolute inset-0 w-full h-full border-0"
-                    allow="autoplay; encrypted-media"
-                    allowFullScreen
-                    title="YouTube video"
-                  />
-
-                  {/* Sound toggle button */}
-                  <button
-                    onClick={toggleMute}
-                    className="absolute bottom-4 right-4 z-20 w-10 h-10 bg-black/60 hover:bg-black/80 backdrop-blur-sm rounded-full flex items-center justify-center transition-all"
-                    aria-label={isMuted ? 'הפעל צליל' : 'השתק'}
-                  >
-                    {isMuted ? (
-                      <VolumeX className="w-5 h-5 text-white" />
-                    ) : (
-                      <Volume2 className="w-5 h-5 text-white" />
-                    )}
-                  </button>
-
-                  {/* Bottom bar (home indicator) */}
-                  <div className="absolute bottom-2 left-1/2 -translate-x-1/2 w-[120px] h-[4px] bg-white/30 rounded-full z-20" />
-                </div>
-              </div>
-            </div>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Introduction - Floating Text Over White */}
-      <section className="py-16 md:py-20 bg-white relative">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 60 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 1.2 }}
-            className="space-y-6 text-center"
-          >
-            <motion.p
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 1, delay: 0.2 }}
-              className="text-4xl md:text-5xl lg:text-6xl text-charcoal leading-[1.2] font-bold"
-            >
+      {/* Opening statement */}
+      <section className="relative py-20 md:py-32 bg-white overflow-hidden">
+        <span
+          className="pointer-events-none select-none absolute -top-10 -left-10 md:left-8 text-[18rem] md:text-[30rem] leading-none text-deep-red/[0.04] font-bold"
+          aria-hidden
+        >
+          花
+        </span>
+        <div className="relative max-w-7xl mx-auto px-6 lg:px-8 grid lg:grid-cols-12 gap-x-16 gap-y-10">
+          <Reveal className="lg:col-span-7">
+            <p className="text-4xl md:text-6xl font-extrabold text-charcoal leading-[1.15] tracking-tight">
               הריסים הם מסגרת העין
-              <br />
-              <span className="text-3xl md:text-4xl lg:text-5xl font-normal">המבנה העדין ביותר בגוף האדם</span>
-            </motion.p>
-            
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8, delay: 0.4 }}
-              className="pt-4"
-            >
-              <p className="text-2xl md:text-3xl lg:text-4xl text-charcoal leading-relaxed font-medium">
-                ב-<span className="text-deep-red font-bold">HANA BI</span> אנו משחזרים את הקשת המושלמת בדיוק מיקרו-כירורגי
-              </p>
-            </motion.div>
-            
-            <motion.p
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8, delay: 0.6 }}
-              className="text-xl md:text-2xl text-charcoal/60 leading-relaxed font-normal max-w-4xl mx-auto pt-4"
-            >
+            </p>
+            <p className="text-2xl md:text-3xl font-light text-charcoal/60 leading-snug mt-6">
+              המבנה העדין ביותר בגוף האדם
+            </p>
+          </Reveal>
+          <Reveal delay={0.15} className="lg:col-span-5 lg:self-end border-t-2 border-deep-red pt-6">
+            <p className="text-xl md:text-2xl text-charcoal leading-relaxed">
+              ב-<span className="text-deep-red font-bold">HANA BI</span> אנו משחזרים את הקשת המושלמת בדיוק מיקרו-כירורגי
+            </p>
+            <p className="text-lg md:text-xl text-charcoal/60 leading-relaxed mt-4">
               אנו יוצרים מחדש את המבט הערני והזוהר שמעניק לעיניים מסגרת טבעית ומושלמת
-            </motion.p>
-          </motion.div>
+            </p>
+          </Reveal>
         </div>
       </section>
 
-      {/* Principles - Organic Asymmetric Layout */}
-      {principles.map((principle, index) => {
-        const Icon = principle.icon
-        const isFullImage = principle.layout === 'full-image'
-        const isImageLeft = principle.layout === 'image-left'
-        
-        if (isFullImage) {
-          // Full width image with professional text layout
-          return (
-            <section key={index} className="relative min-h-[50vh] flex items-center justify-center overflow-hidden bg-charcoal">
-              {/* Background Image */}
-              <motion.div
-                initial={{ opacity: 0, scale: 1.1 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true, margin: "-100px" }}
-                transition={{ duration: 1.5 }}
-                className="absolute inset-0"
-              >
-                <Image
-                  src={principle.image}
-                  alt={principle.title}
-                  fill
-                  className="object-cover"
-                  quality={95}
-                  sizes="100vw"
-                />
-                {/* Professional Gradient Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-r from-charcoal/95 via-charcoal/85 to-charcoal/75" />
-                <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-charcoal/20" />
-              </motion.div>
-              
-              {/* Content Container */}
-              <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-                <div className="grid md:grid-cols-2 gap-12 lg:gap-20 items-center min-h-[50vh]">
-                  {/* Left Side - Icon & Title */}
-                  <motion.div
-                    initial={{ opacity: 0, x: -80 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 1, delay: 0.3 }}
-                    className="space-y-8"
-                  >
-                    <div className="w-20 h-20 bg-white/10 backdrop-blur-md rounded-3xl flex items-center justify-center border border-white/20 shadow-2xl">
-                      <Icon className="w-12 h-12 text-white" />
-                    </div>
-                    <h3 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight">
-                      {principle.title}
-                    </h3>
-                  </motion.div>
-                  
-                  {/* Right Side - Description */}
-                  <motion.div
-                    initial={{ opacity: 0, x: 80 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 1, delay: 0.5 }}
-                    className="space-y-6"
-                  >
-                    <div className="h-px w-24 bg-gradient-to-l from-white/40 to-transparent mb-4" />
-                    <p className="text-lg md:text-xl lg:text-2xl text-white/90 leading-relaxed font-normal">
-                      {principle.description}
-                    </p>
-                    <div className="h-px w-24 bg-gradient-to-r from-white/40 to-transparent mt-4" />
-                  </motion.div>
-                </div>
-              </div>
-            </section>
-          )
-        }
-        
-        if (isImageLeft) {
-          // Image left, text right (asymmetric)
-          return (
-            <section key={index} className="py-12 md:py-20 bg-white relative overflow-hidden">
-              <div className="max-w-[95vw] mx-auto">
-                <div className="grid md:grid-cols-[1.2fr_1fr] gap-0 items-stretch min-h-[50vh]">
-                  {/* Large Image */}
-                  <motion.div
-                    initial={{ opacity: 0, x: -100 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true, margin: "-100px" }}
-                    transition={{ duration: 1 }}
-                    className="relative w-full h-full min-h-[400px] hidden md:block p-4"
-                  >
-                    <div className="relative w-full h-full rounded-2xl overflow-hidden">
-                      <Image
-                        src={principle.image}
-                        alt={principle.title}
-                        fill
-                        className="object-cover"
-                        quality={95}
-                        sizes="(max-width: 768px) 100vw, 60vw"
-                      />
-                    </div>
-                  </motion.div>
-                  
-                  {/* Text Content - Floating */}
-                  <motion.div
-                    initial={{ opacity: 0, x: 50 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true, margin: "-100px" }}
-                    transition={{ duration: 1, delay: 0.2 }}
-                    className="flex items-center p-8 md:p-10 lg:p-12 bg-white"
-                  >
-                    <div className="w-full">
-                      <div className="flex items-center gap-4 mb-8">
-                        <div className="w-14 h-14 bg-deep-red/10 rounded-xl flex items-center justify-center shrink-0">
-                          <Icon className="w-7 h-7 text-deep-red" />
-                        </div>
-                        <h3 className="text-3xl md:text-4xl font-bold text-charcoal leading-tight">
-                          {principle.title}
-                        </h3>
-                      </div>
-                      {/* Mobile Image */}
-                      <div className="block md:hidden relative w-full h-[300px] rounded-2xl overflow-hidden my-6">
-                        <Image
-                          src={principle.image}
-                          alt={principle.title}
-                          fill
-                          className="object-cover"
-                          quality={95}
-                          sizes="100vw"
-                        />
-                      </div>
-                      <p className="text-lg md:text-xl text-charcoal/70 leading-relaxed font-normal text-right">
-                        {principle.description}
-                      </p>
-                    </div>
-                  </motion.div>
-                </div>
-              </div>
-            </section>
-          )
-        }
-
-        // Image right, text left (asymmetric)
-        return (
-          <section key={index} className="py-12 md:py-20 bg-soft-grey relative overflow-hidden">
-            <div className="max-w-[95vw] mx-auto">
-              <div className="grid md:grid-cols-[1fr_1.2fr] gap-0 items-stretch min-h-[50vh]">
-                {/* Text Content - Floating */}
-                <motion.div
-                  initial={{ opacity: 0, x: -50 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true, margin: "-100px" }}
-                  transition={{ duration: 1 }}
-                  className="flex items-center p-8 md:p-10 lg:p-12 bg-soft-grey order-2 md:order-1"
-                >
-                  <div className="w-full">
-                    <div className="flex items-center gap-4 mb-8">
-                      <div className="w-14 h-14 bg-deep-red/10 rounded-xl flex items-center justify-center shrink-0">
-                        <Icon className="w-7 h-7 text-deep-red" />
-                      </div>
-                      <h3 className="text-3xl md:text-4xl font-bold text-charcoal leading-tight">
-                        {principle.title}
-                      </h3>
-                    </div>
-                    {/* Mobile Image */}
-                    <div className="block md:hidden relative w-full h-[300px] rounded-2xl overflow-hidden my-6">
-                      <Image
-                        src={principle.image}
-                        alt={principle.title}
-                        fill
-                        className="object-cover"
-                        quality={95}
-                        sizes="100vw"
-                      />
-                    </div>
-                    <p className="text-lg md:text-xl text-charcoal/70 leading-relaxed font-normal text-right">
-                      {principle.description}
-                    </p>
-                  </div>
-                </motion.div>
-
-                {/* Large Image */}
-                <motion.div
-                  initial={{ opacity: 0, x: 100 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true, margin: "-100px" }}
-                  transition={{ duration: 1, delay: 0.2 }}
-                  className="relative order-1 md:order-2 w-full h-full min-h-[400px] hidden md:block p-4"
-                >
-                  <div className="relative w-full h-full rounded-2xl overflow-hidden">
-                    <Image
-                      src={principle.image}
-                      alt={principle.title}
-                      fill
-                      className="object-cover"
-                      quality={95}
-                      sizes="(max-width: 768px) 100vw, 60vw"
-                    />
-                  </div>
-                </motion.div>
-              </div>
-            </div>
-          </section>
-        )
-      })}
-
-      {/* Pain-Free Experience Section */}
-      <section className="py-8 md:py-10 bg-gradient-to-b from-white via-soft-grey to-white relative overflow-hidden">
-        <div className="absolute inset-0">
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-5xl h-[800px] bg-gradient-to-br from-deep-red/3 via-transparent to-transparent rounded-full blur-3xl" />
+      {/* Before & after video */}
+      <section className="relative bg-paper py-20 md:py-28 overflow-hidden">
+        <div className="bio-grid absolute inset-x-0 top-0 h-80" aria-hidden />
+        <Reveal className="relative text-center px-6 mb-10 md:mb-14">
+          <h2 className="text-4xl md:text-6xl font-extrabold text-charcoal tracking-tight">לפני ואחרי</h2>
+          <div className="w-16 h-1 bg-deep-red rounded-full mx-auto mt-7" aria-hidden />
+        </Reveal>
+        <div className="relative mx-auto w-full max-w-[400px]">
+          <VideoWall ids={[youtubeVideoId]} label="סרטון לפני ואחרי" />
         </div>
+      </section>
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          {/* Header */}
-          <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 1 }}
-            className="text-center mb-10"
+      {/* The three technique chapters */}
+      <section className="bg-white pt-8 md:pt-12 pb-4 md:pb-8">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8">
+          <Chapter
+            number="01"
+            title="סוד המיון – רק שיערות משי (Silk Hair Selection)"
+            image="/files/hair/silk-hair-selection.PNG"
+            alt="סוד המיון – רק שיערות משי"
+            imageWidth={2721}
+            imageHeight={1405}
+            lead="האתגר הגדול ביותר ביצירת ריסים טבעיים הוא המרקם כי שיער הגוף לרוב עבה יותר מריסים טבעיים"
           >
-            <h2 className="text-5xl md:text-6xl lg:text-7xl font-bold text-charcoal mb-6 leading-tight">
-              האם הטיפול בעפעפיים כואב?
-            </h2>
-            <p className="text-2xl md:text-3xl text-deep-red font-bold max-w-4xl mx-auto leading-relaxed mb-6">
-              הטיפול אינו מורגש כלל. צפו ברגע האמת
-            </p>
-          </motion.div>
+            <p>ולכן אנו מבצעים תהליך איתור מורכב באזור העורף התחתון שם צומחות שיערות דקות ורכות במיוחד המכונות &apos;שיערות משי&apos;</p>
+            <p>אנו ממיינים אותן תחת מיקרוסקופ ובוחרים רק את הזקיקים הבודדים והעדינים ביותר כדי להבטיח שהריס החדש יהיה רך למגע ישתלב בטבעיות עם הריסים הקיימים ולא יכביד על העפעף העדין</p>
+          </Chapter>
 
-          {/* Video in iPhone Frame */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 1, delay: 0.2 }}
-            className="flex justify-center mb-8"
+          <Chapter
+            number="02"
+            title="ארכיטקטורת ה-C-Curve (הקשת המושלמת)"
+            image="/files/hair/c-curve.jpeg"
+            alt="ארכיטקטורת ה-C-Curve"
+            imageWidth={1303}
+            imageHeight={768}
+            lead="בעוד שרוב הקליניקות משתילות את השיער בזווית ישרה שיוצרת מראה של 'גגון' שמצל על העין אנו משתמשים בשיטות מיוחדות ומדויקות שמאפשרות לנו לשלוט לא רק בזווית הכניסה אלא גם ברוטציה של הזקיק"
           >
-            <div className="relative mx-auto">
-              {/* Phone outer shell */}
-              <div className="relative bg-[#1a1a1a] rounded-[3rem] p-[10px] shadow-[0_0_0_2px_#333,0_0_0_4px_#1a1a1a,0_25px_60px_-12px_rgba(0,0,0,0.4)]">
-                {/* Side button - right (volume) */}
-                <div className="absolute -right-[3px] top-[120px] w-[3px] h-[30px] bg-[#333] rounded-l-sm" />
-                <div className="absolute -right-[3px] top-[165px] w-[3px] h-[30px] bg-[#333] rounded-l-sm" />
-                {/* Side button - left (power) */}
-                <div className="absolute -left-[3px] top-[140px] w-[3px] h-[45px] bg-[#333] rounded-r-sm" />
+            <p>אנו משתילים ריסים ארוכים בלבד מה שמאפשר לנו לראות את העיקול הטבעי של השערה ולסובב אותה כך שהיא תתעגל כלפי מעלה בצורת C מושלמת</p>
+            <p>פעולה זו &apos;פותחת&apos; את העין ומעניקה לה מראה ערני מורם וזוהר יותר ללא צורך במעגל ריסים</p>
+          </Chapter>
 
-                {/* Screen area */}
-                <div className="relative bg-black rounded-[2.4rem] overflow-hidden w-[280px] h-[580px] md:w-[320px] md:h-[660px]">
-                  {/* Dynamic Island / Notch */}
-                  <div className="absolute top-0 left-0 right-0 z-20 flex justify-center pt-3">
-                    <div className="w-[100px] h-[28px] md:w-[120px] md:h-[32px] bg-black rounded-full" />
-                  </div>
-
-                  {/* Video content */}
-                  <video
-                    ref={videoRef}
-                    src="/files/IMG_0904.MP4"
-                    className="absolute inset-0 w-full h-full object-cover"
-                    playsInline
-                    autoPlay
-                    muted={isVideoMuted}
-                    loop
-                  />
-
-                  {/* Bottom bar (home indicator) */}
-                  <div className="absolute bottom-2 left-1/2 -translate-x-1/2 w-[120px] h-[4px] bg-white/30 rounded-full z-20" />
-                </div>
-              </div>
-            </div>
-
-            {/* Sound toggle button - outside phone frame */}
-            <button
-              onClick={() => {
-                setIsVideoMuted(!isVideoMuted)
-                if (videoRef.current) {
-                  videoRef.current.muted = !isVideoMuted
-                }
-              }}
-              className="mt-6 mx-auto px-6 py-3 bg-charcoal hover:bg-charcoal/80 rounded-full flex items-center gap-3 transition-all shadow-lg"
-              aria-label={isVideoMuted ? 'הפעל צליל' : 'השתק'}
-            >
-              {isVideoMuted ? (
-                <>
-                  <VolumeX className="w-5 h-5 text-white" />
-                  <span className="text-sm font-medium text-white">הפעל צליל</span>
-                </>
-              ) : (
-                <>
-                  <Volume2 className="w-5 h-5 text-white" />
-                  <span className="text-sm font-medium text-white">השתק</span>
-                </>
-              )}
-            </button>
-          </motion.div>
-
-          {/* Text Below Video */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 1, delay: 0.3 }}
-            className="max-w-4xl mx-auto"
+          <Chapter
+            number="03"
+            title="בטיחות עינית (Ocular Safety Protocol)"
+            image="/files/hero/lashes.jpeg"
+            alt="בטיחות עינית"
+            imageWidth={2048}
+            imageHeight={1144}
+            lead="העפעף הוא האזור העדין ביותר בגוף האדם ולכן הפרוטוקול הרפואי שלנו הוא המחמיר ביותר בתחום"
           >
-            <p className="text-lg md:text-xl lg:text-2xl text-charcoal/70 leading-relaxed font-normal text-center">
+            <p>הטיפול מתבצע באמצעות מגן קרנית מיוחד השומר על העין לכל אורך התהליך וההשתלה עצמה נעשית בעומק מבוקר ברמת המיקרון כדי לא לפגוע בשריר העפעף או בזרימת הדם</p>
+            <p>אנו משתמשים במחטי Implanter זעירות שתוכננו במיוחד לכירורגיה של העפעפיים המבטיחות החלמה מהירה ללא צלקות וללא סימנים</p>
+          </Chapter>
+        </div>
+      </section>
+
+      {/* Pain-free experience */}
+      <section className="relative bg-paper py-20 md:py-28 overflow-hidden">
+        <div className="bio-grid absolute inset-0" aria-hidden />
+        <div className="relative max-w-6xl mx-auto px-6 lg:px-8 grid md:grid-cols-[1fr_auto] gap-12 md:gap-20 items-center">
+          <Reveal className="text-center md:text-right">
+            <h2 className="text-4xl md:text-6xl font-extrabold text-charcoal leading-[1.1] tracking-tight">האם הטיפול כואב?</h2>
+            <p className="text-2xl md:text-3xl font-bold text-deep-red leading-snug mt-6">הטיפול אינו מורגש כלל. צפו ברגע האמת</p>
+            <p className="text-lg md:text-xl text-charcoal/70 leading-relaxed mt-8">
               רבות חוששות מהרעיון של טיפול כה קרוב לעין אך המציאות היא שונה לחלוטין הטיפול מתבצע תחת הרדמה מקומית יסודית ולאחריה את נמצאת במצב של רוגע מוחלט ויכולה אפילו לנמנם המגן המיוחד שאנו מניחים מבטיח שלא תרגישי דבר והעפעף נשאר רדום עד לסיום התהליך כך שאת מתעוררת למציאות חדשה עם ריסים מלאים וללא שום כאב
             </p>
-          </motion.div>
+          </Reveal>
+          <Reveal delay={0.15} className="mx-auto w-full max-w-[340px] md:w-[340px]">
+            <div className="rounded-[2.25rem] bg-white ring-1 ring-charcoal/10 p-2.5 shadow-[0_40px_100px_-45px_rgba(0,0,0,0.45)]">
+              <div className="rounded-[1.75rem] overflow-hidden bg-black">
+                <AutoplayVideo src="/files/eyelashes/pain-free.mp4" label="הטיפול בעפעפיים אינו מורגש" />
+              </div>
+            </div>
+          </Reveal>
         </div>
       </section>
 
-      {/* Recovery Journey - Premium Timeline */}
-      <section className="py-16 md:py-20 bg-gradient-to-b from-white via-soft-grey to-white relative overflow-hidden">
-        <div className="absolute inset-0">
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-5xl h-[800px] bg-gradient-to-br from-deep-red/3 via-transparent to-transparent rounded-full blur-3xl" />
-        </div>
-
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          {/* Header */}
-          <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 1 }}
-            className="text-center mb-10"
-          >
-            <h2 className="text-5xl md:text-6xl lg:text-7xl font-bold text-charcoal mb-6 leading-tight">
-              השלבים שלאחר השתלת הריסים
-            </h2>
-            <p className="text-2xl md:text-3xl text-charcoal/70 max-w-4xl mx-auto leading-relaxed font-medium mb-8">
-              ליווי רפואי מלא עד לתוצאה הסופית
-            </p>
-            <motion.p
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8, delay: 0.3 }}
-              className="text-lg md:text-xl text-charcoal/60 max-w-4xl mx-auto leading-relaxed font-normal"
-            >
+      {/* Recovery journey timeline */}
+      <section className="bg-white py-20 md:py-32">
+        <div className="max-w-6xl mx-auto px-6 lg:px-8">
+          <Reveal className="text-center max-w-4xl mx-auto mb-12 md:mb-20">
+            <h2 className="text-4xl md:text-7xl font-extrabold text-charcoal leading-tight tracking-tight">השלבים שלאחר השתלת הריסים</h2>
+            <p className="text-2xl md:text-3xl font-light text-deep-red mt-5">ליווי רפואי מלא עד לתוצאה הסופית</p>
+            <p className="text-lg md:text-xl text-charcoal/65 leading-relaxed mt-8">
               הריסים החדשים שלך הם שיער ראש טבעי שמתנהג קצת אחרת. הנה מה שצפוי לך:
-            </motion.p>
-          </motion.div>
+            </p>
+          </Reveal>
 
-          {/* Timeline */}
-          <div className="space-y-12 md:space-y-16">
-            {/* Stage 1 */}
-            <motion.div
-              initial={{ opacity: 0, x: -50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 1 }}
-              className="relative"
-            >
-              <div className="flex flex-col md:flex-row gap-8 items-start">
-                <div className="md:w-1/3 space-y-6">
-                  <div className="flex items-center gap-4">
-                    <div className="w-16 h-16 bg-deep-red/10 rounded-2xl flex items-center justify-center shrink-0 border border-deep-red/20">
-                      <span className="text-2xl font-bold text-deep-red">1</span>
-                    </div>
-                    <div>
-                      <h3 className="text-2xl md:text-3xl font-bold text-charcoal">שבוע ההחלמה</h3>
-                      <p className="text-sm text-charcoal/50 font-medium">ימים 1-7</p>
-                    </div>
-                  </div>
-                </div>
-                <div className="md:w-2/3">
-                  <p className="text-lg md:text-xl text-charcoal/70 leading-relaxed font-normal">
-                    בימים הראשונים העפעף עשוי להיות מעט נפוח ואדמומי. זהו סימן חיובי לזרימת דם מוגברת לאזור. יש להימנע מאיפור עיניים ומגע כדי לאפשר לזקיקים להתקבע.
-                  </p>
-                </div>
-              </div>
-            </motion.div>
-
-            {/* Checkpoint 1 */}
-            <motion.div
-              initial={{ opacity: 0, x: 50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 1, delay: 0.2 }}
-              className="relative pl-8 md:pl-0"
-            >
-              <div className="absolute right-0 top-0 bottom-0 w-px bg-gradient-to-b from-deep-red/20 via-deep-red/40 to-deep-red/20 hidden md:block" />
-              <div className="flex flex-col md:flex-row gap-8 items-start">
-                <div className="md:w-1/3 space-y-6">
-                  <div className="flex items-center gap-4">
-                    <div className="w-16 h-16 bg-gradient-to-br from-deep-red to-deep-red-dark rounded-2xl flex items-center justify-center shrink-0 shadow-lg">
-                      <CheckCircle2 className="w-8 h-8 text-white" />
-                    </div>
-                    <div>
-                      <h3 className="text-2xl md:text-3xl font-bold text-charcoal">ביקורת ראשונה</h3>
-                      <p className="text-sm text-charcoal/50 font-medium">יום 8</p>
-                    </div>
-                  </div>
-                </div>
-                <div className="md:w-2/3">
-                  <p className="text-lg md:text-xl text-charcoal/70 leading-relaxed font-normal">
-                    מפגש קצר בקליניקה לווידוא החלמה תקינה. בסיום המפגש העפעף חוזר למראהו הרגיל.
-                  </p>
-                </div>
-              </div>
-            </motion.div>
-
-            {/* Stage 2 */}
-            <motion.div
-              initial={{ opacity: 0, x: -50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 1 }}
-              className="relative"
-            >
-              <div className="flex flex-col md:flex-row gap-8 items-start">
-                <div className="md:w-1/3 space-y-6">
-                  <div className="flex items-center gap-4">
-                    <div className="w-16 h-16 bg-deep-red/10 rounded-2xl flex items-center justify-center shrink-0 border border-deep-red/20">
-                      <span className="text-2xl font-bold text-deep-red">2</span>
-                    </div>
-                    <div>
-                      <h3 className="text-2xl md:text-3xl font-bold text-charcoal">שלב הנשירה</h3>
-                      <p className="text-sm text-charcoal/50 font-medium">חודש 1-3</p>
-                    </div>
-                  </div>
-                </div>
-                <div className="md:w-2/3">
-                  <p className="text-lg md:text-xl text-charcoal/70 leading-relaxed font-normal">
-                    כמו בגבות, גם כאן מתרחש ה-Shock Loss. הריסים המושתלים נושרים כדי לפנות מקום לצמיחה החדשה. אל דאגה – השורש חי ומתחזק מתחת לעור.
-                  </p>
-                </div>
-              </div>
-            </motion.div>
-
-            {/* Stage 3 */}
-            <motion.div
-              initial={{ opacity: 0, x: -50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 1 }}
-              className="relative"
-            >
-              <div className="flex flex-col md:flex-row gap-8 items-start">
-                <div className="md:w-1/3 space-y-6">
-                  <div className="flex items-center gap-4">
-                    <div className="w-16 h-16 bg-deep-red/10 rounded-2xl flex items-center justify-center shrink-0 border border-deep-red/20">
-                      <span className="text-2xl font-bold text-deep-red">3</span>
-                    </div>
-                    <div>
-                      <h3 className="text-2xl md:text-3xl font-bold text-charcoal">הצמיחה והתחזוקה</h3>
-                      <p className="text-sm text-charcoal/50 font-medium">חודש 4 ואילך</p>
-                    </div>
-                  </div>
-                </div>
-                <div className="md:w-2/3">
-                  <p className="text-lg md:text-xl text-charcoal/70 leading-relaxed font-normal">
-                    הריסים החדשים מתחילים לצמוח! חשוב לדעת: מכיוון שמקורם בשיער הראש, הם ימשיכו לצמוח לאורך. חלק משגרת הטיפוח החדשה שלך תכלול גזירה עדינה אחת לכמה שבועות כדי לשמור על האורך הרצוי.
-                  </p>
-                </div>
-              </div>
-            </motion.div>
-
-            {/* Final Stage */}
-            <motion.div
-              initial={{ opacity: 0, x: 50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 1, delay: 0.2 }}
-              className="relative"
-            >
-              <div className="flex flex-col md:flex-row gap-8 items-start">
-                <div className="md:w-1/3 space-y-6">
-                  <div className="flex items-center gap-4">
-                    <div className="w-16 h-16 bg-gradient-to-br from-deep-red to-deep-red-dark rounded-2xl flex items-center justify-center shrink-0 shadow-lg">
-                      <Sparkles className="w-8 h-8 text-white" />
-                    </div>
-                    <div>
-                      <h3 className="text-2xl md:text-3xl font-bold text-charcoal">התוצאה הסופית</h3>
-                      <p className="text-sm text-charcoal/50 font-medium">שנה</p>
-                    </div>
-                  </div>
-                </div>
-                <div className="md:w-2/3">
-                  <p className="text-lg md:text-xl text-charcoal/70 leading-relaxed font-normal">
-                    הריסים הגיעו לשיא צפיפותם ועוביים. המבט שלך מודגש, פתוח ומרשים – באופן טבעי ולתמיד.
-                  </p>
-                </div>
-              </div>
-            </motion.div>
-          </div>
+          <RecoveryTimeline steps={timeline} tone="paper" />
         </div>
       </section>
 
-      {/* Consultation Form - Minimalist Luxury */}
-      <section id="appointment" className="py-8 md:py-10 bg-gradient-to-b from-white to-soft-grey relative overflow-hidden">
-        <div className="absolute inset-0">
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-4xl h-96 bg-gradient-to-br from-deep-red/3 to-transparent rounded-full blur-3xl" />
-        </div>
-
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 1 }}
-            className="text-center mb-6"
-          >
-            <h2 className="text-5xl md:text-6xl lg:text-7xl font-bold text-charcoal mb-4 leading-tight">
-              תני לעיניים שלך את המסגרת המגיעה להן
-            </h2>
-            <p className="text-xl md:text-2xl text-charcoal/60 max-w-2xl mx-auto leading-relaxed font-normal">
-              השאירי פרטים ונבדוק יחד אם הטיפול מתאים לך
-            </p>
-          </motion.div>
+      {/* Consultation form */}
+      <section id="appointment" className="relative scroll-mt-20 bg-paper py-20 md:py-28 overflow-hidden">
+        <span
+          className="pointer-events-none select-none absolute -bottom-16 -right-10 text-[20rem] md:text-[32rem] leading-none text-deep-red/[0.04] font-bold"
+          aria-hidden
+        >
+          美
+        </span>
+        <div className="relative max-w-6xl mx-auto px-6 lg:px-8 grid md:grid-cols-2 gap-12 lg:gap-20 items-center">
+          <Reveal className="text-center md:text-right">
+            <h2 className="text-4xl md:text-6xl font-extrabold text-charcoal leading-[1.1] tracking-tight">תני לעיניים שלך את המסגרת המגיעה להן</h2>
+            <p className="text-xl md:text-2xl font-light text-charcoal/65 leading-relaxed mt-6">השאירי פרטים ונבדוק יחד אם הטיפול מתאים לך</p>
+          </Reveal>
 
           <motion.form
             onSubmit={handleSubmit}
-            initial={{ opacity: 0, y: 50 }}
+            initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 1, delay: 0.2 }}
-            className="space-y-8 max-w-2xl mx-auto"
+            viewport={{ once: true, margin: '-80px' }}
+            transition={{ duration: 0.9, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
+            className="bg-white rounded-3xl p-7 md:p-10 space-y-6 ring-1 ring-charcoal/10 shadow-[0_40px_100px_-45px_rgba(0,0,0,0.35)]"
           >
             <div>
-              <label htmlFor="name" className="block text-charcoal font-medium mb-3 text-right text-base">
+              <label htmlFor="name" className="block text-charcoal font-semibold mb-2 text-right">
                 שם מלא
               </label>
               <input
@@ -853,13 +320,13 @@ export default function Eyelashes() {
                 value={formData.name}
                 onChange={handleChange}
                 required
-                className="w-full px-6 py-5 border-b-2 border-gray-200 bg-transparent focus:outline-none focus:border-deep-red transition-all text-right text-lg font-normal"
+                className={fieldClassName}
                 placeholder="הזן את שמך המלא"
               />
             </div>
 
             <div>
-              <label htmlFor="phone" className="block text-charcoal font-medium mb-3 text-right text-base">
+              <label htmlFor="phone" className="block text-charcoal font-semibold mb-2 text-right">
                 טלפון נייד
               </label>
               <input
@@ -869,12 +336,12 @@ export default function Eyelashes() {
                 value={formData.phone}
                 onChange={handleChange}
                 required
-                className="w-full px-6 py-5 border-b-2 border-gray-200 bg-transparent focus:outline-none focus:border-deep-red transition-all text-right text-lg font-normal"
+                className={fieldClassName}
                 placeholder="הזן מספר טלפון נייד"
               />
             </div>
 
-            <label className="flex items-start gap-3 cursor-pointer mt-4">
+            <label className="flex items-start gap-3 cursor-pointer">
               <input
                 type="checkbox"
                 checked={agreedToPrivacy}
@@ -895,7 +362,7 @@ export default function Eyelashes() {
               type="submit"
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
-              className="w-full bg-deep-red text-white px-8 py-6 rounded-full text-lg font-medium hover:opacity-90 transition-all mt-8"
+              className="w-full bg-deep-red text-white px-8 py-5 rounded-full text-lg font-semibold hover:bg-deep-red-dark transition-colors"
             >
               לתיאום פגישת ייעוץ
             </motion.button>

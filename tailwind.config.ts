@@ -21,7 +21,8 @@ const config: Config = {
         'tech-gray': '#f5f5f5',
         'tech-silver': '#e8e8e8',
         'accent-red': '#DC2626',
-        'soft-grey': '#F9FAFB',
+        'soft-grey': '#F6F6F4',
+        'paper': '#F6F6F4',
       },
       fontFamily: {
         sans: ['Heebo', 'Assistant', 'system-ui', 'sans-serif'],

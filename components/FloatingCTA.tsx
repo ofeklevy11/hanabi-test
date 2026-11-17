@@ -10,7 +10,11 @@ export default function FloatingCTA() {
   const [visible, setVisible] = useState(false)
 
   useEffect(() => {
-    const onScroll = () => setVisible(window.scrollY > 300)
+    const onScroll = () => {
+      const form = document.getElementById('appointment') || document.getElementById('contact')
+      const formOnScreen = !!form && form.getBoundingClientRect().top < window.innerHeight * 0.6
+      setVisible(window.scrollY > 300 && !formOnScreen)
+    }
     window.addEventListener('scroll', onScroll, { passive: true })
     onScroll()
     return () => window.removeEventListener('scroll', onScroll)

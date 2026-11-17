@@ -1,11 +1,11 @@
 'use client'
 
 import Navbar from '@/components/Navbar'
+import { Reveal, LocalVideoWall } from '@/components/TreatmentBlocks'
 import Footer from '@/components/Footer'
-import { ChevronRight, ChevronLeft, Volume2, VolumeX } from 'lucide-react'
 import Link from 'next/link'
 import Image from 'next/image'
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion } from 'framer-motion'
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 
@@ -15,23 +15,11 @@ export default function IPRF() {
     name: '',
     phone: '',
   })
-  const [currentVideoIndex, setCurrentVideoIndex] = useState(0)
-  const [isMuted, setIsMuted] = useState(true)
-
-  // Array of video sources - you can add more videos here
   const videos = [
-    '/videos/iprf-video-1.mp4', // Replace with your actual video paths
-    '/videos/iprf-video-2.mp4',
-    '/videos/iprf-video-3.mp4',
+    { src: '/files/iprf/iprf-1.mp4', label: 'טיפול iPRF - סרטון 1' },
+    { src: '/files/iprf/iprf-2.mp4', label: 'טיפול iPRF - סרטון 2' },
+    { src: '/files/iprf/iprf-3.mp4', label: 'טיפול iPRF - סרטון 3' },
   ]
-  
-  const nextVideo = () => {
-    setCurrentVideoIndex((prev) => (prev + 1) % videos.length)
-  }
-  
-  const prevVideo = () => {
-    setCurrentVideoIndex((prev) => (prev - 1 + videos.length) % videos.length)
-  }
 
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [agreedToPrivacy, setAgreedToPrivacy] = useState(false)
@@ -100,7 +88,7 @@ export default function IPRF() {
         {/* Background Image */}
         <div className="absolute inset-0">
           <Image
-            src="/files/hero/iprf.jpeg"
+            src="/files/hero/iprf-hero.jpg"
             alt="iPRF התחדשות ביולוגית - HANA BI"
             fill
             className="object-cover"
@@ -163,180 +151,54 @@ export default function IPRF() {
         <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-white to-transparent z-10" />
       </section>
 
-      {/* First Image Section */}
-      <section className="py-8 bg-white">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-            className="relative"
-          >
-            <div className="relative w-full aspect-video rounded-2xl overflow-hidden shadow-modern-lg bg-gray-100">
+      {/* Process image */}
+      <section className="relative bg-white pt-16 md:pt-24 overflow-hidden">
+        <div className="bio-grid absolute inset-x-0 top-0 h-96" aria-hidden />
+        <div className="relative max-w-6xl mx-auto px-6 lg:px-8">
+          <Reveal>
+            <div className="relative w-full aspect-video rounded-2xl md:rounded-3xl overflow-hidden ring-1 ring-black/5 shadow-[0_40px_90px_-50px_rgba(0,0,0,0.45)] bg-soft-grey">
               <Image
                 src="/files/IPRF.jpeg"
                 alt="תהליך טיפול iPRF - לקיחת דם, צנטריפוגה והפרדה, הזרקה והתחדשות"
                 fill
                 className="object-cover"
                 quality={95}
-                sizes="100vw"
+                sizes="(max-width: 1152px) 100vw, 1152px"
               />
             </div>
-          </motion.div>
+          </Reveal>
         </div>
       </section>
 
-      {/* Content Sections */}
-      <section className="py-10 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="space-y-12 md:space-y-16">
-            {contentBlocks.map((block, index) => {
-              if (block.layout === 'center') {
-                // Center aligned block
-                return (
-                  <motion.div
-                    key={index}
-                    initial={{ opacity: 0, y: 40 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.8, delay: index * 0.1 }}
-                    className="max-w-4xl mx-auto"
-                  >
-                    <p className="text-lg md:text-xl lg:text-2xl text-charcoal/80 leading-relaxed font-normal text-center">
-                      {block.text}
-                    </p>
-                  </motion.div>
-                )
-              }
-
-              // Full width text blocks
-              return (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 40 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.8, delay: index * 0.1 }}
-                  className="max-w-5xl mx-auto"
-                >
-                  <p className="text-lg md:text-xl lg:text-2xl text-charcoal/80 leading-relaxed font-normal text-right">
-                    {block.text}
-                  </p>
-                </motion.div>
-              )
-            })}
-          </div>
+      {/* Content: numbered rows */}
+      <section className="bg-white py-12 md:py-20">
+        <div className="max-w-5xl mx-auto px-6 lg:px-8">
+          {contentBlocks.map((block, index) => (
+            <Reveal key={index} className="grid md:grid-cols-[7rem_1fr] gap-3 md:gap-10 py-10 md:py-14 border-t border-charcoal/10 first:border-t-0">
+              <span className="text-5xl md:text-7xl font-light text-deep-red tabular-nums leading-none" aria-hidden>
+                {String(index + 1).padStart(2, '0')}
+              </span>
+              <p className="text-lg md:text-2xl text-charcoal/80 leading-relaxed">{block.text}</p>
+            </Reveal>
+          ))}
         </div>
       </section>
 
-      {/* Video Carousel Section - iPhone View */}
-      <section className="py-8 md:py-12 relative bg-gradient-to-b from-white via-soft-grey/30 to-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 1 }}
-            className="relative flex items-center justify-center gap-6 md:gap-12"
-          >
-            {/* Prev Button */}
-            {videos.length > 1 && (
-              <button
-                onClick={prevVideo}
-                className="w-12 h-12 md:w-14 md:h-14 bg-white hover:bg-gray-50 shadow-lg rounded-full flex items-center justify-center transition-all z-10 border border-gray-200 shrink-0"
-                aria-label="סרטון קודם"
-              >
-                <ChevronRight className="w-6 h-6 text-charcoal" />
-              </button>
-            )}
-
-            {/* iPhone Frame */}
-            <div className="relative mx-auto">
-              {/* Phone outer shell */}
-              <div className="relative bg-[#1a1a1a] rounded-[3rem] p-[10px] shadow-[0_0_0_2px_#333,0_0_0_4px_#1a1a1a,0_25px_60px_-12px_rgba(0,0,0,0.4)]">
-                {/* Side button - right (volume) */}
-                <div className="absolute -right-[3px] top-[120px] w-[3px] h-[30px] bg-[#333] rounded-l-sm" />
-                <div className="absolute -right-[3px] top-[165px] w-[3px] h-[30px] bg-[#333] rounded-l-sm" />
-                {/* Side button - left (power) */}
-                <div className="absolute -left-[3px] top-[140px] w-[3px] h-[45px] bg-[#333] rounded-r-sm" />
-
-                {/* Screen area */}
-                <div className="relative bg-black rounded-[2.4rem] overflow-hidden w-[280px] h-[580px] md:w-[320px] md:h-[660px]">
-                  {/* Dynamic Island / Notch */}
-                  <div className="absolute top-0 left-0 right-0 z-20 flex justify-center pt-3">
-                    <div className="w-[100px] h-[28px] md:w-[120px] md:h-[32px] bg-black rounded-full" />
-                  </div>
-
-                  {/* Video content */}
-                  <AnimatePresence mode="wait">
-                    <motion.video
-                      key={`${currentVideoIndex}-${isMuted}`}
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      exit={{ opacity: 0 }}
-                      transition={{ duration: 0.5 }}
-                      src={videos[currentVideoIndex]}
-                      className="absolute inset-0 w-full h-full object-cover"
-                      playsInline
-                      autoPlay
-                      muted={isMuted}
-                    />
-                  </AnimatePresence>
-
-                  {/* Sound toggle button */}
-                  <button
-                    onClick={() => setIsMuted(!isMuted)}
-                    className="absolute bottom-4 right-4 z-20 w-10 h-10 bg-black/60 hover:bg-black/80 backdrop-blur-sm rounded-full flex items-center justify-center transition-all"
-                    aria-label={isMuted ? 'הפעל צליל' : 'השתק'}
-                  >
-                    {isMuted ? (
-                      <VolumeX className="w-5 h-5 text-white" />
-                    ) : (
-                      <Volume2 className="w-5 h-5 text-white" />
-                    )}
-                  </button>
-
-                  {/* Bottom bar (home indicator) */}
-                  <div className="absolute bottom-2 left-1/2 -translate-x-1/2 w-[120px] h-[4px] bg-white/30 rounded-full z-20" />
-                </div>
-              </div>
-            </div>
-
-            {/* Next Button */}
-            {videos.length > 1 && (
-              <button
-                onClick={nextVideo}
-                className="w-12 h-12 md:w-14 md:h-14 bg-white hover:bg-gray-50 shadow-lg rounded-full flex items-center justify-center transition-all z-10 border border-gray-200 shrink-0"
-                aria-label="סרטון הבא"
-              >
-                <ChevronLeft className="w-6 h-6 text-charcoal" />
-              </button>
-            )}
-          </motion.div>
-
-          {/* Dots indicator */}
-          {videos.length > 1 && (
-            <div className="flex justify-center gap-2.5 mt-8">
-              {videos.map((_, index) => (
-                <button
-                  key={index}
-                  onClick={() => setCurrentVideoIndex(index)}
-                  className={`rounded-full transition-all duration-300 ${
-                    index === currentVideoIndex
-                      ? 'bg-deep-red w-8 h-2.5'
-                      : 'bg-gray-300 hover:bg-gray-400 w-2.5 h-2.5'
-                  }`}
-                  aria-label={`עבור לסרטון ${index + 1}`}
-                />
-              ))}
-            </div>
-          )}
+      {/* Treatment videos across the screen */}
+      <section className="relative bg-paper py-20 md:py-28 overflow-hidden">
+        <div className="bio-grid absolute inset-0" aria-hidden />
+        <Reveal className="relative text-center px-6 mb-10 md:mb-14">
+          <h2 className="text-4xl md:text-6xl font-extrabold text-charcoal tracking-tight">מטופלים שלנו</h2>
+          <div className="w-16 h-1 bg-deep-red rounded-full mx-auto mt-7" aria-hidden />
+        </Reveal>
+        <div className="relative max-w-[1240px] mx-auto">
+          <LocalVideoWall videos={videos} />
         </div>
+        <p className="lg:hidden relative text-center text-sm text-charcoal/50 mt-5">החליקו הצידה כדי לראות את כל הסרטונים</p>
       </section>
 
       {/* Consultation Form Section */}
-      <section id="appointment" className="py-8 md:py-10 bg-soft-grey">
+      <section id="appointment" className="py-20 md:py-28 bg-white">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -346,10 +208,10 @@ export default function IPRF() {
             className="text-center mb-6"
           >
             <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-charcoal mb-4 leading-tight">
-              תני לגוף שלך את הכוח לתקן את עצמו
+              הגוף שלך יכול לתקן את עצמו
             </h2>
             <p className="text-xl md:text-2xl text-charcoal-light max-w-3xl mx-auto leading-relaxed font-normal">
-              השאירי פרטים ונבדוק יחד אם הטיפול מתאים לך
+              השאירו פרטים ונבדוק יחד אם הטיפול מתאים לכם
             </p>
           </motion.div>
 
@@ -359,10 +221,10 @@ export default function IPRF() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="bg-white p-8 md:p-10 rounded-3xl shadow-modern-lg border border-gray-100 relative overflow-hidden"
+            className="bg-white p-7 md:p-10 rounded-3xl relative overflow-hidden ring-1 ring-charcoal/10 shadow-[0_40px_100px_-45px_rgba(0,0,0,0.35)]"
           >
             {/* Decorative gradient */}
-            <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-deep-red/5 to-transparent rounded-full blur-3xl" />
+            
             
             <div className="relative z-10">
               <div className="space-y-6 max-w-2xl mx-auto">
@@ -377,7 +239,7 @@ export default function IPRF() {
                     value={formData.name}
                     onChange={handleChange}
                     required
-                    className="w-full px-5 py-4 border-2 border-gray-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-deep-red/20 focus:border-deep-red transition-all text-right text-lg bg-gray-50/50 hover:bg-white"
+                    className="w-full px-5 py-4 rounded-xl bg-soft-grey border border-charcoal/10 focus:outline-none focus:border-deep-red focus:ring-2 focus:ring-deep-red/15 transition-all text-right text-lg"
                     placeholder="הזן את שמך המלא"
                   />
                 </div>
@@ -393,7 +255,7 @@ export default function IPRF() {
                     value={formData.phone}
                     onChange={handleChange}
                     required
-                    className="w-full px-5 py-4 border-2 border-gray-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-deep-red/20 focus:border-deep-red transition-all text-right text-lg bg-gray-50/50 hover:bg-white"
+                    className="w-full px-5 py-4 rounded-xl bg-soft-grey border border-charcoal/10 focus:outline-none focus:border-deep-red focus:ring-2 focus:ring-deep-red/15 transition-all text-right text-lg"
                     placeholder="הזן מספר טלפון נייד"
                   />
                 </div>
@@ -417,9 +279,9 @@ export default function IPRF() {
 
                 <motion.button
                   type="submit"
-                  whileHover={{ scale: 1.02, boxShadow: "0 0 30px rgba(153, 0, 0, 0.4)" }}
+                  whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
-                  className="w-full bg-deep-red text-white px-8 py-5 rounded-full text-lg font-semibold hover:opacity-90 transition-all shadow-modern-lg shadow-red-glow mt-6"
+                  className="w-full bg-deep-red text-white px-8 py-5 rounded-full text-lg font-semibold hover:bg-deep-red-dark transition-colors mt-6"
                 >
                   לתיאום פגישת ייעוץ
                 </motion.button>

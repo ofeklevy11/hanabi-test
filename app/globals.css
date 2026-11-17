@@ -1,8 +1,8 @@
+@import url('https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-@import url('https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700&display=swap');
 
 @layer base {
   html {
@@ -12,10 +12,36 @@
   body {
     @apply bg-medical-white text-charcoal;
     font-family: 'Heebo', 'Assistant', system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1,
+  h2,
+  h3 {
+    letter-spacing: -0.02em;
+  }
+
+  ::selection {
+    background: rgba(153, 0, 0, 0.14);
   }
 }
 
 @layer utilities {
+  /* Fine dot grid that fades at the edges: the site's one bio-tech texture */
+  .bio-grid {
+    background-image: radial-gradient(rgba(26, 26, 26, 0.16) 1px, transparent 1.5px);
+    background-size: 22px 22px;
+    -webkit-mask-image: radial-gradient(ellipse at center, black 10%, transparent 75%);
+    mask-image: radial-gradient(ellipse at center, black 10%, transparent 75%);
+  }
+
+  .no-scrollbar {
+    scrollbar-width: none;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
   .glassmorphism {
     background: rgba(255, 255, 255, 0.85);
     backdrop-filter: blur(10px);

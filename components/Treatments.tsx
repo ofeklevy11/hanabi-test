@@ -33,16 +33,16 @@ const services = [
 
 export default function Treatments() {
   return (
-    <section id="treatments" className="py-16 md:py-20 bg-soft-grey">
+    <section id="treatments" className="py-20 md:py-28 bg-paper">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
-          className="text-center mb-10"
+          className="text-center mb-12 md:mb-16"
         >
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-charcoal mb-6 leading-tight">
+          <h2 className="text-4xl md:text-6xl font-extrabold text-charcoal mb-6 leading-tight">
             הטיפולים שלנו שמחזירים את המראה הטבעי
           </h2>
         </motion.div>

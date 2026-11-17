@@ -22,7 +22,7 @@ export default function ServiceCard({ image, title, description, link, index }: 
         viewport={{ once: true, margin: "-50px" }}
         transition={{ duration: 0.6, delay: index * 0.1 }}
         whileHover={{ y: -8 }}
-        className="group bg-white rounded-lg overflow-hidden shadow-modern hover:shadow-modern-lg transition-all duration-300 cursor-pointer h-full"
+        className="group bg-white rounded-2xl overflow-hidden ring-1 ring-charcoal/10 shadow-[0_30px_60px_-40px_rgba(0,0,0,0.4)] hover:shadow-[0_40px_80px_-40px_rgba(0,0,0,0.5)] transition-shadow duration-500 cursor-pointer h-full"
       >
         {/* Image */}
         <div className="relative w-full aspect-[4/5] overflow-hidden bg-gray-100">
