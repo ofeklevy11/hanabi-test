@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import { Mail, Phone, MessageCircle } from 'lucide-react'
+import { Mail, Phone, MessageCircle, MapPin } from 'lucide-react'
 
 const quickLinks = [
   { href: '/', label: 'דף הבית' },
@@ -33,6 +33,10 @@ export default function Footer() {
                   <Mail className="w-5 h-5 shrink-0" />
                   <span>info@hanabi.co.il</span>
                 </a>
+              </li>
+              <li className="flex items-center gap-3 text-white/70">
+                <MapPin className="w-5 h-5 shrink-0" />
+                <span>פאול גרונינגר 4, ראשון לציון</span>
               </li>
               <li>
                 <a href="tel:0585065359" className="flex items-center gap-3 text-white/70 hover:text-white transition-colors">

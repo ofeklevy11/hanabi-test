@@ -75,7 +75,7 @@ export default function Eyelashes() {
       kind: 'final',
       title: 'התוצאה הסופית',
       when: 'שנה',
-      text: 'הריסים הגיעו לשיא צפיפותם ועוביים. המבט שלך מודגש, פתוח ומרשים – באופן טבעי ולתמיד.',
+      text: 'הריסים הגיעו לשיא צפיפותם ועוביים. המבט שלך מודגש, פתוח ומרשים – באופן טבעי ולכל החיים.',
     },
   ]
 
@@ -131,7 +131,7 @@ export default function Eyelashes() {
                 <span className="text-deep-red">לא הדבקות. לא תוספות</span>
               </p>
               <p className="text-xl md:text-2xl lg:text-3xl text-white/90 font-normal">
-                ריסים חיים וארוכים שנשארים איתך לתמיד
+                ריסים חיים וארוכים שנשארים איתך לכל החיים
               </p>
             </motion.div>
 
@@ -287,7 +287,7 @@ export default function Eyelashes() {
         <div className="relative max-w-6xl mx-auto px-6 lg:px-8 grid md:grid-cols-2 gap-12 lg:gap-20 items-center">
           <Reveal className="text-center md:text-right">
             <h2 className="text-4xl md:text-6xl font-extrabold text-charcoal leading-[1.1] tracking-tight">תני לעיניים שלך את המסגרת המגיעה להן</h2>
-            <p className="text-xl md:text-2xl font-light text-charcoal/65 leading-relaxed mt-6">השאירי פרטים ונבדוק יחד אם הטיפול מתאים לך</p>
+            <p className="text-xl md:text-2xl font-light text-charcoal/65 leading-relaxed mt-6">תאמו אבחון קליני מבוסס AI לקביעת פרוטוקול טיפול לתוצאה לכל החיים</p>
           </Reveal>
 
           <motion.form

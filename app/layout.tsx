@@ -28,7 +28,7 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
               '@context': 'https://schema.org',
-              '@type': 'MedicalBusiness',
+              '@type': ['MedicalClinic', 'MedicalBusiness'],
               '@id': 'https://hanabi.co.il/#clinic',
               name: 'HANA BI',
               alternateName: 'Hana Bi אסתטיקה ביולוגית מתקדמת',
@@ -40,6 +40,8 @@ export default function RootLayout({
                 { '@type': 'MedicalProcedure', name: 'השתלת גבות', url: 'https://hanabi.co.il/eyebrows' },
                 { '@type': 'MedicalProcedure', name: 'השתלת ריסים', url: 'https://hanabi.co.il/eyelashes' },
                 { '@type': 'MedicalProcedure', name: 'טיפול iPRF', url: 'https://hanabi.co.il/iprf' },
+                { '@type': 'MedicalProcedure', name: 'השתלת זקן', url: 'https://hanabi.co.il/' },
+                { '@type': 'MedicalProcedure', name: 'חידוש עור והעלמת קמטים', url: 'https://hanabi.co.il/' },
               ],
               email: 'info@hanabi.co.il',
               telephone: '+972-58-506-5359',
@@ -50,6 +52,16 @@ export default function RootLayout({
                 addressCountry: 'IL',
               },
               sameAs: ['https://www.instagram.com/hana.bi_israel'],
+              knowsAbout: [
+                'השתלת שיער בטכניקה היברידית FUE ו-DHI',
+                'לקיחת זקיקים בטכנולוגיית Micro-Extraction תחת מיקרוסקופ',
+                'מערכת קירור זקיקים בכלי ייעודי מבוקר טמפרטורה מחוץ לקרקפת',
+                'השתלת גבות בזקיקי Singles ממוינים',
+                'שחזור ריסים מיקרו-כירורגי בארכיטקטורת C-Curve',
+                'טיפול iPRF מבוסס פיברין אוטולוגי',
+                'השתלת זקן',
+                'חידוש עור והעלמת קמטים במכשור טכנולוגי מתקדם',
+              ],
               inLanguage: 'he-IL',
             }).replace(/</g, String.fromCharCode(92) + 'u003c'),
           }}

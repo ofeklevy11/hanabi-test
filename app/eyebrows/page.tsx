@@ -388,7 +388,7 @@ export default function Eyebrows() {
         <div className="relative max-w-6xl mx-auto px-6 lg:px-8 grid md:grid-cols-2 gap-12 lg:gap-20 items-center">
           <Reveal className="text-center md:text-right">
             <h2 className="text-4xl md:text-7xl font-extrabold text-charcoal leading-[1.08] tracking-tight">הצעד הראשון לגבות מושלמות</h2>
-            <p className="text-xl md:text-2xl font-light text-charcoal/65 leading-relaxed mt-6">השאירי פרטים ונבדוק יחד אם הטיפול מתאים לך</p>
+            <p className="text-xl md:text-2xl font-light text-charcoal/65 leading-relaxed mt-6">תאמו אבחון קליני מבוסס AI לקביעת פרוטוקול טיפול לתוצאה לכל החיים</p>
           </Reveal>
 
           <motion.form

@@ -403,7 +403,7 @@ export default function HairTransplantLP() {
             alt="הגנה על האזור התורם"
             lead="הצלחה של השתלת שיער נמדדת לא רק באיך שהחלק הקדמי נראה, אלא גם בשמירה על החלק האחורי של הראש. ב-Hana bi, אנו מתייחסים לאזור התורם שלך ביראת קודש."
           >
-            <h4 className="text-2xl font-bold text-charcoal">חילוץ זקיקים בטכנולוגיית &quot;Micro-Extraction&quot;:</h4>
+            <h4 className="text-2xl font-bold text-charcoal">לקיחת הזקיקים בטכנולוגיית &quot;Micro-Extraction&quot; ושיטה היברידית (FUE + DHI):</h4>
             <p>באמצעות מכשור קוריאני עדין ודק במיוחד, אנו מחלצים את הזקיקים אחד-אחד בדיוק כירורגי. הכלים המיוחדים שלנו מאפשרים לנו:</p>
             <DetailList
               items={[
@@ -443,7 +443,7 @@ export default function HairTransplantLP() {
             alt="98% אחוזי קליטה"
             lead="הזקיק הוא איבר חי, והזמן שלו מחוץ לגוף הוא קריטי. כדי להבטיח שכל שערה ושערה שאנחנו משתילים אכן תצמח, אנו משתמשים במערכת שימור וקירור זקיקים מתקדמת."
           >
-            <p>ברגע הוצאת הזקיק, הוא עובר לסביבה מבוקרת טמפרטורה המדמה את תנאי הגוף. פרוטוקול השימור הייחודי שלנו מאפשר לנו להגיע לתוצאה חסרת תקדים של 98% אחוזי קליטה. עבורך, זה אומר ביטחון מלא שמה שהשתלנו – יצמח בוודאות ויישאר איתך לתמיד.</p>
+            <p>מערכת קירור הזקיקים אינה מקררת את ראש המטופל. הזקיקים נלקחים מהקרקפת ומיד מועברים לכלי ייעודי מבוקר טמפרטורה מחוץ לגוף, שם הם נשמרים עד להשתלה. פרוטוקול השימור הייחודי שלנו מאפשר לנו להגיע לתוצאה חסרת תקדים של 98% אחוזי קליטה. עבורך, זה אומר ביטחון מלא שמה שהשתלנו – יצמח בוודאות ויישאר איתך לכל החיים.</p>
           </Chapter>
         </div>
       </section>
@@ -612,7 +612,7 @@ export default function HairTransplantLP() {
         <div className="relative max-w-6xl mx-auto px-6 lg:px-8 grid md:grid-cols-2 gap-12 lg:gap-20 items-center">
           <Reveal className="text-center md:text-right">
             <h2 className="text-4xl md:text-7xl font-extrabold text-charcoal leading-[1.08] tracking-tight">הצעד הראשון לשיער מלא</h2>
-            <p className="text-xl md:text-2xl font-light text-charcoal/65 leading-relaxed mt-6">השאירו פרטים ונבדוק יחד אם הטיפול מתאים לכם</p>
+            <p className="text-xl md:text-2xl font-light text-charcoal/65 leading-relaxed mt-6">תאמו אבחון קליני מבוסס AI לקביעת פרוטוקול טיפול לתוצאה לכל החיים</p>
           </Reveal>
 
           <motion.form
