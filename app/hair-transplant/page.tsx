@@ -379,7 +379,7 @@ export default function HairTransplant() {
           <Chapter
             number="01"
             title="ארכיטקטורה של קו השיער: אומנות הסידור"
-            image="/files/hair/hairline-architecture.jpg"
+            image="/files/hair/hairline-architecture-v2.jpg"
             alt="ארכיטקטורה של קו השיער"
             lead={'מראה מלאכותי ("מראה בובה") נובע בדרך כלל מתכנון לקוי. ב-Hana bi, אנו בונים את קו השיער שלך בשכבות אנטומיות:'}
           >
