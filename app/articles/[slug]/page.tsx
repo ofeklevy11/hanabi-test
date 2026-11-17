@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import Image from 'next/image'
+import ArticleCards from '@/components/ArticleCards'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { CheckCircle2 } from 'lucide-react'
@@ -118,6 +119,7 @@ export default function ArticlePage({ params }: { params: { slug: string } }) {
       <article className="pb-16 md:pb-24 mt-12 md:mt-14">
         <div className="max-w-3xl mx-auto px-6">
           <p className="text-xl md:text-2xl text-charcoal/80 leading-relaxed">{a.intro}</p>
+          {a.cards && <ArticleCards cards={a.cards} />}
 
           {a.sections.map((s) => (
             <section key={s.heading} className="mt-14 md:mt-16">

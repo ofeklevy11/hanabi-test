@@ -5,6 +5,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { CheckCircle2, X } from 'lucide-react'
 import { type Article, DISCLAIMER } from '@/lib/articles'
+import ArticleCards from '@/components/ArticleCards'
 
 export default function ArticleHub({ articles }: { articles: Article[] }) {
   const [openSlug, setOpenSlug] = useState<string | null>(null)
@@ -97,6 +98,7 @@ export default function ArticleHub({ articles }: { articles: Article[] }) {
                   נכתב על ידי צוות HANA BI · {active.readMinutes} דקות קריאה
                 </p>
                 <p className="mt-6 text-lg text-charcoal/80 leading-relaxed">{active.intro}</p>
+                {active.cards && <ArticleCards cards={active.cards} />}
 
                 {active.sections.map((s) => (
                   <section key={s.heading} className="mt-9">
