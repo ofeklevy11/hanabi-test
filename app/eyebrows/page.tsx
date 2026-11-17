@@ -3,7 +3,6 @@
 import Navbar from '@/components/Navbar'
 import { submitLead } from '@/lib/submitLead'
 import Footer from '@/components/Footer'
-import PriceBlock from '@/components/PriceBlock'
 import { Reveal, Chapter, DetailList, RecoveryTimeline, AutoplayVideo, LoopVideo, VideoWall, fieldClassName, type TimelineStep } from '@/components/TreatmentBlocks'
 import Link from 'next/link'
 import Image from 'next/image'
@@ -378,16 +377,6 @@ export default function Eyebrows() {
         </div>
       </section>
 
-      <PriceBlock
-        title="כמה עולה השתלת גבות"
-        method="השתלת גבות בטכניקת FUE"
-        from="11,000 ₪"
-        to="14,000 ₪"
-        note="המחיר הסופי נקבע לאחר התייעצות ובדיקה אישית, לפי היקף ההשתלה."
-        addonTitle="טכניקת LONG HAIR FUE ללא קיצור השיער"
-        addonEnglish="LONG HAIR FUE"
-        addonText="בשיטה הסטנדרטית שלנו השיער מקוצר לכ-5 עד 6 ס״מ. בטכניקה ללא קיצור השיער נשאר באורך של 20 עד 30 ס״מ, וההשתלה דורשת צוות גדול יותר ויותר זמן. התוספת למחיר נקבעת לכל מטופל לפי גודל ההשתלה."
-      />
       {/* Consultation form */}
       <section id="appointment" className="relative scroll-mt-20 bg-paper py-20 md:py-28 overflow-hidden">
         <span

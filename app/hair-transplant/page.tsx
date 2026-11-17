@@ -3,7 +3,6 @@
 import Navbar from '@/components/Navbar'
 import { submitLead } from '@/lib/submitLead'
 import Footer from '@/components/Footer'
-import PriceBlock from '@/components/PriceBlock'
 import Image from 'next/image'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
@@ -606,16 +605,6 @@ export default function HairTransplant() {
         </div>
       </section>
 
-      <PriceBlock
-        title="כמה עולה השתלת שיער"
-        method="השתלת שיער בטכניקה משולבת: DHI ו-FUE"
-        from="16,000 ₪"
-        to="20,000 ₪"
-        note="המחיר הסופי נקבע לאחר התייעצות ובדיקה אישית, לפי היקף ההשתלה."
-        addonTitle="השתלה ללא גילוח"
-        addonEnglish="NO SHAVE"
-        addonText="אפשר לבצע את ההשתלה בלי לגלח את השיער, גם באזור התורם וגם באזור המושתל. השערות מוציאות ומושתלות באורך הטבעי שלהן. התוספת למחיר נקבעת לכל מטופל לפי גודל ההשתלה."
-      />
       {/* Consultation form */}
       <section id="appointment" className="relative scroll-mt-20 bg-paper py-20 md:py-28 overflow-hidden">
         <span
