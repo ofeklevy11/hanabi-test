@@ -1,131 +1,89 @@
 'use client'
 
-import { useState, useEffect, useRef, useCallback } from 'react'
+import { useCallback, useEffect, useRef } from 'react'
 import { motion } from 'framer-motion'
 
-const DESKTOP_VIDEO_SRC = '/files/hero/HERO_VIDEO_DESKTOP.mp4'
-const MOBILE_VIDEO_ID = 'Si61kNqklzY'
-const DESKTOP_END_TRIM_SECONDS = 3
+const VIDEO_SRC = '/files/hero/HERO_VIDEO_DESKTOP.mp4'
+const POSTER_SRC = '/files/hero/hero-poster.jpg'
+const END_TRIM_SECONDS = 3
 
-const videoCoverClassName =
-  'absolute top-1/2 left-1/2 w-[100vw] h-[56.25vw] min-h-[100vh] min-w-[177.78vh] -translate-x-1/2 -translate-y-1/2 pointer-events-none border-0'
+const VIDEO_DESCRIPTION =
+  'סרטון תדמית קליני של מרפאת HANA BI: סביבת העבודה המיקרו-כירורגית, אבחון קרקפת ועור מבוסס AI, לקיחת הזקיקים בדיוק מיקרוסקופי ללא פגיעה באזור התורם, שימור הזקיקים בכלי ייעודי במערכת הקירור מחוץ לקרקפת, והשתלה בטכניקה היברידית (FUE + DHI) לתוצאה טבעית לכל החיים.'
 
-function buildMobileEmbedSrc(videoId: string) {
-  const params = new URLSearchParams({
-    autoplay: '1',
-    mute: '1',
-    loop: '1',
-    playlist: videoId,
-    controls: '0',
-    playsinline: '1',
-    rel: '0',
-    modestbranding: '1',
-    iv_load_policy: '3',
-    disablekb: '1',
-    fs: '0',
-    cc_load_policy: '0',
-    origin: typeof window !== 'undefined' ? window.location.origin : '',
-  })
-  return `https://www.youtube.com/embed/${videoId}?${params}`
+const videoLd = {
+  '@context': 'https://schema.org',
+  '@type': 'VideoObject',
+  name: 'HANA BI: אסתטיקה ביולוגית מתקדמת',
+  description: VIDEO_DESCRIPTION,
+  thumbnailUrl: `https://hanabi.co.il${POSTER_SRC}`,
+  contentUrl: `https://hanabi.co.il${VIDEO_SRC}`,
+  uploadDate: '2026-05-20',
+  duration: 'PT9S',
+  inLanguage: 'he-IL',
+  publisher: { '@id': 'https://hanabi.co.il/#clinic' },
 }
 
 export default function Hero() {
-  const [isMobile, setIsMobile] = useState(false)
-  const [ready, setReady] = useState(false)
-  const desktopVideoRef = useRef<HTMLVideoElement>(null)
+  const videoRef = useRef<HTMLVideoElement>(null)
 
-  useEffect(() => {
-    const checkMobile = () => setIsMobile(window.innerWidth < 768)
-    checkMobile()
-    setReady(true)
-    window.addEventListener('resize', checkMobile)
-    return () => window.removeEventListener('resize', checkMobile)
-  }, [])
-
-  const handleDesktopTimeUpdate = useCallback(() => {
-    const video = desktopVideoRef.current
+  // Loop before the last seconds of the clip, which end on a blank frame
+  const handleTimeUpdate = useCallback(() => {
+    const video = videoRef.current
     if (!video || !Number.isFinite(video.duration)) return
-    if (video.currentTime >= video.duration - DESKTOP_END_TRIM_SECONDS) {
-      video.currentTime = 0
-    }
+    if (video.currentTime >= video.duration - END_TRIM_SECONDS) video.currentTime = 0
   }, [])
 
   useEffect(() => {
-    if (isMobile || !desktopVideoRef.current) return
-    const video = desktopVideoRef.current
-    video.play().catch(() => {})
-  }, [isMobile, ready])
-
-  if (!ready) return <section className="relative min-h-[70vh] md:min-h-[85vh] lg:min-h-[90vh] bg-black" />
+    videoRef.current?.play().catch(() => {})
+  }, [])
 
   return (
     <section className="relative min-h-[70vh] md:min-h-[85vh] lg:min-h-[90vh] flex items-center justify-center overflow-hidden bg-black">
-      <div className="absolute inset-0 z-10 overflow-hidden pointer-events-none">
-        {isMobile ? (
-          <iframe
-            key={MOBILE_VIDEO_ID}
-            src={buildMobileEmbedSrc(MOBILE_VIDEO_ID)}
-            className={videoCoverClassName}
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            referrerPolicy="strict-origin-when-cross-origin"
-            title="סרטון תדמית"
-          />
-        ) : (
-          <video
-            ref={desktopVideoRef}
-            src={DESKTOP_VIDEO_SRC}
-            className={`${videoCoverClassName} object-cover`}
-            autoPlay
-            muted
-            playsInline
-            preload="auto"
-            onTimeUpdate={handleDesktopTimeUpdate}
-            aria-hidden
-          />
-        )}
-      </div>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(videoLd).replace(/</g, '\\u003c') }}
+      />
+      {/* Plain HTML5 video, rendered on the server so crawlers see it without running scripts */}
+      <video
+        ref={videoRef}
+        src={VIDEO_SRC}
+        poster={POSTER_SRC}
+        className="absolute inset-0 h-full w-full object-cover pointer-events-none"
+        autoPlay
+        muted
+        loop
+        playsInline
+        preload="auto"
+        onTimeUpdate={handleTimeUpdate}
+        aria-label={VIDEO_DESCRIPTION}
+        title="סרטון תדמית קליני של מרפאת HANA BI"
+      />
 
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, delay: 0.5 }}
-        className="relative z-20 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 w-full pt-20 pointer-events-none"
+        transition={{ duration: 0.8, delay: 0.3 }}
+        className="relative z-20 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 w-full pt-20"
       >
         <div className="text-center space-y-6">
-          <motion.h1
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.7 }}
-            className="text-5xl md:text-6xl lg:text-8xl font-bold mb-4 leading-[1.1] tracking-tight"
-          >
+          <h1 className="text-5xl md:text-6xl lg:text-8xl font-bold mb-4 leading-[1.1] tracking-tight">
             <span className="text-white">דיוק יפני חדשנות קוריאנית </span>
             <span className="text-deep-red">HANA BI</span>
-          </motion.h1>
+          </h1>
 
-          <motion.p
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.9 }}
-            className="text-xl md:text-2xl text-white/90 mb-8 max-w-4xl mx-auto leading-relaxed font-normal"
-          >
-            מרכז מומחים לטיפולי אסתטיקה ושיקום, לתוצאות שנראות כאילו היו שם תמיד. הטכנולוגיה המתקדמת שלנו מאפשרת לשדרג את השיער והעור ללא זכר להתערבות רפואית, ללא צלקות, ותוך שמירה מוחלטת על מראה נקי ובריא.
-          </motion.p>
+          <p className="text-xl md:text-2xl text-white/90 mb-8 max-w-4xl mx-auto leading-relaxed font-normal">
+            מרכז מומחים לאסתטיקה ביולוגית מתקדמת, הפועל לפי הפרוטוקולים הקליניים של יפן ודרום קוריאה. השתלות שיער, גבות,
+            ריסים וזקן בטכניקה היברידית (FUE + DHI), לתוצאה טבעית לכל החיים.
+          </p>
 
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 1.1 }}
-            className="flex flex-col sm:flex-row items-center justify-center gap-2"
-          >
-            <motion.a
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-2">
+            <a
               href="#appointment"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="pointer-events-auto inline-flex items-center gap-2 px-10 py-5 bg-deep-red text-white rounded-full text-lg font-semibold hover:opacity-90 transition-all duration-300 hover:scale-105"
+              className="inline-flex items-center gap-2 px-10 py-5 bg-deep-red text-white rounded-full text-lg font-semibold hover:opacity-90 transition-all duration-300 hover:scale-105"
             >
               לתיאום אבחון טכנולוגי
-            </motion.a>
-          </motion.div>
+            </a>
+          </div>
         </div>
       </motion.div>
 

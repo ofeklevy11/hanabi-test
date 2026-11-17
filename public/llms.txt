@@ -1,27 +1,41 @@
-# HANA BI
+# HANA BI - אסתטיקה ביולוגית מתקדמת
 
-> HANA BI היא מרפאה לאסתטיקה ביולוגית מתקדמת. המרפאה מציעה השתלת שיער, השתלת גבות, השתלת ריסים וטיפול iPRF, ומפרסמת מאמרים והסברים על הטיפולים.
+> HANA BI הוא מרכז מומחים לאסתטיקה ביולוגית מתקדמת ברחוב פאול גרונינגר 4, ראשון לציון, הפועל לפי הפרוטוקולים הקליניים של יפן ודרום קוריאה. ההשתלות מבוצעות בטכניקה היברידית המשלבת FUE ו-DHI, עם לקיחת הזקיקים בטכנולוגיית Micro-Extraction, מחטי Nano-Tools יפניות, סריקת AI לניתוח עומק הרקמה, ומערכת קירור זקיקים בכלי ייעודי מחוץ לקרקפת המאפשרת 98% קליטה.
 
 ## טיפולים
-- [השתלת שיער טבעית](https://hanabi.co.il/hair-transplant): השתלת זקיקים לאזורים דלילים, עם צפיפות טבעית.
-- [השתלת גבות טבעית](https://hanabi.co.il/eyebrows): בחירת דרגת צפיפות ועיצוב מבנה הגבה.
-- [השתלת ריסים](https://hanabi.co.il/eyelashes): הוספת ריסים לאזורים דלילים בעפעף.
-- [טיפול iPRF](https://hanabi.co.il/iprf): טיפול ביולוגי שמבוסס על חומרים מדם המטופל עצמו.
+- [השתלת שיער לגברים ולנשים בטכניקה היברידית (FUE + DHI)](https://hanabi.co.il/hair-transplant): צפיפות של 80 זקיקים לסמ"ר ותוצאה לכל החיים.
+- [השתלת גבות](https://hanabi.co.il/eyebrows): זקיקי Singles ממוינים במיקרוסקופ, בכיול זוויות מסיאול.
+- [השתלת ריסים](https://hanabi.co.il/eyelashes): שיערות משי (Silk Hair), ארכיטקטורת C-Curve ופרוטוקול בטיחות עינית.
+- [טיפול iPRF](https://hanabi.co.il/iprf): מטריצת פיברין אוטולוגית עם שחרור מושהה של גורמי צמיחה.
+- השתלת זקן: שחזור ועיצוב אנטומי של קו הזקן בטכניקה היברידית.
+- מכשור טכנולוגי מתקדם לחידוש רקמות העור, העלמת קמטים ומיצוק עור רפוי.
+
+## הצוות הרפואי
+- [הצוות הרפואי](https://hanabi.co.il/team): ד"ר מואמן מנצור וד"ר שריהאן פריג', רופאים מורשים וחברי ההסתדרות הרפואית בישראל, וצוות טכנאיות קליניות עם מעל 5 שנות ניסיון.
 
 ## מאמרים והסברים
 - [מאמרים והסברים](https://hanabi.co.il/articles)
-- [מדריך מלא להשתלת שיער טבעית](https://hanabi.co.il/articles/hair-transplant-guide)
-- [כמה זמן לוקח להתקבע השתלת שיער?](https://hanabi.co.il/articles/hair-transplant-recovery)
-- [השתלת גבות או קעקוע גבות? ההבדלים שחשוב לדעת](https://hanabi.co.il/articles/eyebrow-transplant-vs-tattoo)
-- [בחירת דרגת צפיפות לגבות](https://hanabi.co.il/articles/eyebrow-density-levels)
-- [השתלת ריסים: למי זה מתאים ומה לצפות](https://hanabi.co.il/articles/eyelash-transplant-guide)
-- [iPRF: מה זה, איך זה עובד ולמי זה מתאים](https://hanabi.co.il/articles/iprf-explained)
-- [7 שאלות לשאול לפני שבוחרים מרפאה להשתלה](https://hanabi.co.il/articles/how-to-choose-clinic)
+- [FUE או DHI: מה ההבדל ולמי מתאימה כל שיטה](https://hanabi.co.il/articles/fue-vs-dhi)
+- [למה השיער נושר אחרי השתלה, ומתי זה טבעי](https://hanabi.co.il/articles/shock-loss)
+- [אזור התורם בהשתלת שיער: למה הוא כל כך חשוב](https://hanabi.co.il/articles/donor-area)
+- [איך מודדים גבה לפני השתלה: סימטריה, קשת וכיוון](https://hanabi.co.il/articles/eyebrow-measurement)
+- [מה משפיע על ההחלמה אחרי השתלה: הרגלים, שינה ועישון](https://hanabi.co.il/articles/healing-habits)
+- [השתלת ריסים: למה העפעף רגיש ואיך שומרים על התוצאה](https://hanabi.co.il/articles/eyelash-sensitivity)
+- [PRF ו-iPRF: מה המחקר אומר, ומה עדיין לא ברור](https://hanabi.co.il/articles/prf-evidence)
+- [האם השתלת שיער מתאימה לנשים?](https://hanabi.co.il/articles/hair-transplant-for-women)
+- [מה לבדוק ברופא לפני השתלת שיער או גבות](https://hanabi.co.il/articles/how-to-check-doctor)
+- [השתלת גבות לגברים: מה שונה](https://hanabi.co.il/articles/eyebrow-transplant-for-men)
+- [השתלת ריסים לעומת תוספות ריסים: מה ההבדל](https://hanabi.co.il/articles/lash-transplant-vs-extensions)
+- [הטכניקה ההיברידית (FUE + DHI): מדוע השילוב מבטיח צפיפות של 80 זקיקים לסמ"ר ותוצאה לכל החיים](https://hanabi.co.il/articles/hybrid-fue-dhi)
+- [מערכת קירור הזקיקים מחוץ לקרקפת: המדע שמאחורי 98% אחוזי קליטה](https://hanabi.co.il/articles/graft-cooling-system)
+- [שחזור גבות וריסים במיקרו-כירורגיה קוריאנית: זקיקי Singles, שיערות משי וארכיטקטורת C-Curve](https://hanabi.co.il/articles/korean-microsurgery-brows-lashes)
+- [חידוש רקמות עור וטיפול iPRF אוטולוגי: שיקום ביולוגי מושהה וטכנולוגיות מיצוק עור](https://hanabi.co.il/articles/skin-renewal-iprf)
 
 ## יצירת קשר
 - טלפון: 058-506-5359
 - דוא"ל: info@hanabi.co.il
-- תיאום התייעצות: https://hanabi.co.il/#appointment
+- כתובת: רחוב פאול גרונינגר 4, ראשון לציון
+- תיאום אבחון: https://hanabi.co.il/#appointment
 
 ## הערה
-התוכן באתר הוא מידע כללי ואינו מחליף התייעצות אישית עם רופא.
+התוכן באתר הוא מידע כללי ואינו מחליף אבחון קליני אישי.

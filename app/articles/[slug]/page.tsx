@@ -165,9 +165,9 @@ export default function ArticlePage({ params }: { params: { slug: string } }) {
           </section>
 
           <div className="mt-16 rounded-3xl bg-charcoal text-white p-8 md:p-12 text-center">
-            <h2 className="text-2xl md:text-3xl font-bold">רוצים להבין מה מתאים לכם?</h2>
+            <h2 className="text-2xl md:text-3xl font-bold">תיאום אבחון קליני</h2>
             <p className="mt-4 text-white/75 text-lg leading-relaxed max-w-xl mx-auto">
-              נשמח לבדוק איתכם את ההתאמה, להסביר את האפשרויות ולענות על כל השאלות.
+              תאמו אבחון קליני מבוסס AI לקביעת פרוטוקול אישי לתוצאה לכל החיים.
             </p>
             <Link
               href={a.ctaHref}
