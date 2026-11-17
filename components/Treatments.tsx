@@ -12,19 +12,19 @@ const services = [
     link: '/eyebrows',
   },
   {
-    image: '/assets/sear.PNG',
+    image: '/assets/sear.webp',
     title: 'השתלת שיער',
     description: 'צפיפות מקסימלית וקו שיער טבעי בטכנולוגיה קוריאנית מתקדמת.',
     link: '/hair-transplant',
   },
   {
-    image: '/assets/risim.PNG',
+    image: '/assets/risim.webp',
     title: 'השתלת ריסים',
     description: 'מראה עיניים פקוח וריסים מלאים וארוכים ללא צורך בהדבקות.',
     link: '/eyelashes',
   },
   {
-    image: '/assets/iprf.PNG',
+    image: '/assets/iprf.webp',
     title: 'טיפול iPRF',
     description: 'התחדשות ביולוגית ושיפור מרקם העור באמצעות משאבים טבעיים בלבד.',
     link: '/iprf',

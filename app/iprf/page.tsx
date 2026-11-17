@@ -6,6 +6,7 @@ import { Reveal, LocalVideoWall } from '@/components/TreatmentBlocks'
 import Footer from '@/components/Footer'
 import Link from 'next/link'
 import Image from 'next/image'
+import SplitHero from '@/components/SplitHero'
 import { motion } from 'framer-motion'
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
@@ -70,75 +71,29 @@ export default function IPRF() {
 
   return (
     <main className="min-h-screen bg-white">
-      <Navbar transparent />
+      <Navbar />
 
-      {/* Hero Section - Full Width Image */}
-      <section className="relative min-h-[70vh] md:min-h-[85vh] lg:min-h-[90vh] flex items-center justify-center overflow-hidden">
-        {/* Background Image */}
-        <div className="absolute inset-0">
-          <Image
-            src="/files/hero/iprf-hero.jpg"
-            alt="iPRF התחדשות ביולוגית - HANA BI"
-            fill
-            className="object-cover"
-            quality={95}
-            priority
-            sizes="100vw"
-          />
-          {/* Subtle overlay for text readability */}
-          <div className="absolute inset-0 bg-black/30" />
-          {/* Bottom darkening to mark section end */}
-          <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-black/40 to-transparent" />
-        </div>
-
-        {/* Hero Content - Centered over image */}
-        <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20">
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1.2, ease: [0.25, 0.1, 0.25, 1] }}
-            className="text-center space-y-6 max-w-6xl mx-auto"
+      {/* Hero: photo whole on every screen, text beside it (desktop) or below it (phone) */}
+      <SplitHero
+        src="/files/hero/iprf-hero.jpg"
+        alt="iPRF התחדשות ביולוגית - HANA BI"
+        desktopPosition="62% 50%"
+        mobileAspect="4 / 3"
+      >
+          <h1 className="text-[2.25rem] sm:text-6xl 2xl:text-7xl font-bold text-charcoal leading-[1.05] tracking-tight">
+            iPRF <span className="text-deep-red">התחדשות ביולוגית</span>
+          </h1>
+          <div className="w-16 h-1 bg-deep-red rounded-full mx-auto lg:mx-0 mt-6 md:mt-7" aria-hidden />
+          <p className="mt-6 md:mt-7 text-lg sm:text-xl xl:text-2xl text-charcoal/65 leading-relaxed max-w-xl mx-auto lg:mx-0">
+            פריצת דרך מהפכנית המעניקה מענה ביולוגי משולש לעצירת נשירת השיער, חידוש מרקם עור הפנים ושחזור עמוק של עור צלקתי
+          </p>
+          <a
+            href="#appointment"
+            className="mt-9 inline-block bg-deep-red hover:bg-deep-red-dark text-white px-10 py-4 rounded-full text-lg font-semibold transition-all duration-300 hover:scale-105"
           >
-            <motion.h1
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1, delay: 0.3 }}
-              className="text-5xl md:text-7xl lg:text-9xl font-bold text-white leading-[1.05] tracking-tight"
-            >
-              iPRF <span className="text-deep-red">התחדשות ביולוגית</span>
-            </motion.h1>
-
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1, delay: 0.6 }}
-              className="space-y-3"
-            >
-              <p className="text-xl md:text-2xl lg:text-3xl text-white/90 font-normal max-w-5xl mx-auto leading-relaxed">
-                פריצת דרך מהפכנית המעניקה מענה ביולוגי משולש לעצירת נשירת השיער חידוש מרקם עור הפנים ושחזור עמוק של עור צלקתי
-              </p>
-            </motion.div>
-
-            {/* CTA Button */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1, delay: 0.9 }}
-              className="pt-4"
-            >
-              <a
-                href="#appointment"
-                className="inline-block bg-deep-red hover:bg-deep-red-dark text-white px-10 py-4 rounded-full text-lg font-semibold transition-all duration-300 hover:scale-105"
-              >
-                לתיאום פגישת ייעוץ
-              </a>
-            </motion.div>
-          </motion.div>
-        </div>
-
-        {/* Clean transition to next section */}
-        <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-white to-transparent z-10" />
-      </section>
+            לתיאום פגישת ייעוץ
+          </a>
+      </SplitHero>
 
       {/* Process image */}
       <section className="relative bg-white pt-16 md:pt-24 overflow-hidden">

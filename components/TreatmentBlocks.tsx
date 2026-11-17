@@ -162,14 +162,28 @@ export function RecoveryTimeline({ steps, tone = 'white' }: { steps: TimelineSte
 export const fieldClassName =
   'w-full px-5 py-4 rounded-xl bg-soft-grey border border-charcoal/10 focus:outline-none focus:border-deep-red focus:ring-2 focus:ring-deep-red/15 transition-all text-right text-lg'
 
-// Plays muted while at least half of it is on screen, pauses when scrolled away
-export function AutoplayVideo({ src, label, className }: { src: string; label: string; className?: string }) {
+// Downloads nothing until the video is close to the screen, then plays muted while
+// at least half of it is visible and pauses when scrolled away
+function useLazyAutoplay() {
   const videoRef = useRef<HTMLVideoElement>(null)
 
   useEffect(() => {
     const video = videoRef.current
     if (!video) return
-    const observer = new IntersectionObserver(
+    const near = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          // play() already started loading if the video jumped straight into view
+          if (video.paused && video.readyState === 0) {
+            video.preload = 'metadata'
+            video.load()
+          }
+          near.disconnect()
+        }
+      },
+      { rootMargin: '600px 0px' }
+    )
+    const visible = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
           video.play().catch(() => {})
@@ -179,9 +193,19 @@ export function AutoplayVideo({ src, label, className }: { src: string; label: s
       },
       { threshold: 0.5 }
     )
-    observer.observe(video)
-    return () => observer.disconnect()
+    near.observe(video)
+    visible.observe(video)
+    return () => {
+      near.disconnect()
+      visible.disconnect()
+    }
   }, [])
+
+  return videoRef
+}
+
+export function AutoplayVideo({ src, label, className }: { src: string; label: string; className?: string }) {
+  const videoRef = useLazyAutoplay()
 
   return (
     <video
@@ -192,7 +216,25 @@ export function AutoplayVideo({ src, label, className }: { src: string; label: s
       muted
       loop
       playsInline
-      preload="metadata"
+      preload="none"
+      aria-label={label}
+    />
+  )
+}
+
+// Silent looping clip without controls (e.g. results), loaded only near the screen
+export function LoopVideo({ src, label, className }: { src: string; label: string; className?: string }) {
+  const videoRef = useLazyAutoplay()
+
+  return (
+    <video
+      ref={videoRef}
+      src={`${src}#t=0.001`}
+      className={className}
+      muted
+      loop
+      playsInline
+      preload="none"
       aria-label={label}
     />
   )

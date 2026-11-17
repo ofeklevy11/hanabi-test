@@ -1,6 +1,7 @@
 'use client'
 
 import Image from 'next/image'
+import SplitHero from '@/components/SplitHero'
 import { submitLead } from '@/lib/submitLead'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
@@ -218,69 +219,26 @@ export default function HairTransplantLP() {
 
   return (
     <main className="min-h-screen bg-white relative overflow-hidden">
-      {/* Hero */}
-      <section className="relative min-h-[85svh] md:min-h-[85vh] lg:min-h-[90vh] flex items-end justify-center overflow-hidden">
-        <div className="absolute inset-0">
-          <Image
-            src="/files/hero/hair-transplant-hero-v2.jpg"
-            alt="השתלת שיער טבעית - HANA BI"
-            fill
-            className="object-cover"
-            quality={95}
-            priority
-            sizes="100vw"
-          />
-        </div>
-
-        <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-7 md:pb-20">
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1.2, ease: [0.25, 0.1, 0.25, 1] }}
-            className="text-center space-y-3 md:space-y-5 max-w-6xl mx-auto"
+      {/* Hero: photo whole on every screen, text beside it (desktop) or below it (phone) */}
+      <SplitHero
+        src="/files/hero/hair-transplant-hero-v2.jpg"
+        alt="השתלת שיער טבעית - HANA BI"
+        desktopPosition="50% 32%"
+        mobileAspect="1 / 1"
+        mobilePosition="50% 42%"
+        withNavbar={false}
+      >
+          <h1 className="text-[2.25rem] sm:text-6xl 2xl:text-7xl font-bold text-charcoal leading-[1.05] tracking-tight">השתלת שיער טבעית</h1>
+          <div className="w-16 h-1 bg-deep-red rounded-full mx-auto lg:mx-0 mt-6 md:mt-7" aria-hidden />
+          <p className="mt-6 md:mt-7 text-2xl sm:text-3xl 2xl:text-4xl font-bold text-deep-red leading-tight">צפיפות מלאה, ומראה טבעי</p>
+          <p className="mt-3 text-xl sm:text-2xl text-charcoal/60">שנשאר לכל החיים</p>
+          <a
+            href="#appointment"
+            className="mt-9 inline-block bg-deep-red hover:bg-deep-red-dark text-white px-10 py-4 rounded-full text-lg font-semibold transition-all duration-300 hover:scale-105"
           >
-            <motion.h1
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1, delay: 0.3 }}
-              className="text-[2.3rem] md:text-7xl lg:text-8xl font-bold text-white leading-[1.05] tracking-tight"
-            >
-              השתלת שיער טבעית
-            </motion.h1>
-
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1, delay: 0.6 }}
-              className="space-y-3"
-            >
-              <p className="text-2xl md:text-4xl lg:text-5xl font-bold leading-tight max-w-5xl mx-auto">
-                <span className="text-deep-red">צפיפות מלאה, ומראה טבעי</span>
-              </p>
-              <p className="text-xl md:text-2xl lg:text-3xl text-charcoal/80 md:text-white/90 font-medium md:font-normal">
-                שנשאר לכל החיים
-              </p>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1, delay: 0.9 }}
-              className="pt-4"
-            >
-              <a
-                href="#appointment"
-                className="inline-block bg-deep-red hover:bg-deep-red-dark text-white px-10 py-4 rounded-full text-lg font-semibold transition-all duration-300 hover:scale-105"
-              >
-                לתיאום פגישת ייעוץ
-              </a>
-            </motion.div>
-          </motion.div>
-        </div>
-
-        {/* Clean transition to next section */}
-        <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-white to-transparent z-10" />
-      </section>
+            לתיאום פגישת ייעוץ
+          </a>
+      </SplitHero>
 
       {/* Opening statement */}
       <section className="relative py-20 md:py-32 bg-white overflow-hidden">

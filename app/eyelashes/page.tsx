@@ -202,7 +202,7 @@ export default function Eyelashes() {
           <Chapter
             number="01"
             title="סוד המיון – רק שיערות משי (Silk Hair Selection)"
-            image="/files/hair/silk-hair-selection.PNG"
+            image="/files/hair/silk-hair-selection.webp"
             alt="סוד המיון – רק שיערות משי"
             imageWidth={2721}
             imageHeight={1405}

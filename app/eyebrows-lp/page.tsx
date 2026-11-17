@@ -1,6 +1,6 @@
 'use client'
 
-import { Reveal, Chapter, DetailList, RecoveryTimeline, AutoplayVideo, VideoWall, fieldClassName, type TimelineStep } from '@/components/TreatmentBlocks'
+import { Reveal, Chapter, DetailList, RecoveryTimeline, AutoplayVideo, LoopVideo, VideoWall, fieldClassName, type TimelineStep } from '@/components/TreatmentBlocks'
 import { submitLead } from '@/lib/submitLead'
 import Link from 'next/link'
 import Image from 'next/image'
@@ -335,7 +335,7 @@ export default function EyebrowsLP() {
                           ) : (
                             <>
                               {item.video ? (
-                                <video src={item.src} className="absolute inset-0 w-full h-full object-cover" autoPlay loop muted playsInline preload="metadata" aria-label={`${name} - ${item.label}`} />
+                                <LoopVideo src={item.src} className="absolute inset-0 w-full h-full object-cover" label={`${name} - ${item.label}`} />
                               ) : (
                                 <Image src={item.src} alt={`${name} - ${item.label}`} fill className="object-cover" quality={95} sizes="(max-width: 768px) 50vw, 380px" />
                               )}

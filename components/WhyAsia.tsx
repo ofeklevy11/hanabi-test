@@ -101,7 +101,7 @@ export default function WhyAsia() {
           media={
             <div className={`${mediaFrameClassName} aspect-[4/3]`}>
               <Image
-                src="/assets/IMG_0457.PNG"
+                src="/assets/IMG_0457.webp"
                 alt="Nano-Tools (יפן) - Advanced Medical Tools"
                 fill
                 className="object-cover"
