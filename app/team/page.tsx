@@ -6,11 +6,11 @@ import { SITE_URL } from '@/lib/articles'
 export const metadata: Metadata = {
   title: 'הצוות הרפואי | HANA BI',
   description:
-    'הצוות הרפואי של HANA BI: רופאים מתמחים בהשתלות שיער ובהשתלות גבות, וצוות טכנאיות עם ניסיון מעל 5 שנים. התוצאה הטבעית נבנית בידי אנשי מקצוע.',
+    'הצוות הרפואי של HANA BI: רופאים מורשים, חברי ההסתדרות הרפואית בישראל, וטכנאיות קליניות עם מעל 5 שנות ניסיון, הפועלים לפי הפרוטוקולים הקליניים של יפן ודרום קוריאה.',
   alternates: { canonical: `${SITE_URL}/team` },
   openGraph: {
     title: 'הצוות הרפואי | HANA BI',
-    description: 'אנשי המקצוע מאחורי התוצאה הטבעית ב-HANA BI.',
+    description: 'רופאים מורשים וצוות קליני הפועלים לפי הפרוטוקולים של יפן ודרום קוריאה.',
     url: `${SITE_URL}/team`,
     locale: 'he_IL',
     type: 'website',
@@ -20,51 +20,61 @@ export const metadata: Metadata = {
 const doctors = [
   {
     name: 'ד"ר מואמן מנצור',
-    role: 'רופא מורשה · מומחה להשתלות שיער',
+    role: 'רופא מורשה · מומחה להשתלות שיער, גבות וזקן',
     tagline: 'שיער שנראה טבעי, בכל זווית.',
     intro:
-      'ד"ר מנצור הוא רופא מורשה וחבר קבוע בהסתדרות הרפואית בישראל (הר"י). את לימודי הרפואה (MD) השלים בהצטיינות באוקראינה, ולאחר מכן ביצע את הסטאז\' בבית החולים בילינסון.',
+      'ד"ר מואמן מנצור הוא רופא מורשה בישראל וחבר ההסתדרות הרפואית בישראל (הר"י). את לימודי הרפואה (MD) השלים בהצטיינות באוקראינה, ואת הסטאז\' ביצע בבית החולים בילינסון.',
     background:
-      'בהמשך דרכו עבד במוקדי רפואה דחופה ובקופת חולים מכבי, שם צבר ניסיון קליני עשיר בדיאגנוסטיקה ובטיפול במטופלים. את עיקר העשייה המקצועית שלו הקדיש לתחום השתלות השיער, שיקום שיער ורפואה אסתטית.',
+      'ד"ר מנצור הוא מומחה עתיר ניסיון קליני בהשתלות שיער, גבות וזקן בטכניקה ההיברידית (FUE + DHI). לאורך שנים רבות ביצע אלפי פרוצדורות מוצלחות, לצד עבודה במוקדי רפואה דחופה ובמכבי שירותי בריאות, שם צבר ניסיון רחב בדיאגנוסטיקה ובטיפול במטופלים.',
     training:
-      'הכשרה מעשית אינטנסיבית באיסטנבול, במרפאת Polyclinic SRK של ד"ר סרקאן (Dr. Serkan), מהשמות המובילים בעולם בתחום השתלות השיער. שם למד באופן אישי ישיר את השיטות והטכניקות המדויקות ביותר.',
+      'בוגר הכשרות קליניות מתקדמות באיסטנבול, במרפאת Polyclinic SRK של ד"ר סרקאן (Dr. Serkan), ומוסמך בפרוטוקולים המיקרו-כירורגיים של HANA BI. לצד עבודתו הקלינית הוא משמש מרצה ומנחה מקצועי המכשיר רופאים בתחום השתלות השיער.',
     expertise: [
-      'השתלות שיער בשיטות FUE ו-DHI',
-      'שיקום וחיזוק השיער',
-      'רפואה אסתטית',
-      'הדרכה והכשרת רופאים בתחום השתלות השיער',
+      'השתלות שיער לגברים ולנשים בטכניקה היברידית (FUE + DHI)',
+      'השתלת זקן אנטומית',
+      'השתלות גבות',
+      'לקיחת הזקיקים בטכנולוגיית Micro-Extraction',
+      'הכשרת רופאים בתחום השתלות השיער',
     ],
     approach:
-      'כל טיפול מתחיל באבחון קפדני ובבניית תוכנית אישית, לפי הצרכים, מבנה הפנים והציפיות שלכם. סטנדרטים רפואיים בינלאומיים, בלי פשרות, ובשקיפות מלאה לאורך כל הדרך.',
+      'כל טיפול מתחיל באבחון קליני מבוסס AI ובבניית פרוטוקול אישי, לפי מבנה הפנים, אזור התורם והמטרה של כל מטופל. סטנדרטים רפואיים בינלאומיים, ללא פשרות ובשקיפות מלאה.',
     href: '/hair-transplant',
     hrefLabel: 'השתלת שיער',
   },
   {
-    name: 'ד"ר שריהאן פריג',
-    role: 'רופאה מורשית · מומחית להשתלות גבות',
+    name: 'ד"ר שריהאן פריג\'',
+    role: 'רופאה מורשית · מומחית לשחזור אסתטי מיקרו-כירורגי',
     tagline: 'גבה שמתאימה לפנים, לא לתבנית.',
     intro:
-      'ד"ר פריג היא אחת הרופאות הראשונות בארץ שהתמחו בהשתלות גבות ובעיצוב מבנה הגבה, בתחום שבו הדיוק הוא כל העניין.',
+      'ד"ר שריהאן פריג\' היא רופאה מורשית בישראל וחברת ההסתדרות הרפואית בישראל (הר"י), ואחת הרופאות הראשונות בארץ שהתמחו בהשתלות גבות.',
     background:
-      'היא עברה הכשרה בדרום קוריאה, ושם למדה את הפרוטוקולים המתקדמים בתחום. מכאן נובע הניסיון שלה בבניית גבה טבעית, שנראית כאילו הייתה שם תמיד.',
-    training: 'הכשרה בדרום קוריאה, בפרוטוקולים המתקדמים של התחום.',
+      'בעלת ניסיון קליני עשיר בשחזור אסתטי מיקרו-כירורגי: השתלות שיער, גבות וריסים, וטיפולי התחדשות ביולוגית (iPRF).',
+    training:
+      'בוגרת הכשרה קלינית מתקדמת במרכזי האסתטיקה הרפואית והשתלות השיער המובילים בסיאול, דרום קוריאה.',
     expertise: [
-      'השתלות גבות טבעיות',
-      'עיצוב מבנה הגבה לפי צורת הפנים',
-      'בחירת דרגת הצפיפות המתאימה',
-      'בניית תוכנית מותאמת לכל מטופלת',
+      'השתלות גבות בזקיקי Singles ממוינים במיקרוסקופ',
+      'שחזור ריסים מיקרו-כירורגי בארכיטקטורת C-Curve',
+      'השתלות שיער',
+      'טיפולי התחדשות ביולוגית (iPRF)',
     ],
     approach:
-      'לפני כל טיפול בוחנים יחד את הפנים, את הגבה הקיימת ואת המראה שאתן רוצות. המטרה היא גבה שמתאימה לכם בכל יום, בלי להרגיש מלאכותית.',
+      'לפני כל טיפול נבחנים מבנה הפנים, הגבה הקיימת והמראה הרצוי, ונבנה פרוטוקול אישי לתוצאה טבעית לכל החיים.',
     href: '/eyebrows',
     hrefLabel: 'השתלת גבות',
   },
 ]
 
+const protocols = [
+  'מחטי Nano-Tools יפניות, הדקות פי 3 מהסטנדרט ומאפשרות צפיפות גבוהה ב-40%',
+  'מכשור מיקרו-כירורגי מסיאול, דרום קוריאה',
+  'טכניקה היברידית המשלבת FUE ו-DHI',
+  'סריקת AI לניתוח עומק הרקמה',
+  'מערכת קירור זקיקים שאינה מקררת את ראש המטופל: הזקיקים נשמרים בכלי ייעודי מבוקר טמפרטורה מחוץ לקרקפת, לשיעור קליטה של 98%',
+]
+
 const steps = [
-  { n: '01', t: 'התייעצות עם רופא', d: 'נבדוק מה מתאים לכם, בלי התחייבות לטיפול.' },
-  { n: '02', t: 'תוכנית אישית', d: 'נבנה תוכנית לפי הפנים, הצרכים והציפיות שלכם.' },
-  { n: '03', t: 'הטיפול בצוות', d: 'הרופא והטכנאיות עובדים יחד בכל שלב ההליך.' },
+  { n: '01', t: 'אבחון קליני מבוסס AI', d: 'סריקת קרקפת ועור לניתוח עומק הרקמה ואזור התורם.' },
+  { n: '02', t: 'פרוטוקול אישי', d: 'תכנון הצפיפות, הזוויות וקו השיער לפי מבנה הפנים.' },
+  { n: '03', t: 'לקיחת הזקיקים וההשתלה', d: 'בטכניקה ההיברידית (FUE + DHI), עם שימור הזקיקים במערכת הקירור.' },
   { n: '04', t: 'ביקורות ומעקב', d: 'ביקורת ביום העשירי, בחודש השלישי ובתוצאה הסופית.' },
 ]
 
@@ -75,6 +85,7 @@ const personLd = (d: (typeof doctors)[number]) => ({
   jobTitle: d.role,
   description: d.intro,
   medicalSpecialty: d.expertise,
+  memberOf: { '@type': 'Organization', name: 'ההסתדרות הרפואית בישראל' },
   worksFor: { '@id': `${SITE_URL}/#clinic` },
   url: `${SITE_URL}/team`,
 })
@@ -96,11 +107,12 @@ export default function TeamPage() {
         <div className="relative max-w-4xl mx-auto px-6 text-center">
           <p className="text-sm md:text-base font-bold tracking-wide text-deep-red">הצוות שלנו</p>
           <h1 className="mt-4 text-4xl md:text-6xl font-extrabold text-charcoal leading-tight tracking-tight">
-            האנשים מאחורי התוצאה
+            הצוות הרפואי של HANA BI
           </h1>
           <div className="w-16 h-1 bg-deep-red rounded-full mx-auto mt-7" aria-hidden />
           <p className="mt-7 text-lg md:text-xl text-charcoal/70 max-w-2xl mx-auto leading-relaxed">
-            תוצאה טבעית לא נוצרת במכשיר לבד. היא נבנית בידי רופא מתמחה, בהבנה של מבנה הפנים, ובצוות שמכיר כל שלב.
+            רופאים מורשים, חברי ההסתדרות הרפואית בישראל, וצוות טכנאיות קליניות הפועלים לפי הפרוטוקולים של יפן ודרום
+            קוריאה.
           </p>
         </div>
       </header>
@@ -141,7 +153,7 @@ export default function TeamPage() {
                   <p className="mt-3 text-lg text-charcoal/75 leading-relaxed">{d.training}</p>
                 </div>
                 <div className="rounded-2xl bg-soft-grey p-6 md:p-7">
-                  <h3 className="text-sm font-bold tracking-wide text-charcoal/50">הגישה שלנו</h3>
+                  <h3 className="text-sm font-bold tracking-wide text-charcoal/50">הגישה הקלינית</h3>
                   <p className="mt-3 text-lg text-charcoal/80 leading-relaxed">{d.approach}</p>
                 </div>
               </div>
@@ -154,17 +166,17 @@ export default function TeamPage() {
         <div className="max-w-6xl mx-auto px-6 lg:px-8">
           <div className="rounded-3xl bg-charcoal text-white p-8 md:p-14 grid gap-8 lg:grid-cols-2 lg:gap-14 items-center">
             <div>
-              <p className="text-sm font-bold tracking-wide text-white/60">הצוות שמאחורי הרופאים</p>
-              <h2 className="mt-4 text-3xl md:text-5xl font-extrabold leading-tight">טכנאיות עם ניסיון של מעל 5 שנים</h2>
+              <p className="text-sm font-bold tracking-wide text-white/60">הצוות הקליני</p>
+              <h2 className="mt-4 text-3xl md:text-5xl font-extrabold leading-tight">טכנאיות קליניות עם מעל 5 שנות ניסיון</h2>
               <div className="w-12 h-1 bg-deep-red rounded-full mt-7" aria-hidden />
             </div>
             <div className="space-y-5 text-lg text-white/80 leading-relaxed">
               <p>
-                לצד הרופאים עובדות במרפאה טכנאיות מוסמכות עם ניסיון של מעל 5 שנים. הניסיון הזה מורגש בכל שלב, מההכנה
-                וההליך ועד המעקב אחרי ההחלמה.
+                כל אחת מצוות הטכנאיות הקליניות ב-HANA BI מחזיקה במעל 5 שנות ניסיון מעשי, עם התמחות במיון זקיקים תחת
+                מיקרוסקופ: בידוד זקיקי Singles ושיערות משי (Silk Hair), בקרת זוויות הצמיחה ותפעול מערכת קירור הזקיקים.
               </p>
               <p>
-                הן מכירות את הפרוטוקולים לפרטי פרטים, ולכן כל טיפול מתנהל בדיוק ובסבלנות, עם רציפות מלאה מההתחלה ועד הסוף.
+                הצוות פועל לצד הרופאים בכל שלבי הטיפול, מהאבחון ועד המעקב אחרי ההחלמה, ברציפות מלאה ובדיוק קליני.
               </p>
             </div>
           </div>
@@ -172,22 +184,29 @@ export default function TeamPage() {
       </section>
 
       <section className="pb-16 md:pb-24">
-        <div className="max-w-4xl mx-auto px-6 text-center">
-          <p className="text-sm font-bold tracking-wide text-deep-red">הטכנולוגיה שלנו</p>
-          <h2 className="mt-4 text-3xl md:text-5xl font-extrabold text-charcoal leading-tight">
-            המכשור והפרוטוקולים שייכים לצוות שלנו
+        <div className="max-w-4xl mx-auto px-6">
+          <p className="text-center text-sm font-bold tracking-wide text-deep-red">הסטנדרט הקליני</p>
+          <h2 className="mt-4 text-center text-3xl md:text-5xl font-extrabold text-charcoal leading-tight">
+            הפרוטוקולים של יפן ודרום קוריאה
           </h2>
           <div className="w-16 h-1 bg-deep-red rounded-full mx-auto mt-7" aria-hidden />
-          <p className="mt-8 text-lg md:text-xl text-charcoal/75 leading-relaxed">
-            הטכנולוגיות והפרוטוקולים של HANA BI נבחרו, נלמדו ומופעלים בידי הרופאים והטכנאיות שלנו. כל מכשיר וכל שלב
-            בתהליך נמצאים באחריות הצוות שמכיר אותם לעומק, וזו הסיבה שאנחנו מציגים אותם בשמם.
+          <p className="mt-8 text-center text-lg md:text-xl text-charcoal/75 leading-relaxed">
+            הבידול של HANA BI נשען על הפרוטוקולים הקליניים של יפן ודרום קוריאה, שהצוות שלנו מפעיל בכל טיפול:
           </p>
+          <ul className="mt-8 space-y-4">
+            {protocols.map((p) => (
+              <li key={p} className="flex items-start gap-3 rounded-2xl bg-white p-5 ring-1 ring-black/5 text-lg text-charcoal/80 leading-relaxed">
+                <span className="mt-2.5 h-1.5 w-1.5 shrink-0 rounded-full bg-deep-red" aria-hidden />
+                <span>{p}</span>
+              </li>
+            ))}
+          </ul>
         </div>
       </section>
 
       <section className="pb-16 md:pb-24">
         <div className="max-w-6xl mx-auto px-6 lg:px-8">
-          <h2 className="text-center text-3xl md:text-5xl font-extrabold text-charcoal">איך זה עובד אצלנו</h2>
+          <h2 className="text-center text-3xl md:text-5xl font-extrabold text-charcoal">התהליך הקליני</h2>
           <div className="w-16 h-1 bg-deep-red rounded-full mx-auto mt-7" aria-hidden />
           <ol className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
             {steps.map((s) => (
@@ -203,15 +222,15 @@ export default function TeamPage() {
 
       <section className="pb-24 md:pb-32">
         <div className="max-w-3xl mx-auto px-6 text-center">
-          <h2 className="text-3xl md:text-4xl font-extrabold text-charcoal leading-tight">רוצים להכיר אותנו?</h2>
+          <h2 className="text-3xl md:text-4xl font-extrabold text-charcoal leading-tight">תיאום אבחון קליני</h2>
           <p className="mt-5 text-lg text-charcoal/70 leading-relaxed">
-            נשמח לשבת איתכם, לבחון את ההתאמה ולהסביר את כל האפשרויות.
+            תאמו אבחון קליני מבוסס AI לקביעת פרוטוקול אישי לתוצאה לכל החיים.
           </p>
           <a
             href="/#appointment"
             className="mt-8 inline-block bg-deep-red hover:bg-deep-red-dark text-white px-10 py-4 rounded-full text-lg font-semibold transition-all duration-300 hover:scale-105"
           >
-            לתיאום התייעצות
+            לתיאום אבחון טכנולוגי
           </a>
         </div>
       </section>

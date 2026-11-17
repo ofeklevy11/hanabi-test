@@ -294,7 +294,7 @@ export default function HairTransplant() {
                 href="#appointment"
                 className="inline-block bg-deep-red hover:bg-deep-red-dark text-white px-10 py-4 rounded-full text-lg font-semibold transition-all duration-300 hover:scale-105"
               >
-                לתיאום פגישת ייעוץ
+                לתיאום אבחון טכנולוגי
               </a>
             </motion.div>
           </motion.div>
@@ -610,7 +610,7 @@ export default function HairTransplant() {
   { q: "מה ההבדל בין השתלת שיער בטכניקה היברידית לבין שיטות מסורתיות?", a: "ב-HANA BI ההשתלות מבוצעות בטכניקה היברידית המשלבת FUE ו-DHI. לקיחת הזקיקים נעשית בטכנולוגיית Micro-Extraction תחת מיקרוסקופ, וההכנסה נעשית באמצעות מחטי Nano-Tools יפניים הדקים פי 3 מהסטנדרט. התוצאה היא צפיפות גבוהה בכ-40% משיטות מסורתיות נפרדות, שנשמרת לכל החיים." },
   { q: "כיצד פועלת מערכת קירור הזקיקים ומדוע היא מבטיחה 98% קליטה?", a: "מערכת קירור הזקיקים אינה מקררת את ראש המטופל. הזקיקים נלקחים מהקרקפת ומיד מועברים לכלי ייעודי מבוקר טמפרטורה מחוץ לגוף, שם הם נשמרים עד להשתלה. השמירה המבוקרת על חיות הזקיק היא שמאפשרת שיעור קליטה של 98%." },
   { q: "האם ההשתלה מתאימה גם לנשים?", a: "כן. הפרוטוקול מותאם לנשים ולגברים, ומבוסס על מבנה השיער, אזור התורם והמטרה של כל מטופל. ההתאמה נקבעת בהתייעצות אישית לפני ההליך." },
-  { q: "האם אפשרי לבצע השתלה ללא גילוח?", a: "כן. בהשתלה ללא גילוח השיער של אזור התורם והאזור המושתל נשמר באורכו הטבעי, והזקיקים נלקחים ומושתלים באורך זה. התוספת למחיר נקבעת לכל מטופל לפי גודל ההשתלה." },
+  { q: "האם אפשרי לבצע השתלה ללא גילוח?", a: "כן. בהשתלה ללא גילוח (NO SHAVE) השיער באזור התורם ובאזור המושתל נשמר באורכו הטבעי, והזקיקים נלקחים ומושתלים באורך זה. הפרוטוקול נקבע לכל מטופל לפי היקף ההשתלה." },
   { q: "מה ההבדל בין השתלת זקן להשתלת שיער?", a: "השתלת זקן מתכננת את הזווית והכיוון לפי קו הלסת וכיוון הצמיחה הטבעי של הזקן. ההשתלה מתבצעת באותו פרוטוקול דיוק ובטכניקה ההיברידית, אך מותאמת לאזור הפנים ולא לקרקפת." },
       ]} />
       {/* Consultation form */}
@@ -624,7 +624,7 @@ export default function HairTransplant() {
         <div className="relative max-w-6xl mx-auto px-6 lg:px-8 grid md:grid-cols-2 gap-12 lg:gap-20 items-center">
           <Reveal className="text-center md:text-right">
             <h2 className="text-4xl md:text-7xl font-extrabold text-charcoal leading-[1.08] tracking-tight">הצעד הראשון לשיער מלא</h2>
-            <p className="text-xl md:text-2xl font-light text-charcoal/65 leading-relaxed mt-6">תאמו אבחון קליני מבוסס AI לקביעת פרוטוקול טיפול לתוצאה לכל החיים</p>
+            <p className="text-xl md:text-2xl font-light text-charcoal/65 leading-relaxed mt-6">תאמו אבחון קליני מבוסס AI לקביעת פרוטוקול אישי לתוצאה לכל החיים.</p>
           </Reveal>
 
           <motion.form
@@ -690,7 +690,7 @@ export default function HairTransplant() {
               whileTap={{ scale: 0.98 }}
               className="w-full bg-deep-red text-white px-8 py-5 rounded-full text-lg font-semibold hover:bg-deep-red-dark transition-colors"
             >
-              לתיאום פגישת ייעוץ
+              לתיאום אבחון טכנולוגי
             </motion.button>
           </motion.form>
         </div>

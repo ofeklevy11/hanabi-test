@@ -56,7 +56,7 @@ export default function IPRF() {
       layout: "full",
     },
     {
-      text: "עם הגיל יורדת ייצור הקולגן והאלסטין בעור. הגירוי שנוצר בטיפול מעודד את התאים לייצר מחדש את מרכיבי המבנה של העור, ובכך משפר את המרקם והגמישות. בצלקות פוסט-אקנה הטיפול מסייע לשחזור הרקמה הצלקתית, ולבניית עור חלק ויותר יציב לאורך זמן.",
+      text: "עם הגיל יורדת ייצור הקולגן והאלסטין בעור. הגירוי שנוצר בטיפול מעודד את התאים לייצר מחדש את מרכיבי המבנה של העור, ובכך משפר את המרקם והגמישות. בצלקות פוסט-אקנה הטיפול מסייע לשחזור הרקמה הצלקתית, ולבניית עור חלק ויציב לכל החיים.",
       layout: "full",
     },
     {
@@ -131,7 +131,7 @@ export default function IPRF() {
                 href="#appointment"
                 className="inline-block bg-deep-red hover:bg-deep-red-dark text-white px-10 py-4 rounded-full text-lg font-semibold transition-all duration-300 hover:scale-105"
               >
-                לתיאום פגישת ייעוץ
+                לתיאום אבחון טכנולוגי
               </a>
             </motion.div>
           </motion.div>
@@ -207,7 +207,7 @@ export default function IPRF() {
               הגוף שלך יכול לתקן את עצמו
             </h2>
             <p className="text-xl md:text-2xl text-charcoal-light max-w-3xl mx-auto leading-relaxed font-normal">
-              תאמו אבחון קליני מבוסס AI לקביעת פרוטוקול טיפול לתוצאה לכל החיים
+              תאמו אבחון קליני מבוסס AI לקביעת פרוטוקול אישי לתוצאה לכל החיים.
             </p>
           </motion.div>
 
@@ -279,7 +279,7 @@ export default function IPRF() {
                   whileTap={{ scale: 0.98 }}
                   className="w-full bg-deep-red text-white px-8 py-5 rounded-full text-lg font-semibold hover:bg-deep-red-dark transition-colors mt-6"
                 >
-                  לתיאום פגישת ייעוץ
+                  לתיאום אבחון טכנולוגי
                 </motion.button>
               </div>
             </div>

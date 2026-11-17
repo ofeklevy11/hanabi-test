@@ -58,7 +58,7 @@ export default function ThankYou() {
               פנייתך התקבלה בהצלחה
             </p>
             <p className="text-lg text-charcoal/60 leading-relaxed max-w-lg mx-auto">
-              צוות המומחים שלנו יחזור אליך בהקדם האפשרי לתיאום פגישת ייעוץ אישית
+              צוות המומחים שלנו יחזור אליך בהקדם האפשרי לתיאום אבחון טכנולוגי אישית
             </p>
           </motion.div>
 

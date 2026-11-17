@@ -289,7 +289,7 @@ export default function HairTransplantLP() {
                 href="#appointment"
                 className="inline-block bg-deep-red hover:bg-deep-red-dark text-white px-10 py-4 rounded-full text-lg font-semibold transition-all duration-300 hover:scale-105"
               >
-                לתיאום פגישת ייעוץ
+                לתיאום אבחון טכנולוגי
               </a>
             </motion.div>
           </motion.div>
@@ -612,7 +612,7 @@ export default function HairTransplantLP() {
         <div className="relative max-w-6xl mx-auto px-6 lg:px-8 grid md:grid-cols-2 gap-12 lg:gap-20 items-center">
           <Reveal className="text-center md:text-right">
             <h2 className="text-4xl md:text-7xl font-extrabold text-charcoal leading-[1.08] tracking-tight">הצעד הראשון לשיער מלא</h2>
-            <p className="text-xl md:text-2xl font-light text-charcoal/65 leading-relaxed mt-6">תאמו אבחון קליני מבוסס AI לקביעת פרוטוקול טיפול לתוצאה לכל החיים</p>
+            <p className="text-xl md:text-2xl font-light text-charcoal/65 leading-relaxed mt-6">תאמו אבחון קליני מבוסס AI לקביעת פרוטוקול אישי לתוצאה לכל החיים.</p>
           </Reveal>
 
           <motion.form
@@ -678,7 +678,7 @@ export default function HairTransplantLP() {
               whileTap={{ scale: 0.98 }}
               className="w-full bg-deep-red text-white px-8 py-5 rounded-full text-lg font-semibold hover:bg-deep-red-dark transition-colors"
             >
-              לתיאום פגישת ייעוץ
+              לתיאום אבחון טכנולוגי
             </motion.button>
           </motion.form>
         </div>
