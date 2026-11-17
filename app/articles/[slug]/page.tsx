@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import Image from 'next/image'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { CheckCircle2 } from 'lucide-react'
@@ -108,7 +109,13 @@ export default function ArticlePage({ params }: { params: { slug: string } }) {
         </div>
       </header>
 
-      <article className="pb-16 md:pb-24">
+      <div className="max-w-3xl mx-auto px-6">
+        <div className="relative aspect-[16/8] w-full overflow-hidden rounded-3xl bg-soft-grey">
+          <Image src={a.image} alt={a.imageAlt} fill sizes="(min-width: 768px) 768px, 100vw" className="object-cover" />
+        </div>
+      </div>
+
+      <article className="pb-16 md:pb-24 mt-12 md:mt-14">
         <div className="max-w-3xl mx-auto px-6">
           <p className="text-xl md:text-2xl text-charcoal/80 leading-relaxed">{a.intro}</p>
 
