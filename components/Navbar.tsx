@@ -17,7 +17,7 @@ export default function Navbar({ transparent = false }: { transparent?: boolean 
   }, [])
 
   const navLinks = [
-    { href: '#treatments', label: 'טיפולים' },
+    { href: '/#treatments', label: 'טיפולים' },
     { href: '/articles', label: 'מאמרים' },
     { href: '/team', label: 'הצוות הרפואי' },
   ]
@@ -98,7 +98,7 @@ export default function Navbar({ transparent = false }: { transparent?: boolean 
                   />
                 </motion.a>
                 {/* Dropdown Menu: only under the treatments item */}
-                {link.href === '#treatments' && (
+                {link.href === '/#treatments' && (
                 <div className="absolute top-full right-0 mt-2 w-48 bg-white rounded-2xl shadow-modern-lg border border-gray-100 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
                   <div className="py-2">
                     {treatmentLinks.map((treatment) => (
@@ -148,7 +148,7 @@ export default function Navbar({ transparent = false }: { transparent?: boolean 
           className="md:hidden bg-white/95 backdrop-blur-md border-t border-gray-100"
         >
           <div className="px-4 py-6 space-y-4">
-            {navLinks.map((link, index) => (
+            {navLinks.filter((link) => link.href !== '/#treatments').map((link, index) => (
               <motion.a
                 key={link.href}
                 href={link.href}
