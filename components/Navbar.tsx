@@ -79,7 +79,7 @@ export default function Navbar({ transparent = false }: { transparent?: boolean 
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-10">
-            {navLinks.map((link) => (
+            {navLinks.filter((link) => link.href !== '/team').map((link) => (
               <motion.div
                 key={link.href}
                 className="relative group"
@@ -148,39 +148,50 @@ export default function Navbar({ transparent = false }: { transparent?: boolean 
           className="md:hidden bg-white/95 backdrop-blur-md border-t border-gray-100"
         >
           <div className="px-4 py-6 space-y-4">
-            {navLinks.filter((link) => link.href !== '/#treatments').map((link, index) => (
+            {/* Treatments first, with its list */}
+            <div>
+              <div className="text-base font-semibold text-charcoal py-2">טיפולים</div>
+              <div className="pr-4 space-y-1">
+                {treatmentLinks.map((link, index) => (
+                  <motion.a
+                    key={link.href}
+                    href={link.href}
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: index * 0.08 }}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className="block text-charcoal/70 hover:text-deep-red transition-colors duration-200 text-sm font-medium py-2"
+                  >
+                    {link.label}
+                  </motion.a>
+                ))}
+              </div>
+            </div>
+
+            {/* Articles, then the medical team (team is only in this menu) */}
+            {navLinks.filter((link) => link.href !== '/#treatments' && link.href !== '/team').map((link, index) => (
               <motion.a
                 key={link.href}
                 href={link.href}
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: index * 0.1 }}
+                transition={{ delay: (treatmentLinks.length + index) * 0.08 }}
                 onClick={() => setIsMobileMenuOpen(false)}
                 className="block text-charcoal hover:text-deep-red transition-colors duration-200 text-base font-semibold py-2"
               >
                 {link.label}
               </motion.a>
             ))}
-            
-            {/* Treatment Links */}
-            <div className="border-t border-gray-200 pt-4 mt-4">
-              <div className="text-xs font-semibold text-charcoal/60 uppercase tracking-wider mb-3">
-                טיפולים
-              </div>
-              {treatmentLinks.map((link, index) => (
-                <motion.a
-                  key={link.href}
-                  href={link.href}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: (navLinks.length + index) * 0.1 }}
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className="block text-charcoal/70 hover:text-deep-red transition-colors duration-200 text-sm font-medium py-2 pr-4"
-                >
-                  {link.label}
-                </motion.a>
-              ))}
-            </div>
+            <motion.a
+              href="/team"
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: (treatmentLinks.length + navLinks.length) * 0.08 }}
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="block text-charcoal hover:text-deep-red transition-colors duration-200 text-base font-semibold py-2"
+            >
+              הצוות הרפואי
+            </motion.a>
 
             <motion.a
               href="#appointment"
