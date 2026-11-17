@@ -9,6 +9,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${SITE_URL}/eyelashes`, changeFrequency: 'monthly', priority: 0.9 },
     { url: `${SITE_URL}/iprf`, changeFrequency: 'monthly', priority: 0.9 },
     { url: `${SITE_URL}/articles`, changeFrequency: 'weekly', priority: 0.8 },
+    { url: `${SITE_URL}/team`, changeFrequency: 'monthly', priority: 0.8 },
     { url: `${SITE_URL}/accessibility`, changeFrequency: 'yearly', priority: 0.2 },
     { url: `${SITE_URL}/privacy`, changeFrequency: 'yearly', priority: 0.2 },
     { url: `${SITE_URL}/terms`, changeFrequency: 'yearly', priority: 0.2 },

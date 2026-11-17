@@ -19,6 +19,7 @@ export default function Navbar({ transparent = false }: { transparent?: boolean 
   const navLinks = [
     { href: '#treatments', label: 'טיפולים' },
     { href: '/articles', label: 'מאמרים' },
+    { href: '/team', label: 'הצוות הרפואי' },
   ]
 
   const treatmentLinks = [

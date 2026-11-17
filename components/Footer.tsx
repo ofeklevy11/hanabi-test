@@ -10,6 +10,7 @@ const quickLinks = [
   { href: '/eyelashes', label: 'השתלת ריסים' },
   { href: '/iprf', label: 'טיפול iPRF' },
   { href: '/articles', label: 'מאמרים והסברים' },
+  { href: '/team', label: 'הצוות הרפואי' },
 ]
 
 const legalLinks = [
