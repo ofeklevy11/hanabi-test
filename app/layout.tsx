@@ -43,6 +43,13 @@ export default function RootLayout({
               ],
               email: 'info@hanabi.co.il',
               telephone: '+972-58-506-5359',
+              address: {
+                '@type': 'PostalAddress',
+                streetAddress: 'פאול גרוניגר 4',
+                addressLocality: 'ראשון לציון',
+                addressCountry: 'IL',
+              },
+              sameAs: ['https://www.instagram.com/hana.bi_israel'],
               inLanguage: 'he-IL',
             }).replace(/</g, String.fromCharCode(92) + 'u003c'),
           }}
