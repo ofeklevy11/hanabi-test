@@ -9,6 +9,7 @@ const quickLinks = [
   { href: '/eyebrows', label: 'השתלת גבות' },
   { href: '/eyelashes', label: 'השתלת ריסים' },
   { href: '/iprf', label: 'טיפול iPRF' },
+  { href: '/articles', label: 'מאמרים והסברים' },
 ]
 
 const legalLinks = [
