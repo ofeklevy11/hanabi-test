@@ -222,42 +222,48 @@ export default function HairTransplant() {
     <main className="min-h-screen bg-white relative overflow-hidden">
       <Navbar transparent />
 
-      {/* Hero */}
-      <section className="relative min-h-[85svh] md:min-h-[85vh] lg:min-h-[90vh] flex items-end lg:items-center justify-center overflow-hidden">
-        {/* Wide screens: the whole portrait photo at full height, with a soft blurred copy filling the rest */}
-        <div className="absolute inset-0 hidden lg:block overflow-hidden" aria-hidden>
-          <Image
-            src="/files/hero/hair-transplant-hero-v2.jpg"
-            alt=""
-            fill
-            className="object-cover scale-125 blur-2xl brightness-[0.7] saturate-110"
-            sizes="25vw"
-          />
-        </div>
-        <div className="absolute inset-y-0 right-0 w-full lg:w-auto lg:aspect-[1493/2000] lg:[mask-image:linear-gradient(to_right,transparent,#000_14%)]">
+      {/* Hero Section - Full Width Image */}
+      <section className="relative min-h-[70vh] md:min-h-[85vh] lg:min-h-[90vh] flex items-end md:items-center justify-center overflow-hidden">
+        {/* Background Image */}
+        <div className="absolute inset-0">
+          {/* Phones get the full portrait photo, wider screens the landscape crop */}
           <Image
             src="/files/hero/hair-transplant-hero-v2.jpg"
             alt="השתלת שיער טבעית - HANA BI"
             fill
-            className="object-cover object-[45%_45%] md:object-[50%_30%] lg:object-center"
+            className="lg:hidden object-cover object-[45%_40%]"
             quality={92}
             priority
-            sizes="(min-width: 1024px) 40vw, 100vw"
+            sizes="100vw"
           />
+          <Image
+            src="/files/hero/hair-transplant-hero-wide.jpg"
+            alt="השתלת שיער טבעית - HANA BI"
+            fill
+            className="hidden lg:block object-cover object-center"
+            quality={95}
+            priority
+            sizes="100vw"
+          />
+          {/* Subtle overlay for text readability */}
+          <div className="absolute inset-0 bg-black/30" />
+          {/* Bottom darkening to mark section end */}
+          <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-black/40 to-transparent" />
         </div>
 
-        <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-7 md:pb-20">
+        {/* Hero Content - Centered over image */}
+        <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-8 md:pb-0">
           <motion.div
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1.2, ease: [0.25, 0.1, 0.25, 1] }}
-            className="text-center space-y-3 md:space-y-5 max-w-6xl mx-auto lg:max-w-[46%] lg:mr-auto lg:ml-0"
+            className="text-center space-y-6 max-w-6xl mx-auto"
           >
             <motion.h1
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, delay: 0.3 }}
-              className="text-[2.3rem] md:text-7xl lg:text-6xl 2xl:text-7xl font-bold text-white leading-[1.05] tracking-tight"
+              className="text-4xl sm:text-5xl md:text-7xl lg:text-9xl font-bold text-white leading-[1.05] tracking-tight"
             >
               השתלת שיער טבעית
             </motion.h1>
@@ -268,14 +274,15 @@ export default function HairTransplant() {
               transition={{ duration: 1, delay: 0.6 }}
               className="space-y-3"
             >
-              <p className="text-2xl md:text-4xl lg:text-4xl 2xl:text-5xl font-bold leading-tight max-w-5xl mx-auto">
+              <p className="text-2xl md:text-4xl lg:text-5xl font-bold leading-tight max-w-5xl mx-auto">
                 <span className="text-deep-red">צפיפות מלאה, ומראה טבעי</span>
               </p>
-              <p className="text-xl md:text-2xl lg:text-3xl text-charcoal/80 md:text-white/90 font-medium md:font-normal">
+              <p className="text-xl md:text-2xl lg:text-3xl text-white/90 font-normal">
                 שנשאר לכל החיים
               </p>
             </motion.div>
 
+            {/* CTA Button */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}

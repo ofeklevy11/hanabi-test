@@ -80,13 +80,13 @@ export default function IPRF() {
             src="/files/hero/iprf-hero.jpg"
             alt="iPRF התחדשות ביולוגית - HANA BI"
             fill
-            className="object-cover object-[64%_50%] md:object-[60%_50%]"
+            className="object-cover"
             quality={95}
             priority
             sizes="100vw"
           />
           {/* Subtle overlay for text readability */}
-          <div className="absolute inset-0 bg-black/20" />
+          <div className="absolute inset-0 bg-black/30" />
           {/* Bottom darkening to mark section end */}
           <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-black/40 to-transparent" />
         </div>
@@ -103,7 +103,7 @@ export default function IPRF() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, delay: 0.3 }}
-              className="text-5xl md:text-7xl lg:text-7xl 2xl:text-8xl font-bold text-white leading-[1.05] tracking-tight"
+              className="text-5xl md:text-7xl lg:text-9xl font-bold text-white leading-[1.05] tracking-tight"
             >
               iPRF <span className="text-deep-red">התחדשות ביולוגית</span>
             </motion.h1>
