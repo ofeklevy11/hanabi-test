@@ -97,7 +97,8 @@ export default function Navbar({ transparent = false }: { transparent?: boolean 
                     initial={false}
                   />
                 </motion.a>
-                {/* Dropdown Menu */}
+                {/* Dropdown Menu: only under the treatments item */}
+                {link.href === '#treatments' && (
                 <div className="absolute top-full right-0 mt-2 w-48 bg-white rounded-2xl shadow-modern-lg border border-gray-100 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
                   <div className="py-2">
                     {treatmentLinks.map((treatment) => (
@@ -111,6 +112,7 @@ export default function Navbar({ transparent = false }: { transparent?: boolean 
                     ))}
                   </div>
                 </div>
+                )}
               </motion.div>
             ))}
             <motion.a
