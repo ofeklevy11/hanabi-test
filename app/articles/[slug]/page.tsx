@@ -6,7 +6,7 @@ import { notFound } from 'next/navigation'
 import { CheckCircle2 } from 'lucide-react'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
-import { articles, DISCLAIMER, getArticle, SITE_URL } from '@/lib/articles'
+import { articles, DISCLAIMER, getArticle, getRelated, SITE_URL } from '@/lib/articles'
 
 export const dynamicParams = false
 
@@ -41,9 +41,7 @@ export default function ArticlePage({ params }: { params: { slug: string } }) {
   if (!a) notFound()
 
   const url = `${SITE_URL}/articles/${a.slug}`
-  // Same topic first, then the rest, so every article links to its closest neighbours.
-  const others = articles.filter((x) => x.slug !== a.slug)
-  const related = [...others.filter((x) => x.category === a.category), ...others.filter((x) => x.category !== a.category)].slice(0, 3)
+  const related = getRelated(a.slug)
 
   // No reviewedBy / lastReviewed until a real medical review has taken place.
   const jsonLd = [

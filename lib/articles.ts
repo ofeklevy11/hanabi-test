@@ -780,3 +780,36 @@ export const DISCLAIMER =
 export function getArticle(slug: string) {
   return articles.find((a) => a.slug === slug)
 }
+
+// Hand-picked related reading: each article links to its closest topics, and every article is linked from at least two others.
+export const RELATED: Record<string, string[]> = {
+  'fue-vs-dhi': ['hybrid-fue-dhi', 'donor-area', 'how-to-check-doctor'],
+  'shock-loss': ['healing-habits', 'graft-cooling-system', 'hybrid-fue-dhi'],
+  'donor-area': ['hybrid-fue-dhi', 'fue-vs-dhi', 'hair-transplant-for-women'],
+  'eyebrow-measurement': ['eyebrow-transplant-for-men', 'korean-microsurgery-brows-lashes', 'how-to-check-doctor'],
+  'healing-habits': ['shock-loss', 'eyelash-sensitivity', 'graft-cooling-system'],
+  'eyelash-sensitivity': ['lash-transplant-vs-extensions', 'korean-microsurgery-brows-lashes', 'healing-habits'],
+  'prf-evidence': ['skin-renewal-iprf', 'how-to-check-doctor', 'hair-transplant-for-women'],
+  'hair-transplant-for-women': ['donor-area', 'hybrid-fue-dhi', 'prf-evidence'],
+  'how-to-check-doctor': ['fue-vs-dhi', 'eyebrow-transplant-for-men', 'skin-renewal-iprf'],
+  'eyebrow-transplant-for-men': ['eyebrow-measurement', 'korean-microsurgery-brows-lashes', 'healing-habits'],
+  'lash-transplant-vs-extensions': ['eyelash-sensitivity', 'korean-microsurgery-brows-lashes', 'how-to-check-doctor'],
+  'hybrid-fue-dhi': ['fue-vs-dhi', 'donor-area', 'graft-cooling-system'],
+  'graft-cooling-system': ['hybrid-fue-dhi', 'shock-loss', 'healing-habits'],
+  'korean-microsurgery-brows-lashes': ['eyebrow-measurement', 'eyelash-sensitivity', 'lash-transplant-vs-extensions'],
+  'skin-renewal-iprf': ['prf-evidence', 'healing-habits', 'how-to-check-doctor'],
+}
+
+// Articles shown on each treatment page.
+export const TREATMENT_ARTICLES: Record<string, string[]> = {
+  '/hair-transplant': ['hybrid-fue-dhi', 'fue-vs-dhi', 'donor-area', 'shock-loss'],
+  '/eyebrows': ['eyebrow-measurement', 'eyebrow-transplant-for-men', 'korean-microsurgery-brows-lashes'],
+  '/eyelashes': ['eyelash-sensitivity', 'lash-transplant-vs-extensions', 'korean-microsurgery-brows-lashes'],
+  '/iprf': ['prf-evidence', 'skin-renewal-iprf'],
+}
+
+export function getRelated(slug: string, limit = 3) {
+  const picked = (RELATED[slug] ?? []).map(getArticle).filter((a): a is Article => Boolean(a))
+  const rest = articles.filter((a) => a.slug !== slug && !picked.includes(a))
+  return [...picked, ...rest].slice(0, limit)
+}
