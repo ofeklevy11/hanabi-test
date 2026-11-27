@@ -8,7 +8,7 @@ const POSTER_SRC = '/files/hero/hero-poster.jpg'
 const END_TRIM_SECONDS = 3
 
 const VIDEO_DESCRIPTION =
-  'סרטון תדמית קליני של מרפאת HANA BI: סביבת העבודה המיקרו-כירורגית, אבחון קרקפת ועור מבוסס AI, לקיחת הזקיקים בדיוק מיקרוסקופי ללא פגיעה באזור התורם, שימור הזקיקים בכלי ייעודי במערכת הקירור מחוץ לקרקפת, והשתלה בטכניקה היברידית (FUE + DHI) לתוצאה טבעית לכל החיים.'
+  'סרטון תדמית קליני של מרפאת HANA BI: סביבת העבודה המיקרו-כירורגית, אבחון קרקפת ועור מבוסס AI, לקיחת הזקיקים בדיוק מיקרוסקופי ללא פגיעה באזור התורם, שימור הזקיקים בכלי ייעודי במערכת הקירור מחוץ לקרקפת, והשתלה בטכניקה היברידית (FUE + DHI) לתוצאה שנראית טבעית.'
 
 const videoLd = {
   '@context': 'https://schema.org',
@@ -73,7 +73,7 @@ export default function Hero() {
 
           <p className="text-xl md:text-2xl text-white/90 mb-8 max-w-4xl mx-auto leading-relaxed font-normal">
             מרכז מומחים לאסתטיקה ביולוגית מתקדמת, הפועל לפי הפרוטוקולים הקליניים של יפן ודרום קוריאה. השתלות שיער, גבות,
-            ריסים וזקן בטכניקה היברידית (FUE + DHI), לתוצאה טבעית לכל החיים.
+            ריסים וזקן בטכניקה היברידית (FUE + DHI), לתוצאה שנראית טבעית.
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-2">

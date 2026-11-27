@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import Navbar from '@/components/Navbar'
 import ArticleHub from '@/components/ArticleHub'
 import Footer from '@/components/Footer'
+import Link from 'next/link'
 import { articles, DISCLAIMER, SITE_URL } from '@/lib/articles'
 
 export const metadata: Metadata = {
@@ -29,6 +30,8 @@ export default function ArticlesIndex() {
       '@type': 'Article',
       headline: a.title,
       url: `${SITE_URL}/articles/${a.slug}`,
+      datePublished: a.publishedAt,
+      dateModified: a.updatedAt,
     })),
   }
 
@@ -58,7 +61,13 @@ export default function ArticlesIndex() {
         <div className="max-w-6xl mx-auto px-6 lg:px-8">
           <ArticleHub articles={articles} />
 
-          <p className="mt-14 text-center text-sm text-charcoal/50 max-w-3xl mx-auto leading-relaxed">{DISCLAIMER}</p>
+          <p className="mt-14 text-center text-sm text-charcoal/60 max-w-3xl mx-auto leading-relaxed">
+            <Link href="/about" className="hover:text-deep-red underline">אודות המרפאה</Link> ·{' '}
+            <Link href="/technology" className="hover:text-deep-red underline">הטכנולוגיה</Link> ·{' '}
+            <Link href="/editorial-policy" className="hover:text-deep-red underline">מדיניות התוכן</Link> ·{' '}
+            <Link href="/medical-references" className="hover:text-deep-red underline">מקורות רפואיים</Link>
+          </p>
+          <p className="mt-4 text-center text-sm text-charcoal/50 max-w-3xl mx-auto leading-relaxed">{DISCLAIMER}</p>
         </div>
       </section>
 

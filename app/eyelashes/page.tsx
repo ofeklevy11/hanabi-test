@@ -77,7 +77,7 @@ export default function Eyelashes() {
       kind: 'final',
       title: 'התוצאה הסופית',
       when: 'שנה',
-      text: 'הריסים הגיעו לשיא צפיפותם ועוביים. המבט שלך מודגש, פתוח ומרשים – באופן טבעי ולכל החיים.',
+      text: 'הריסים הגיעו לשיא צפיפותם ועוביים. המבט מודגש ופתוח, במראה טבעי. הריסים המושתלים ממשיכים לצמוח כמו שיער, ולכן דורשים קיצוץ וסלסול מדי פעם.',
     },
   ]
 
@@ -133,7 +133,7 @@ export default function Eyelashes() {
                 <span className="text-deep-red">לא הדבקות. לא תוספות</span>
               </p>
               <p className="text-xl md:text-2xl lg:text-3xl text-white/90 font-normal">
-                ריסים חיים וארוכים שנשארים איתך לכל החיים
+                ריסים מזקיקי שיער שלך, שממשיכים לצמוח
               </p>
             </motion.div>
 
@@ -237,7 +237,7 @@ export default function Eyelashes() {
             lead="העפעף הוא האזור העדין ביותר בגוף האדם ולכן הפרוטוקול הרפואי שלנו הוא המחמיר ביותר בתחום"
           >
             <p>הטיפול מתבצע באמצעות מגן קרנית מיוחד השומר על העין לכל אורך התהליך וההשתלה עצמה נעשית בעומק מבוקר ברמת המיקרון כדי לא לפגוע בשריר העפעף או בזרימת הדם</p>
-            <p>אנו משתמשים במחטי Implanter זעירות שתוכננו במיוחד לכירורגיה של העפעפיים המבטיחות החלמה מהירה ללא צלקות וללא סימנים</p>
+            <p>אנו משתמשים במחטי Implanter זעירות שתוכננו במיוחד לכירורגיה של העפעפיים שמאפשרות לעבוד בפתחים קטנים מאוד. הנחיות ההחלמה, והסיכונים האפשריים, נמסרים ונבדקים לפני הטיפול</p>
           </Chapter>
         </div>
       </section>
@@ -248,9 +248,9 @@ export default function Eyelashes() {
         <div className="relative max-w-6xl mx-auto px-6 lg:px-8 grid md:grid-cols-[1fr_auto] gap-12 md:gap-20 items-center">
           <Reveal className="text-center md:text-right">
             <h2 className="text-4xl md:text-6xl font-extrabold text-charcoal leading-[1.1] tracking-tight">האם הטיפול כואב?</h2>
-            <p className="text-2xl md:text-3xl font-bold text-deep-red leading-snug mt-6">הטיפול אינו מורגש כלל. צפו ברגע האמת</p>
+            <p className="text-2xl md:text-3xl font-bold text-deep-red leading-snug mt-6">איך ההליך מרגיש? צפו ברגע האמת</p>
             <p className="text-lg md:text-xl text-charcoal/70 leading-relaxed mt-8">
-              רבות חוששות מהרעיון של טיפול כה קרוב לעין אך המציאות היא שונה לחלוטין הטיפול מתבצע תחת הרדמה מקומית יסודית ולאחריה את נמצאת במצב של רוגע מוחלט ויכולה אפילו לנמנם המגן המיוחד שאנו מניחים מבטיח שלא תרגישי דבר והעפעף נשאר רדום עד לסיום התהליך כך שאת מתעוררת למציאות חדשה עם ריסים מלאים וללא שום כאב
+              רבות חוששות מטיפול כה קרוב לעין. ההליך מתבצע תחת הרדמה מקומית, ומגן מיוחד מונח על העין לאורך כל ההליך. רוב המטופלות מתארות תחושה נסבלת לאחר ההרדמה, והתחושה משתנה מאדם לאדם. לפני הטיפול נבדקים העפעף והעין, ומוסברים ההחלמה והסיכונים האפשריים.
             </p>
           </Reveal>
           <Reveal delay={0.15} className="mx-auto w-full max-w-[340px] md:w-[340px]">
@@ -283,7 +283,7 @@ export default function Eyelashes() {
   { q: "מה מיוחד בשחזור הריסים ב-HANA BI?", a: "שחזור הריסים נעשה בארכיטקטורת C-Curve, עם שיערות משי (Silk Hair) שנבחרות ידנית. ההליך כולל פרוטוקול בטיחות עינית עם מגן לקרנית, ומחטי Implanter מיקרו-כירורגיות שמכניסות כל ריס במיקום המדויק." },
   { q: "כיצד נלקחים הזקיקים העדינים לשחזור הריסים?", a: "הזקיקים נלקחים מאזור העורף התחתון, שם השיער דק ורך במיוחד. הבחירה נעשית לפי עובי ואורך השערה, כדי שהריס המושתל ייראה טבעי." },
   { q: "האם השתלת ריסים כואבת?", a: "ההליך נעשה תחת הרדמה מקומית ובזהירות רבה באזור העדין של העפעף. ההרגשה במהלך ההליך נסבלת ברוב המקרים, והנחיות ההחלמה נמסרות במרפאה." },
-  { q: "האם הריסים המושתלים נשמרים לכל החיים?", a: "הריסים המושתלים נשמרים לכל החיים ונצמחים במחזור טבעי. ייתכן שיידרש תיקון קטן לאורך זמן, והוא נבדק במעקב." },
+  { q: "כמה זמן נשמרים הריסים המושתלים?", a: "הזקיקים המושתלים נלקחים מהקרקפת וממשיכים לצמוח במחזור של שיער קרקפת, ולכן צריך לקצץ ולסלסל אותם מדי פעם. לא כל הזקיקים נקלטים, וייתכן שיידרש תיקון לאורך זמן. הדבר נבדק במעקב." },
       ]} />
       {/* Consultation form */}
       <section id="appointment" className="relative scroll-mt-20 bg-paper py-20 md:py-28 overflow-hidden">
@@ -296,7 +296,7 @@ export default function Eyelashes() {
         <div className="relative max-w-6xl mx-auto px-6 lg:px-8 grid md:grid-cols-2 gap-12 lg:gap-20 items-center">
           <Reveal className="text-center md:text-right">
             <h2 className="text-4xl md:text-6xl font-extrabold text-charcoal leading-[1.1] tracking-tight">תני לעיניים שלך את המסגרת המגיעה להן</h2>
-            <p className="text-xl md:text-2xl font-light text-charcoal/65 leading-relaxed mt-6">תאמו אבחון קליני מבוסס AI לקביעת פרוטוקול אישי לתוצאה לכל החיים.</p>
+            <p className="text-xl md:text-2xl font-light text-charcoal/65 leading-relaxed mt-6">תאמו אבחון קליני לבחינת ההתאמה ולבניית תוכנית אישית.</p>
           </Reveal>
 
           <motion.form

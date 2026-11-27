@@ -4,12 +4,15 @@ import { useEffect, useRef, useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { CheckCircle2, X } from 'lucide-react'
-import { type Article, DISCLAIMER } from '@/lib/articles'
+import { type Article, articleSources, DISCLAIMER } from '@/lib/articles'
 import ArticleCards from '@/components/ArticleCards'
+import RefText from '@/components/RefText'
 
 export default function ArticleHub({ articles }: { articles: Article[] }) {
   const [openSlug, setOpenSlug] = useState<string | null>(null)
   const active = articles.find((a) => a.slug === openSlug) ?? null
+  const activeSources = active ? articleSources(active) : []
+  const order = activeSources.map((x) => x.id)
 
   const dialogRef = useRef<HTMLDivElement>(null)
   const closeRef = useRef<HTMLButtonElement>(null)
@@ -129,29 +132,34 @@ export default function ArticleHub({ articles }: { articles: Article[] }) {
                 <p className="mt-3 text-sm text-charcoal/50">
                   נכתב על ידי צוות HANA BI · {active.readMinutes} דקות קריאה
                 </p>
-                <p className="mt-6 text-lg text-charcoal/80 leading-relaxed">{active.intro}</p>
+                <p className="mt-6 text-lg text-charcoal/80 leading-relaxed">
+                  <RefText text={active.intro} order={order} />
+                </p>
                 {active.cards && <ArticleCards cards={active.cards} />}
 
-                {active.sections.map((s) => (
-                  <section key={s.heading} className="mt-9">
-                    <h3 className="text-xl md:text-2xl font-bold text-charcoal">{s.heading}</h3>
+                {active.sections.map((s, si) => (
+                  <section key={`${si}-${s.heading}`} className="mt-9">
+                    {s.heading && <h3 className="text-xl md:text-2xl font-bold text-charcoal">{s.heading}</h3>}
                     <div className="mt-3 space-y-4">
-                      {s.paragraphs.map((p, i) => (
-                        <p key={i} className="text-base md:text-lg text-charcoal/80 leading-relaxed">
-                          {p}
-                        </p>
-                      ))}
+                      {s.blocks.map((b, bi) =>
+                        b.type === 'p' ? (
+                          <p key={bi} className="text-base md:text-lg text-charcoal/80 leading-relaxed">
+                            <RefText text={b.text} order={order} />
+                          </p>
+                        ) : (
+                          <ul key={bi} className="space-y-2.5">
+                            {b.items.map((item, ii) => (
+                              <li key={ii} className="flex items-start gap-3 text-base text-charcoal/80 leading-relaxed">
+                                <CheckCircle2 className="mt-1 h-5 w-5 shrink-0 text-deep-red" aria-hidden />
+                                <span>
+                                  <RefText text={item} order={order} />
+                                </span>
+                              </li>
+                            ))}
+                          </ul>
+                        ),
+                      )}
                     </div>
-                    {s.bullets && (
-                      <ul className="mt-4 space-y-2.5">
-                        {s.bullets.map((b) => (
-                          <li key={b} className="flex items-start gap-3 text-base text-charcoal/80 leading-relaxed">
-                            <CheckCircle2 className="mt-1 h-5 w-5 shrink-0 text-deep-red" aria-hidden />
-                            <span>{b}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    )}
                   </section>
                 ))}
 
@@ -166,7 +174,9 @@ export default function ArticleHub({ articles }: { articles: Article[] }) {
                             +
                           </span>
                         </summary>
-                        <p className="mt-3 text-base text-charcoal/75 leading-relaxed">{f.a}</p>
+                        <p className="mt-3 text-base text-charcoal/75 leading-relaxed">
+                          <RefText text={f.a} order={order} />
+                        </p>
                       </details>
                     ))}
                   </div>
@@ -174,12 +184,28 @@ export default function ArticleHub({ articles }: { articles: Article[] }) {
 
                 <div className="mt-10 rounded-2xl bg-charcoal p-6 text-center text-white">
                   <Link
-                    href={active.ctaHref}
+                    href={active.ctaHref === '/technology' ? '/#appointment' : active.ctaHref}
                     className="inline-block bg-deep-red hover:bg-deep-red-dark text-white px-8 py-3 rounded-full font-semibold transition-colors"
                   >
                     {active.ctaLabel}
                   </Link>
                 </div>
+
+                {activeSources.length > 0 && (
+                  <section className="mt-10">
+                    <h3 className="text-xl md:text-2xl font-bold text-charcoal">מקורות</h3>
+                    <ol className="mt-4 space-y-1.5 list-decimal pr-5 text-sm text-charcoal/70 leading-relaxed" dir="ltr">
+                      {activeSources.map((x) => (
+                        <li key={x.id} className="text-left">
+                          <a href={x.url} target="_blank" rel="noopener noreferrer" className="hover:text-deep-red hover:underline">
+                            {x.name}
+                          </a>
+                          {x.year && <span className="text-charcoal/50"> ({x.year})</span>}
+                        </li>
+                      ))}
+                    </ol>
+                  </section>
+                )}
 
                 <p className="mt-8 text-xs text-charcoal/50 leading-relaxed">{DISCLAIMER}</p>
                 <Link href={`/articles/${active.slug}`} className="mt-4 inline-block text-sm font-bold text-deep-red hover:underline">

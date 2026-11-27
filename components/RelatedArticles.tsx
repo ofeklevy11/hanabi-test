@@ -8,9 +8,9 @@ export default function RelatedArticles({ page, title = 'מאמרים בנושא
   if (items.length === 0) return null
 
   return (
-    <section className="border-t border-charcoal/10 bg-white py-16 md:py-20" aria-labelledby={`related-${page}`}>
+    <section className="border-t border-charcoal/10 bg-white py-16 md:py-20" aria-labelledby={`related-${page.replace(/\W/g, "") || "home"}`}>
       <div className="max-w-6xl mx-auto px-6 lg:px-8">
-        <h2 id={`related-${page}`} className="text-2xl md:text-3xl font-bold text-charcoal">
+        <h2 id={`related-${page.replace(/\W/g, "") || "home"}`} className="text-2xl md:text-3xl font-bold text-charcoal">
           {title}
         </h2>
         <ul className="mt-8 grid gap-6 md:grid-cols-3">

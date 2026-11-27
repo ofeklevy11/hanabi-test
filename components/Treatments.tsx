@@ -8,7 +8,7 @@ const services = [
   {
     image: '/assets/gabot.JPG',
     title: 'השתלת גבות',
-    description: 'עיצוב תלת-ממדי קבוע המותאם למבנה הפנים, ללא צורך באיפור.',
+    description: 'השתלת זקיקים בודדים בעיצוב המותאם למבנה הפנים.',
     link: '/eyebrows',
   },
   {

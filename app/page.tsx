@@ -6,6 +6,7 @@ import Treatments from '@/components/Treatments'
 import AppointmentForm from '@/components/AppointmentForm'
 import Footer from '@/components/Footer'
 import HomeServices from '@/components/HomeServices'
+import RelatedArticles from '@/components/RelatedArticles'
 
 // Home page metadata, defined on the home page itself (the root layout keeps the site default). Pending approval.
 export const metadata: Metadata = {
@@ -32,6 +33,7 @@ export default function Home() {
       <WhyAsia />
       <Treatments />
       <HomeServices />
+      <RelatedArticles page="/" title="מאמרים מומלצים" />
       <AppointmentForm />
       <Footer />
     </main>
