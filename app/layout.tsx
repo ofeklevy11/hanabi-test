@@ -47,8 +47,7 @@ export default function RootLayout({
                   name: 'HANA BI',
                   alternateName: 'HANA BI - אסתטיקה ביולוגית מתקדמת',
                   url: 'https://hanabi.co.il',
-                  // Interim logo: the site icon. Replace with the official logo file when supplied.
-                  logo: 'https://hanabi.co.il/apple-icon.png',
+                  // logo: add only when the official logo file is supplied (no interim icon presented as the logo).
                   image: 'https://hanabi.co.il/files/hero/hero-poster.jpg',
                   description: 'מרפאה להשתלות שיער לגברים ולנשים בטכניקה היברידית (FUE + DHI), השתלות גבות, ריסים וזקן, וטיפולי iPRF, בראשון לציון.',
                   availableService: [

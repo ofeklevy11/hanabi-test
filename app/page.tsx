@@ -7,8 +7,21 @@ import AppointmentForm from '@/components/AppointmentForm'
 import Footer from '@/components/Footer'
 import HomeServices from '@/components/HomeServices'
 
+// Home page metadata, defined on the home page itself (the root layout keeps the site default). Pending approval.
 export const metadata: Metadata = {
+  title: 'HANA BI | מרפאה להשתלות שיער, גבות, זקן וריסים בישראל',
+  description:
+    'מרפאת HANA BI בראשון לציון. מידע רפואי על השתלות שיער, גבות, זקן וריסים וטיפולי iPRF, הערכה ממוחשבת ומעקב רפואי.',
   alternates: { canonical: 'https://hanabi.co.il' },
+  openGraph: {
+    title: 'HANA BI | מרפאה להשתלות שיער, גבות, זקן וריסים בישראל',
+    description:
+      'מרפאת HANA BI בראשון לציון. מידע רפואי על השתלות שיער, גבות, זקן וריסים וטיפולי iPRF, הערכה ממוחשבת ומעקב רפואי.',
+    url: 'https://hanabi.co.il',
+    locale: 'he_IL',
+    type: 'website',
+    images: [{ url: 'https://hanabi.co.il/files/hero/hero-poster.jpg' }],
+  },
 }
 
 export default function Home() {

@@ -91,7 +91,7 @@ const personLd = (d: (typeof doctors)[number]) => ({
   '@id': doctorIds[d.name],
   name: d.name,
   jobTitle: d.role.split('·')[0].trim(),
-  description: d.intro,
+  // description left out until the biographical claims on the page are verified (see HANABI_EVIDENCE_MATRIX_V3).
   knowsAbout: d.expertise,
   memberOf: { '@type': 'Organization', name: 'ההסתדרות הרפואית בישראל' },
   worksFor: { '@id': `${SITE_URL}/#clinic` },
