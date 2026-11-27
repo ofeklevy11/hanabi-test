@@ -78,13 +78,21 @@ const steps = [
   { n: '04', t: 'ביקורות ומעקב', d: 'ביקורת ביום העשירי, בחודש השלישי ובתוצאה הסופית.' },
 ]
 
+// medicalSpecialty takes schema.org's fixed list of recognised specialties, so the doctors' areas of work go in knowsAbout.
+// jobTitle stays with the licence wording until specialist recognition is verified (see HANABI_EVIDENCE_MATRIX C19).
+const doctorIds: Record<string, string> = {
+  'ד"ר מואמן מנצור': `${SITE_URL}/team#dr-moamen-mansour`,
+  'ד"ר שריהאן פריג\'': `${SITE_URL}/team#dr-sherihan-frej`,
+}
+
 const personLd = (d: (typeof doctors)[number]) => ({
   '@context': 'https://schema.org',
   '@type': 'Physician',
+  '@id': doctorIds[d.name],
   name: d.name,
-  jobTitle: d.role,
+  jobTitle: d.role.split('·')[0].trim(),
   description: d.intro,
-  medicalSpecialty: d.expertise,
+  knowsAbout: d.expertise,
   memberOf: { '@type': 'Organization', name: 'ההסתדרות הרפואית בישראל' },
   worksFor: { '@id': `${SITE_URL}/#clinic` },
   url: `${SITE_URL}/team`,

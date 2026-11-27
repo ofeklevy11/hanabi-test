@@ -45,18 +45,31 @@ export default function ArticlePage({ params }: { params: { slug: string } }) {
   const others = articles.filter((x) => x.slug !== a.slug)
   const related = [...others.filter((x) => x.category === a.category), ...others.filter((x) => x.category !== a.category)].slice(0, 3)
 
+  // No reviewedBy / lastReviewed until a real medical review has taken place.
   const jsonLd = [
     {
       '@context': 'https://schema.org',
+      '@type': 'MedicalWebPage',
+      '@id': url,
+      url,
+      name: a.title,
+      inLanguage: 'he-IL',
+      isPartOf: { '@id': `${SITE_URL}/#website` },
+      breadcrumb: { '@id': `${url}#breadcrumb` },
+    },
+    {
+      '@context': 'https://schema.org',
       '@type': 'Article',
+      '@id': `${url}#article`,
       headline: a.title,
       description: a.description,
+      image: `${SITE_URL}${a.image}`,
       inLanguage: 'he-IL',
       datePublished: a.publishedAt,
       dateModified: a.updatedAt,
-      author: { '@type': 'Organization', name: 'HANA BI', url: SITE_URL },
-      publisher: { '@type': 'Organization', name: 'HANA BI', url: SITE_URL },
-      mainEntityOfPage: { '@type': 'WebPage', '@id': url },
+      author: { '@id': `${SITE_URL}/#clinic` },
+      publisher: { '@id': `${SITE_URL}/#clinic` },
+      mainEntityOfPage: { '@id': url },
       about: a.category,
     },
     {
@@ -71,6 +84,7 @@ export default function ArticlePage({ params }: { params: { slug: string } }) {
     {
       '@context': 'https://schema.org',
       '@type': 'BreadcrumbList',
+      '@id': `${url}#breadcrumb`,
       itemListElement: [
         { '@type': 'ListItem', position: 1, name: 'דף הבית', item: SITE_URL },
         { '@type': 'ListItem', position: 2, name: 'מאמרים', item: `${SITE_URL}/articles` },
