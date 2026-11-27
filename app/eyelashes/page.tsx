@@ -4,6 +4,7 @@ import Navbar from '@/components/Navbar'
 import { submitLead } from '@/lib/submitLead'
 import Footer from '@/components/Footer'
 import TreatmentFaq from '@/components/TreatmentFaq'
+import RelatedArticles from '@/components/RelatedArticles'
 import { Reveal, Chapter, RecoveryTimeline, AutoplayVideo, VideoWall, fieldClassName, type TimelineStep } from '@/components/TreatmentBlocks'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -277,6 +278,7 @@ export default function Eyelashes() {
         </div>
       </section>
 
+      <RelatedArticles page="/eyelashes" />
       <TreatmentFaq items={[
   { q: "מה מיוחד בשחזור הריסים ב-HANA BI?", a: "שחזור הריסים נעשה בארכיטקטורת C-Curve, עם שיערות משי (Silk Hair) שנבחרות ידנית. ההליך כולל פרוטוקול בטיחות עינית עם מגן לקרנית, ומחטי Implanter מיקרו-כירורגיות שמכניסות כל ריס במיקום המדויק." },
   { q: "כיצד נלקחים הזקיקים העדינים לשחזור הריסים?", a: "הזקיקים נלקחים מאזור העורף התחתון, שם השיער דק ורך במיוחד. הבחירה נעשית לפי עובי ואורך השערה, כדי שהריס המושתל ייראה טבעי." },

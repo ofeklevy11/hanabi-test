@@ -5,6 +5,7 @@ import { submitLead } from '@/lib/submitLead'
 import { Reveal, LocalVideoWall } from '@/components/TreatmentBlocks'
 import Footer from '@/components/Footer'
 import TreatmentFaq from '@/components/TreatmentFaq'
+import RelatedArticles from '@/components/RelatedArticles'
 import Link from 'next/link'
 import Image from 'next/image'
 import { motion } from 'framer-motion'
@@ -188,6 +189,7 @@ export default function IPRF() {
       </section>
 
       {/* Consultation Form Section */}
+      <RelatedArticles page="/iprf" />
       <TreatmentFaq items={[
   { q: "מה הטיפול iPRF?", a: "טיפול iPRF מבוסס על מטריצת פיברין אוטולוגית שמופקת מדמו של המטופל עצמו. החומר מוזרק לאזור הטיפול, ואין בו חומרים סינתטיים או תרופות." },
   { q: "כמה זמן נמשך הטיפול?", a: "הטיפול עצמו קצר יחסית. גורמי הצמיחה משתחררים בהדרגה במשך כעשרה ימים רצופים, ומספר הטיפולים הנדרש נקבע בהתייעצות." },
