@@ -41,7 +41,9 @@ export default function ArticlePage({ params }: { params: { slug: string } }) {
   if (!a) notFound()
 
   const url = `${SITE_URL}/articles/${a.slug}`
-  const related = articles.filter((x) => x.slug !== a.slug).slice(0, 3)
+  // Same topic first, then the rest, so every article links to its closest neighbours.
+  const others = articles.filter((x) => x.slug !== a.slug)
+  const related = [...others.filter((x) => x.category === a.category), ...others.filter((x) => x.category !== a.category)].slice(0, 3)
 
   const jsonLd = [
     {

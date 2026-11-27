@@ -28,9 +28,14 @@ export default function ArticleHub({ articles }: { articles: Article[] }) {
       <ul className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
         {articles.map((a) => (
           <li key={a.slug}>
-            <button
-              type="button"
-              onClick={() => setOpenSlug(a.slug)}
+            {/* A real link so crawlers and new tabs reach the article page; a plain click still opens the preview. */}
+            <Link
+              href={`/articles/${a.slug}`}
+              onClick={(e) => {
+                if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) return
+                e.preventDefault()
+                setOpenSlug(a.slug)
+              }}
               className="group flex h-full w-full flex-col overflow-hidden rounded-3xl bg-white text-right ring-1 ring-black/5 shadow-[0_30px_70px_-45px_rgba(0,0,0,0.35)] transition-transform duration-300 hover:-translate-y-1"
             >
               <div className="relative aspect-[16/10] w-full overflow-hidden bg-soft-grey">
@@ -55,7 +60,7 @@ export default function ArticleHub({ articles }: { articles: Article[] }) {
                   <span className="font-bold text-deep-red">לקריאה ←</span>
                 </div>
               </div>
-            </button>
+            </Link>
           </li>
         ))}
       </ul>
