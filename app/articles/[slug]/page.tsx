@@ -54,6 +54,10 @@ export default function ArticlePage({ params }: { params: { slug: string } }) {
       inLanguage: 'he-IL',
       isPartOf: { '@id': `${SITE_URL}/#website` },
       breadcrumb: { '@id': `${url}#breadcrumb` },
+      // Only when a real medical review exists (never as a placeholder).
+      ...(a.medicalReview
+        ? { reviewedBy: { '@id': a.medicalReview.reviewerId }, lastReviewed: a.medicalReview.date }
+        : {}),
     },
     {
       '@context': 'https://schema.org',
@@ -69,6 +73,9 @@ export default function ArticlePage({ params }: { params: { slug: string } }) {
       publisher: { '@id': `${SITE_URL}/#clinic` },
       mainEntityOfPage: { '@id': url },
       about: a.category,
+      ...(a.citations?.length
+        ? { citation: a.citations.map((c) => ({ '@type': 'CreativeWork', name: c.name, url: c.url })) }
+        : {}),
     },
     {
       '@context': 'https://schema.org',
@@ -121,6 +128,11 @@ export default function ArticlePage({ params }: { params: { slug: string } }) {
           <p className="mt-6 text-sm text-charcoal/55">
             נכתב על ידי צוות HANA BI · עודכן {dateFmt.format(new Date(a.updatedAt))} · {a.readMinutes} דקות קריאה
           </p>
+          {a.medicalReview && (
+            <p className="mt-2 text-sm text-charcoal/55">
+              נבדק רפואית על ידי {a.medicalReview.reviewerName} · {dateFmt.format(new Date(a.medicalReview.date))}
+            </p>
+          )}
         </div>
       </header>
 
@@ -158,6 +170,23 @@ export default function ArticlePage({ params }: { params: { slug: string } }) {
               )}
             </section>
           ))}
+
+          {a.citations && a.citations.length > 0 && (
+            <section className="mt-16 md:mt-20" aria-labelledby="sources-title">
+              <h2 id="sources-title" className="text-2xl md:text-3xl font-bold text-charcoal">מקורות</h2>
+              <div className="w-12 h-1 bg-deep-red rounded-full mt-5" aria-hidden />
+              <ol className="mt-6 space-y-2 list-decimal pr-5 text-base text-charcoal/75 leading-relaxed">
+                {a.citations.map((c) => (
+                  <li key={c.url}>
+                    <a href={c.url} target="_blank" rel="noopener noreferrer" className="hover:text-deep-red underline-offset-2 hover:underline">
+                      {c.name}
+                    </a>
+                    {c.year && <span className="text-charcoal/50"> · {c.year}</span>}
+                  </li>
+                ))}
+              </ol>
+            </section>
+          )}
 
           <section className="mt-16 md:mt-20">
             <h2 className="text-2xl md:text-3xl font-bold text-charcoal">שאלות נפוצות</h2>

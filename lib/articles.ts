@@ -32,7 +32,13 @@ export type Article = {
   ctaLabel: string
   ctaHref: string
   cards?: ArticleCard[]
+  // Sources shown under the article and listed as schema.org citation. Only sources approved for the article.
+  citations?: ArticleCitation[]
+  // Medical review: fill ONLY after a doctor has actually reviewed and approved the article.
+  medicalReview?: { reviewerId: string; reviewerName: string; date: string }
 }
+
+export type ArticleCitation = { name: string; url: string; year?: string }
 
 export const SITE_URL = 'https://hanabi.co.il'
 
