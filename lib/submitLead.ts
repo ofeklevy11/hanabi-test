@@ -11,13 +11,12 @@ const CALLPILOT_WEBHOOK = 'https://yoavhaik.com:7027/api/webhooks/scenario/2d1cd
 
 function sendToCallPilot(body: string) {
   try {
-    // text/plain keeps this a simple request (no CORS preflight); keepalive lets it finish after the page moves on.
+    // CallPilot reads JSON bodies only (tested from hanabi.co.il on 27.11.2026); keepalive lets it finish after the page moves on.
     fetch(CALLPILOT_WEBHOOK, {
       method: 'POST',
-      headers: { 'Content-Type': 'text/plain;charset=UTF-8' },
+      headers: { 'Content-Type': 'application/json' },
       body,
       keepalive: true,
-      mode: 'no-cors',
     }).catch(() => {})
   } catch {
     // Never let the CRM copy affect the form.
