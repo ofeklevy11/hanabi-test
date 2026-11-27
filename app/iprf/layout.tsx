@@ -3,12 +3,12 @@ import type { Metadata } from 'next'
 // Page metadata lives here because page.tsx is a client component and cannot export it.
 // This file only adds head tags; it renders the page exactly as before.
 export const metadata: Metadata = {
-  title: 'טיפול iPRF מדם המטופל לעור ולשיער | HANA BI',
-  description: 'טיפול iPRF שמופק מדמו של המטופל: איך הוא מוכן, למי הוא מתאים, ומה ידוע מהמחקר. אבחון אישי במרפאה בראשון לציון.',
+  title: 'טיפול iPRF לשיער ולעור | HANA BI',
+  description: 'טיפול iPRF שמופק מדם המטופל: איך הוא מוכן, למי הוא מתאים ומה ידוע מהמחקר. אבחון אישי במרפאת HANA BI בראשון לציון.',
   alternates: { canonical: 'https://hanabi.co.il/iprf' },
   openGraph: {
-    title: 'טיפול iPRF מדם המטופל לעור ולשיער | HANA BI',
-    description: 'טיפול iPRF שמופק מדמו של המטופל: איך הוא מוכן, למי הוא מתאים, ומה ידוע מהמחקר. אבחון אישי במרפאה בראשון לציון.',
+    title: 'טיפול iPRF לשיער ולעור | HANA BI',
+    description: 'טיפול iPRF שמופק מדם המטופל: איך הוא מוכן, למי הוא מתאים ומה ידוע מהמחקר. אבחון אישי במרפאת HANA BI בראשון לציון.',
     url: 'https://hanabi.co.il/iprf',
     locale: 'he_IL',
     type: 'website',
