@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
+import { Check, Phone, Send, User } from 'lucide-react'
 import { submitLead } from '@/lib/submitLead'
 
 // Lead form inside the "תיאום אבחון" box at the end of every article.
@@ -23,8 +24,20 @@ const DEFAULT_BY_PAGE: Record<string, string> = {
   '/iprf': 'iprf',
 }
 
-const field =
-  'w-full px-4 py-3.5 rounded-xl bg-white/10 border border-white/15 text-white placeholder:text-white/45 text-right text-base focus:outline-none focus:border-white/60 focus:ring-2 focus:ring-white/20 transition-all'
+/** Israeli phone number in local form (0501234567), or null when it is not a valid number. */
+export function normalizeIsraeliPhone(input: string): string | null {
+  let d = input.replace(/[\s\-().]/g, '')
+  if (d.startsWith('+972')) d = '0' + d.slice(4)
+  else if (d.startsWith('00972')) d = '0' + d.slice(5)
+  else if (d.startsWith('972')) d = '0' + d.slice(3)
+  if (d.startsWith('00')) return null
+  // Mobile 05X and 07X (10 digits), landlines 02/03/04/08/09 (9 digits).
+  if (/^05\d{8}$/.test(d) || /^07\d{8}$/.test(d) || /^0[23489]\d{7}$/.test(d)) return d
+  return null
+}
+
+const input =
+  'w-full rounded-2xl bg-soft-grey border border-charcoal/10 px-4 py-3.5 text-base text-charcoal placeholder:text-charcoal/40 text-right transition-all focus:outline-none focus:bg-white focus:border-deep-red focus:ring-4 focus:ring-deep-red/10'
 
 export default function ArticleLeadForm({ articleTitle, treatmentHref }: { articleTitle: string; treatmentHref: string }) {
   const router = useRouter()
@@ -37,19 +50,27 @@ export default function ArticleLeadForm({ articleTitle, treatmentHref }: { artic
   })
   const [agreed, setAgreed] = useState(false)
   const [sending, setSending] = useState(false)
+  const [phoneTouched, setPhoneTouched] = useState(false)
+  const [tried, setTried] = useState(false)
   const [error, setError] = useState('')
 
-  const set = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) =>
-    setForm({ ...form, [e.target.name]: e.target.value })
+  const phoneOk = normalizeIsraeliPhone(form.phone) !== null
+  const showPhoneError = (phoneTouched || tried) && !phoneOk
+  const showTreatmentError = tried && !form.treatment
+
+  const set = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => setForm({ ...form, [e.target.name]: e.target.value })
 
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    setSending(true)
+    setTried(true)
     setError('')
+    const phone = normalizeIsraeliPhone(form.phone)
+    if (!phone || !form.treatment || !form.name.trim() || !agreed) return
+    setSending(true)
     try {
       const payload = {
         name: form.name.trim(),
-        phone: form.phone.trim(),
+        phone,
         // CallPilot fills every field into the lead's notes, so optional fields are never sent empty.
         email: form.email.trim() || '—',
         treatment: form.treatment,
@@ -60,59 +81,141 @@ export default function ArticleLeadForm({ articleTitle, treatmentHref }: { artic
         submittedAt: new Date().toLocaleString('he-IL', { timeZone: 'Asia/Jerusalem' }),
       }
       if (await submitLead(payload)) router.push('/thank-you')
-      else setError('השליחה לא הצליחה. נסו שוב, או התקשרו אלינו ל-058-506-5359.')
+      else setError('השליחה לא הצליחה. נסו שוב, או התקשרו אלינו: 058-506-5359.')
     } catch {
-      setError('השליחה לא הצליחה. נסו שוב, או התקשרו אלינו ל-058-506-5359.')
+      setError('השליחה לא הצליחה. נסו שוב, או התקשרו אלינו: 058-506-5359.')
     } finally {
       setSending(false)
     }
   }
 
   return (
-    <form onSubmit={onSubmit} className="mt-8 grid gap-4 text-right max-w-xl mx-auto" aria-label="השארת פרטים לתיאום אבחון">
-      <div className="grid gap-4 sm:grid-cols-2">
+    <form
+      onSubmit={onSubmit}
+      noValidate
+      aria-label="השארת פרטים לתיאום אבחון"
+      className="mt-8 mx-auto max-w-2xl rounded-[1.75rem] bg-white p-6 md:p-9 text-right text-charcoal shadow-[0_40px_90px_-40px_rgba(0,0,0,0.6)]"
+    >
+      <fieldset>
+        <legend className="mb-3 text-base font-bold">על איזה טיפול תרצו ייעוץ?</legend>
+        <div className="flex flex-wrap gap-2.5" role="radiogroup">
+          {TREATMENTS.map((t) => {
+            const on = form.treatment === t.value
+            return (
+              <label
+                key={t.value}
+                className={`relative inline-flex cursor-pointer items-center gap-2 rounded-full border px-4 py-2.5 text-sm font-semibold transition-all ${
+                  on
+                    ? 'border-deep-red bg-deep-red text-white shadow-[0_10px_25px_-12px_rgba(153,0,0,0.8)]'
+                    : 'border-charcoal/15 bg-white text-charcoal/80 hover:border-deep-red/50 hover:text-deep-red'
+                } has-[:focus-visible]:ring-4 has-[:focus-visible]:ring-deep-red/20`}
+              >
+                <input
+                  type="radio"
+                  name="treatment"
+                  value={t.value}
+                  checked={on}
+                  onChange={() => setForm({ ...form, treatment: t.value })}
+                  className="sr-only"
+                />
+                {on && <Check className="h-4 w-4" aria-hidden />}
+                {t.label}
+              </label>
+            )
+          })}
+        </div>
+        {showTreatmentError && <p className="mt-2 text-sm font-medium text-deep-red">בחרו את הטיפול שמעניין אתכם.</p>}
+      </fieldset>
+
+      <div className="mt-6 grid gap-4 sm:grid-cols-2">
         <div>
-          <label htmlFor="al-name" className="block mb-1.5 text-sm font-semibold text-white/85">שם מלא</label>
-          <input id="al-name" name="name" value={form.name} onChange={set} required autoComplete="name" className={field} placeholder="השם שלך" />
+          <label htmlFor="al-name" className="mb-1.5 block text-sm font-bold">שם מלא</label>
+          <div className="relative">
+            <User className="pointer-events-none absolute right-4 top-1/2 h-4 w-4 -translate-y-1/2 text-charcoal/35" aria-hidden />
+            <input
+              id="al-name"
+              name="name"
+              value={form.name}
+              onChange={set}
+              required
+              autoComplete="name"
+              aria-invalid={tried && !form.name.trim()}
+              className={`${input} pr-11`}
+              placeholder="השם שלכם"
+            />
+          </div>
+          {tried && !form.name.trim() && <p className="mt-1.5 text-sm font-medium text-deep-red">נא למלא שם.</p>}
         </div>
         <div>
-          <label htmlFor="al-phone" className="block mb-1.5 text-sm font-semibold text-white/85">טלפון</label>
-          <input id="al-phone" name="phone" type="tel" value={form.phone} onChange={set} required autoComplete="tel" dir="ltr" className={`${field} text-right`} placeholder="050-0000000" />
+          <label htmlFor="al-phone" className="mb-1.5 block text-sm font-bold">טלפון</label>
+          <div className="relative">
+            <Phone className="pointer-events-none absolute right-4 top-1/2 h-4 w-4 -translate-y-1/2 text-charcoal/35" aria-hidden />
+            <input
+              id="al-phone"
+              name="phone"
+              type="tel"
+              inputMode="tel"
+              value={form.phone}
+              onChange={set}
+              onBlur={() => setPhoneTouched(true)}
+              required
+              autoComplete="tel"
+              maxLength={16}
+              aria-invalid={showPhoneError}
+              aria-describedby="al-phone-error"
+              dir="ltr"
+              className={`${input} pr-11 ${showPhoneError ? 'border-deep-red bg-deep-red/5' : ''}`}
+              placeholder="050-000-0000"
+            />
+          </div>
+          {showPhoneError && (
+            <p id="al-phone-error" className="mt-1.5 text-sm font-medium text-deep-red">
+              נא להזין מספר טלפון ישראלי תקין, למשל 050-1234567.
+            </p>
+          )}
         </div>
       </div>
-      <div>
-        <label htmlFor="al-treatment" className="block mb-1.5 text-sm font-semibold text-white/85">על איזה טיפול תרצו ייעוץ?</label>
-        <select id="al-treatment" name="treatment" value={form.treatment} onChange={set} required className={`${field} [&>option]:text-charcoal`}>
-          <option value="">בחרו טיפול</option>
-          {TREATMENTS.map((t) => (
-            <option key={t.value} value={t.value}>{t.label}</option>
-          ))}
-        </select>
+
+      <div className="mt-4">
+        <label htmlFor="al-email" className="mb-1.5 block text-sm font-bold">
+          אימייל <span className="font-normal text-charcoal/45">(לא חובה)</span>
+        </label>
+        <input id="al-email" name="email" type="email" value={form.email} onChange={set} autoComplete="email" dir="ltr" className={input} placeholder="name@example.com" />
       </div>
-      <div>
-        <label htmlFor="al-email" className="block mb-1.5 text-sm font-semibold text-white/85">אימייל (אופציונלי)</label>
-        <input id="al-email" name="email" type="email" value={form.email} onChange={set} autoComplete="email" dir="ltr" className={`${field} text-right`} placeholder="name@example.com" />
+
+      <div className="mt-4">
+        <label htmlFor="al-message" className="mb-1.5 block text-sm font-bold">
+          הודעה <span className="font-normal text-charcoal/45">(לא חובה)</span>
+        </label>
+        <textarea id="al-message" name="message" value={form.message} onChange={set} rows={3} className={`${input} resize-none`} placeholder="מה חשוב לכם שנדע?" />
       </div>
-      <div>
-        <label htmlFor="al-message" className="block mb-1.5 text-sm font-semibold text-white/85">הודעה (אופציונלי)</label>
-        <textarea id="al-message" name="message" value={form.message} onChange={set} rows={3} className={`${field} resize-none`} placeholder="מה חשוב לכם שנדע?" />
-      </div>
-      <label className="flex items-start gap-3 cursor-pointer text-sm text-white/70 leading-relaxed">
-        <input type="checkbox" checked={agreed} onChange={(e) => setAgreed(e.target.checked)} required className="mt-1 w-5 h-5 accent-deep-red shrink-0 cursor-pointer" />
+
+      <label className="mt-5 flex cursor-pointer items-start gap-3 text-sm leading-relaxed text-charcoal/65">
+        <input type="checkbox" checked={agreed} onChange={(e) => setAgreed(e.target.checked)} required className="mt-0.5 h-5 w-5 shrink-0 cursor-pointer accent-deep-red" />
         <span>
           אני מאשר/ת את{' '}
-          <Link href="/privacy" target="_blank" className="text-white underline hover:no-underline">מדיניות הפרטיות</Link>{' '}
+          <Link href="/privacy" target="_blank" className="font-semibold text-deep-red hover:underline">מדיניות הפרטיות</Link>{' '}
           ומסכים/ה לשימוש בפרטים שמסרתי לצורך יצירת קשר.
         </span>
       </label>
-      {error && <p role="alert" className="text-sm text-red-300">{error}</p>}
+      {tried && !agreed && <p className="mt-1.5 text-sm font-medium text-deep-red">יש לאשר את מדיניות הפרטיות.</p>}
+
+      {error && (
+        <p role="alert" className="mt-4 rounded-xl bg-deep-red/10 px-4 py-3 text-sm font-medium text-deep-red">
+          {error}
+        </p>
+      )}
+
       <button
         type="submit"
         disabled={sending}
-        className="mt-2 w-full bg-deep-red hover:bg-deep-red-dark disabled:opacity-60 text-white px-8 py-4 rounded-full text-lg font-semibold transition-all duration-300 hover:scale-[1.02]"
+        onClick={() => setTried(true)}
+        className="mt-6 flex w-full items-center justify-center gap-3 rounded-full bg-deep-red px-8 py-4 text-lg font-semibold text-white transition-all duration-300 hover:bg-deep-red-dark hover:shadow-[0_18px_40px_-18px_rgba(153,0,0,0.9)] disabled:opacity-60"
       >
         {sending ? 'שולח...' : 'לתיאום אבחון'}
+        {!sending && <Send className="h-5 w-5 -scale-x-100" aria-hidden />}
       </button>
+      <p className="mt-3 text-center text-xs text-charcoal/45">נחזור אליכם בהקדם. אפשר גם להתקשר: 058-506-5359</p>
     </form>
   )
 }
