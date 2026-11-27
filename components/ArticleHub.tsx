@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { CheckCircle2, X } from 'lucide-react'
@@ -11,15 +11,39 @@ export default function ArticleHub({ articles }: { articles: Article[] }) {
   const [openSlug, setOpenSlug] = useState<string | null>(null)
   const active = articles.find((a) => a.slug === openSlug) ?? null
 
+  const dialogRef = useRef<HTMLDivElement>(null)
+  const closeRef = useRef<HTMLButtonElement>(null)
+
   useEffect(() => {
     if (!active) return
-    const onKey = (e: KeyboardEvent) => e.key === 'Escape' && setOpenSlug(null)
+    // Accessible dialog: focus moves into it, Tab stays inside, Escape closes, focus returns to the card.
+    const opener = document.activeElement as HTMLElement | null
+    closeRef.current?.focus()
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        setOpenSlug(null)
+        return
+      }
+      if (e.key !== 'Tab' || !dialogRef.current) return
+      const focusable = dialogRef.current.querySelectorAll<HTMLElement>('a[href], button, summary, [tabindex]:not([tabindex="-1"])')
+      if (focusable.length === 0) return
+      const first = focusable[0]
+      const last = focusable[focusable.length - 1]
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault()
+        last.focus()
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault()
+        first.focus()
+      }
+    }
     document.addEventListener('keydown', onKey)
     const prev = document.body.style.overflow
     document.body.style.overflow = 'hidden'
     return () => {
       document.removeEventListener('keydown', onKey)
       document.body.style.overflow = prev
+      opener?.focus()
     }
   }, [active])
 
@@ -70,10 +94,12 @@ export default function ArticleHub({ articles }: { articles: Article[] }) {
           <button
             type="button"
             aria-label="סגירה"
+            tabIndex={-1}
             onClick={() => setOpenSlug(null)}
             className="absolute inset-0 bg-charcoal/60 backdrop-blur-sm"
           />
           <div
+            ref={dialogRef}
             role="dialog"
             aria-modal="true"
             aria-labelledby="article-title"
@@ -81,6 +107,7 @@ export default function ArticleHub({ articles }: { articles: Article[] }) {
           >
             <div className="flex items-center justify-between border-b border-charcoal/10 bg-white px-6 py-4">
               <button
+                ref={closeRef}
                 type="button"
                 onClick={() => setOpenSlug(null)}
                 className="rounded-full p-2 text-charcoal/70 hover:bg-charcoal/5"
