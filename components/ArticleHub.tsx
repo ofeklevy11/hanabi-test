@@ -184,7 +184,7 @@ export default function ArticleHub({ articles }: { articles: Article[] }) {
 
                 <div className="mt-10 rounded-2xl bg-charcoal p-6 text-center text-white">
                   <Link
-                    href={active.ctaHref === '/technology' ? '/#appointment' : active.ctaHref}
+                    href={`/articles/${active.slug}#article-appointment`}
                     className="inline-block bg-deep-red hover:bg-deep-red-dark text-white px-8 py-3 rounded-full font-semibold transition-colors"
                   >
                     {active.ctaLabel}

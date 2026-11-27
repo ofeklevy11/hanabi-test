@@ -7,6 +7,7 @@ import { CheckCircle2 } from 'lucide-react'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import RefText from '@/components/RefText'
+import ArticleLeadForm from '@/components/ArticleLeadForm'
 import { articles, articleSources, DISCLAIMER, getArticle, getRelated, SITE_URL } from '@/lib/articles'
 import { stripRefs } from '@/lib/sources'
 
@@ -226,17 +227,12 @@ export default function ArticlePage({ params }: { params: { slug: string } }) {
             </p>
           )}
 
-          <div className="mt-12 rounded-3xl bg-charcoal text-white p-8 md:p-12 text-center">
+          <div id="article-appointment" className="mt-12 rounded-3xl bg-charcoal text-white p-8 md:p-12 text-center scroll-mt-28">
             <h2 className="text-2xl md:text-3xl font-bold">תיאום אבחון</h2>
             <p className="mt-4 text-white/75 text-lg leading-relaxed max-w-xl mx-auto">
-              תאמו אבחון במרפאה לבחינת ההתאמה ולבניית תוכנית אישית.
+              השאירו פרטים ובחרו את הטיפול שמעניין אתכם. נחזור אליכם לתיאום אבחון במרפאה.
             </p>
-            <Link
-              href={a.ctaHref === '/technology' ? '/#appointment' : a.ctaHref}
-              className="mt-8 inline-block bg-deep-red hover:bg-deep-red-dark text-white px-10 py-4 rounded-full text-lg font-semibold transition-all duration-300 hover:scale-105"
-            >
-              {a.ctaLabel}
-            </Link>
+            <ArticleLeadForm articleTitle={a.title} treatmentHref={a.ctaHref} />
           </div>
 
           {sources.length > 0 && (

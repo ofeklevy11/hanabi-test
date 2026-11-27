@@ -35,6 +35,8 @@ const LABELS: Record<string, string> = {
   service: 'טיפול',
   message: 'הודעה',
   source: 'מקור',
+  page: 'מאמר',
+  treatmentLabel: 'טיפול שנבחר',
 }
 
 async function postOnce(url: string, body: string): Promise<boolean> {
