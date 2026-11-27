@@ -59,7 +59,7 @@ export default function AppointmentForm() {
             קביעת פגישת <span className="text-deep-red">ייעוץ</span>
           </h2>
           <p className="text-xl md:text-2xl text-charcoal-light max-w-3xl mx-auto leading-relaxed font-normal">
-            תאמו אבחון קליני מבוסס AI לקביעת פרוטוקול אישי לתוצאה לכל החיים.
+            תאמו אבחון קליני לבחינת ההתאמה ולבניית תוכנית אישית.
           </p>
         </motion.div>
 
