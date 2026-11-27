@@ -5,6 +5,7 @@ import FacebookPixel from '@/components/FacebookPixel'
 import FloatingCTA from '@/components/FloatingCTA'
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://hanabi.co.il'),
   title: 'HANA BI - אסתטיקה ביולוגית מתקדמת',
   description: 'להיות את. הגרסה הבריאה ביותר. אסתטיקה ביולוגית מתקדמת המבוססת על המשאבים הטבעיים של גופך.',
 }
