@@ -60,7 +60,9 @@ const REF = /\[(E\d{2}(?:\s*,\s*E\d{2})*)\]/g
 export function refsInOrder(texts: string[]): string[] {
   const seen: string[] = []
   for (const t of texts) {
-    for (const m of t.matchAll(REF)) {
+    const re = new RegExp(REF.source, 'g')
+    let m: RegExpExecArray | null
+    while ((m = re.exec(t)) !== null) {
       for (const id of m[1].split(/\s*,\s*/)) if (SOURCES[id] && !seen.includes(id)) seen.push(id)
     }
   }
