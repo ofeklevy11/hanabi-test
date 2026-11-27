@@ -6,9 +6,8 @@ import FloatingCTA from '@/components/FloatingCTA'
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://hanabi.co.il'),
-  // PROPOSAL, pending approval: clearer home title and description naming the clinic's main fields.
-  title: 'HANA BI | השתלת שיער, גבות, זקן וריסים בראשון לציון',
-  description: 'מרפאת HANA BI בראשון לציון: השתלות שיער לגברים ולנשים, השתלות גבות, זקן וריסים, וטיפולי iPRF. אבחון ממוחשב, תכנון צפיפות אישי ומעקב רפואי לאורך השנה הראשונה.',
+  title: 'HANA BI - אסתטיקה ביולוגית מתקדמת',
+  description: 'להיות את. הגרסה הבריאה ביותר. אסתטיקה ביולוגית מתקדמת המבוססת על המשאבים הטבעיים של גופך.',
 }
 
 export default function RootLayout({
