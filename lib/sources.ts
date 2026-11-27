@@ -44,6 +44,14 @@ export const SOURCES: Record<string, Source> = {
   E37: { id: 'E37', year: '2023', url: pubmed('37188989'), name: 'Starace M, et al. Impact and Management of Loss of Eyebrows and Eyelashes. Dermatology and Therapy' },
   E38: { id: 'E38', year: '2026', url: 'https://www.aao.org/eye-health/diseases/what-is-trichiasis', name: 'American Academy of Ophthalmology: What Is Trichiasis?' },
   E39: { id: 'E39', year: '2018', url: 'https://www.aao.org/eye-health/tips-prevention/eyelash-extension-facts-safety', name: 'American Academy of Ophthalmology: Eyelash Extension Facts and Safety' },
+  E40: { id: 'E40', year: '2024', url: 'https://www.nhs.uk/conditions/hair-loss/', name: 'NHS: Hair loss' },
+  E41: { id: 'E41', url: 'https://www.aad.org/public/diseases/hair-loss/treatment/male-pattern-hair-loss-treatment', name: 'American Academy of Dermatology: What is male pattern hair loss, and can it be treated?' },
+  E42: { id: 'E42', url: 'https://www.aad.org/public/diseases/hair-loss/types/female-pattern', name: 'American Academy of Dermatology: Thinning hair and hair loss: Could it be female pattern hair loss?' },
+  E43: { id: 'E43', year: '2019', url: 'https://ishrs.org/top-5-things-to-know-about-hair-transplantation/', name: 'International Society of Hair Restoration Surgery (ISHRS): Top 5 Things to Know About Hair Transplantation' },
+  E44: { id: 'E44', year: '2025', url: 'https://ishrs.org/fifth-hair-transplant-repair-day/', name: 'International Society of Hair Restoration Surgery (ISHRS): World Hair Transplant Repair Day 2025' },
+  E45: { id: 'E45', url: 'https://ishrs.org/wp-content/uploads/2017/12/ISHRSPatientBrochure_ENGLISH.pdf', name: 'International Society of Hair Restoration Surgery (ISHRS): Patient brochure on hair transplantation' },
+  E46: { id: 'E46', url: 'https://www.aad.org/public/diseases/hair-loss/types/alopecia', name: 'American Academy of Dermatology: Alopecia areata' },
+  E47: { id: 'E47', year: '2022', url: 'https://www.aad.org/news/finding-the-right-treatments-for-genetic-hair-loss', name: 'American Academy of Dermatology: Finding the right treatments for genetic hair loss' },
 }
 
 const REF = /\[(E\d{2}(?:\s*,\s*E\d{2})*)\]/g
