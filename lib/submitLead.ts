@@ -4,6 +4,25 @@ const LEAD_WEBHOOKS = [
   'https://hook.eu2.make.com/wwr2v4bsxhwbb4uue69w3w8fknw9i4q0',
 ]
 
+// CallPilot CRM: every website lead is also created as a lead in CallPilot (folder "לידים מהאתר").
+// Sent on its own, in the background: it never delays the visitor and never decides whether the form succeeded,
+// so the existing WhatsApp flow through the connections above stays exactly as it is.
+const CALLPILOT_WEBHOOK = 'https://yoavhaik.com:7027/api/webhooks/scenario/2d1cd39ee857d9e8d9d40190a5ef740f'
+
+function sendToCallPilot(body: string) {
+  try {
+    // CallPilot reads JSON bodies only (tested from hanabi.co.il on 27.11.2026); keepalive lets it finish after the page moves on.
+    fetch(CALLPILOT_WEBHOOK, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body,
+      keepalive: true,
+    }).catch(() => {})
+  } catch {
+    // Never let the CRM copy affect the form.
+  }
+}
+
 const CLINIC_WHATSAPP = '972585065359'
 const ATTEMPTS = 3
 const TIMEOUT_MS = 12000
@@ -56,6 +75,7 @@ function whatsappFallback(payload: Record<string, unknown>) {
 /** Returns true when at least one connection received the lead. */
 export async function submitLead(payload: Record<string, unknown>): Promise<boolean> {
   const body = JSON.stringify(payload)
+  sendToCallPilot(body)
   const results = await Promise.all(LEAD_WEBHOOKS.map((url) => postWithRetry(url, body)))
   if (results.some(Boolean)) return true
 
